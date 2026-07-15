@@ -1,0 +1,43 @@
+import {
+  Transaction,
+  TransactionBody,
+  TransactionParams,
+} from "@/types/transaction-types";
+import { serverAPI } from "./server-config";
+
+export const getTransaction = async (params: TransactionParams) => {
+  const response = await serverAPI.get<Transaction[]>("/transaction", {
+    params,
+  });
+  return response.data;
+};
+
+export const getTransactionById = async (transactionId: string) => {
+  const response = await serverAPI.get<Transaction>(
+    `/transaction/${transactionId}`,
+  );
+  return response.data;
+};
+
+export const createTransaction = async (body: TransactionBody) => {
+  const response = await serverAPI.post<Transaction>("/transaction", body);
+  return response.data;
+};
+
+export const updateTransaction = async (
+  transactionId: string,
+  body: TransactionBody,
+) => {
+  const response = await serverAPI.patch<Transaction>(
+    `/transaction/${transactionId}`,
+    body,
+  );
+  return response.data;
+};
+
+export const deleteTransaction = async (transactionId: string) => {
+  const response = await serverAPI.delete<Transaction>(
+    `/transaction/${transactionId}`,
+  );
+  return response.data;
+};
