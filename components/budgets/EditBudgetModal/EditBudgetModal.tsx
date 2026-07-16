@@ -1,14 +1,15 @@
 "use client";
-import { createBudget } from "@/services/budget";
-import css from "./CreateBudgetModal.module.css";
-import { useQueryClient } from "@tanstack/react-query";
 import CurrencySelector from "@/components/custom/CurrencySelector/CurrencySelector";
+import css from "./EditBudgetModal.module.css";
+import { deleteBudget, updateBudget } from "@/services/budget";
+import { useQueryClient } from "@tanstack/react-query";
 
-interface CreateBudgetCardProps {
+interface EditBudgetModalProps {
+  budgetId: string;
   closeModal: () => void;
 }
 
-const CreateBudgetModal = ({ closeModal }: CreateBudgetCardProps) => {
+const EditBudgetModal = ({ budgetId, closeModal }: EditBudgetModalProps) => {
   const queryClient = useQueryClient();
 
   const handleSubmit = async (formData: FormData) => {
@@ -18,24 +19,31 @@ const CreateBudgetModal = ({ closeModal }: CreateBudgetCardProps) => {
       currency: formData.get("currency") as string,
     };
 
-    await createBudget(budgetData);
-
+    await updateBudget(budgetId, budgetData);
     queryClient.invalidateQueries({
       queryKey: ["budgets"],
     });
+
+    closeModal();
+  };
+
+  const handleDelete = async () => {
+    await deleteBudget(budgetId);
+    queryClient.invalidateQueries({ queryKey: ["budgets"] });
     closeModal();
   };
 
   return (
-    <div className={css["createBudgetModal"]}>
+    <div>
       <form action={handleSubmit}>
         <input type="number" name="balance" defaultValue={0} required />
         <input type="text" name="title" placeholder="title" required />
         <CurrencySelector />
         <button type="submit">Save</button>
       </form>
+      <button onClick={handleDelete}>Delete Budget</button>
     </div>
   );
 };
 
-export default CreateBudgetModal;
+export default EditBudgetModal;

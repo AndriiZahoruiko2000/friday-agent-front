@@ -1,0 +1,199 @@
+.transactionCard {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #e9e9ee;
+}
+
+.transactionCard + .transactionCard::before {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  left: 70px;
+  z-index: 3;
+  height: 1px;
+  background: rgb(60 60 67 / 11%);
+  content: "";
+  pointer-events: none;
+}
+
+.actions {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: grid;
+  width: 144px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.actions button {
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.actions button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.edit {
+  background: #ff9f0a;
+}
+
+.delete {
+  background: #ff3b30;
+}
+
+.actions button:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 3px solid rgb(255 255 255 / 70%);
+  outline-offset: -4px;
+}
+
+.actions button:active {
+  filter: brightness(0.9);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: 72px;
+  padding: 10px 16px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  color: #111114;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 150ms ease;
+  -webkit-user-select: none;
+}
+
+.content:active {
+  cursor: grabbing;
+}
+
+.content:hover {
+  background: #fafafa;
+}
+
+.dragging {
+  transition: none;
+}
+
+.categoryIcon {
+  --category-color: #8e8e93;
+  --category-tint: rgb(142 142 147 / 14%);
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--category-tint);
+  color: var(--category-color);
+  font-size: 21px;
+}
+
+.categoryIcon[data-color="orange"] { --category-color: #ff9f0a; --category-tint: rgb(255 159 10 / 14%); }
+.categoryIcon[data-color="red"] { --category-color: #ff453a; --category-tint: rgb(255 69 58 / 14%); }
+.categoryIcon[data-color="purple"] { --category-color: #bf5af2; --category-tint: rgb(191 90 242 / 14%); }
+.categoryIcon[data-color="green"] { --category-color: #30d158; --category-tint: rgb(48 209 88 / 14%); }
+.categoryIcon[data-color="blue"] { --category-color: #0a84ff; --category-tint: rgb(10 132 255 / 14%); }
+.categoryIcon[data-color="black"] { --category-color: #48484a; --category-tint: rgb(72 72 74 / 14%); }
+.categoryIcon[data-color="yellow"] { --category-color: #d69e00; --category-tint: rgb(255 214 10 / 18%); }
+.categoryIcon[data-color="tomato"] { --category-color: #ff6347; --category-tint: rgb(255 99 71 / 14%); }
+.categoryIcon[data-color="pink"] { --category-color: #ff375f; --category-tint: rgb(255 55 95 / 14%); }
+.categoryIcon[data-color="teal"] { --category-color: #40c8e0; --category-tint: rgb(64 200 224 / 14%); }
+
+.details,
+.meta {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.details strong,
+.meta strong {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.details small,
+.meta small {
+  overflow: hidden;
+  color: #8e8e93;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  max-width: 145px;
+  justify-items: end;
+  text-align: right;
+}
+
+.expense {
+  color: #111114;
+}
+
+.income {
+  color: #248a3d;
+}
+
+@media (prefers-color-scheme: dark) {
+  .transactionCard {
+    background: #3a3a3c;
+  }
+
+  .transactionCard + .transactionCard::before {
+    background: rgb(255 255 255 / 9%);
+  }
+
+  .content {
+    background: #1c1c1e;
+    color: #f5f5f7;
+  }
+
+  .content:hover {
+    background: #242426;
+  }
+
+  .expense {
+    color: #f5f5f7;
+  }
+
+  .income {
+    color: #30d158;
+  }
+
+  .categoryIcon[data-color="black"] {
+    --category-color: #d1d1d6;
+    --category-tint: rgb(209 209 214 / 14%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    transition: none;
+  }
+}

@@ -1,0 +1,119 @@
+.navigationList {
+  display: grid;
+  width: min(100%, 430px);
+  height: 64px;
+  margin: 0 auto;
+  padding: 0;
+  grid-template-columns: 1fr 76px 1fr;
+  align-items: center;
+  list-style: none;
+}
+
+.navigationList li {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+}
+
+.navItem {
+  display: flex;
+  min-width: 72px;
+  min-height: 52px;
+  padding: 5px 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  border-radius: 14px;
+  color: #8e8e93;
+  transition: color 160ms ease, background-color 160ms ease,
+    transform 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navItem svg {
+  width: 23px;
+  height: 23px;
+}
+
+.navItem span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.navItem:hover {
+  background: rgb(118 118 128 / 8%);
+}
+
+.navItem:active {
+  transform: scale(0.94);
+}
+
+.navItem:focus-visible,
+.createButton:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 2px;
+}
+
+.active {
+  color: #0a84ff;
+}
+
+.createItem {
+  position: relative;
+  height: 100%;
+}
+
+.createButton {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 19px;
+  outline: none;
+  background: linear-gradient(145deg, #1b91ff, #0077ed);
+  box-shadow: 0 8px 20px rgb(10 132 255 / 34%), inset 0 1px 0 rgb(255 255 255 / 30%);
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.createButton svg {
+  width: 28px;
+  height: 28px;
+}
+
+.createButton:hover {
+  box-shadow: 0 10px 24px rgb(10 132 255 / 42%), inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px);
+}
+
+.createButton:active {
+  box-shadow: 0 4px 12px rgb(10 132 255 / 28%);
+  transform: scale(0.94);
+}
+
+@media (prefers-color-scheme: dark) {
+  .navItem {
+    color: #8e8e93;
+  }
+
+  .active {
+    color: #0a84ff;
+  }
+
+  .navItem:hover {
+    background: rgb(255 255 255 / 7%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navItem,
+  .createButton {
+    transition: none;
+  }
+}

@@ -6,7 +6,7 @@ import {
 import { serverAPI } from "./server-config";
 
 export const getTransaction = async (params: TransactionParams) => {
-  const response = await serverAPI.get<Transaction[]>("/transaction", {
+  const response = await serverAPI.get<Transaction[]>("/transactions", {
     params,
   });
   return response.data;
@@ -14,13 +14,13 @@ export const getTransaction = async (params: TransactionParams) => {
 
 export const getTransactionById = async (transactionId: string) => {
   const response = await serverAPI.get<Transaction>(
-    `/transaction/${transactionId}`,
+    `/transactions/${transactionId}`,
   );
   return response.data;
 };
 
 export const createTransaction = async (body: TransactionBody) => {
-  const response = await serverAPI.post<Transaction>("/transaction", body);
+  const response = await serverAPI.post<Transaction>("/transactions", body);
   return response.data;
 };
 
@@ -29,7 +29,7 @@ export const updateTransaction = async (
   body: TransactionBody,
 ) => {
   const response = await serverAPI.patch<Transaction>(
-    `/transaction/${transactionId}`,
+    `/transactions/${transactionId}`,
     body,
   );
   return response.data;
@@ -37,7 +37,7 @@ export const updateTransaction = async (
 
 export const deleteTransaction = async (transactionId: string) => {
   const response = await serverAPI.delete<Transaction>(
-    `/transaction/${transactionId}`,
+    `/transactions/${transactionId}`,
   );
   return response.data;
 };

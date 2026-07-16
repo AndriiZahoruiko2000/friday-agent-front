@@ -1,0 +1,207 @@
+.transactionCategoryList {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+}
+
+.transactionCategoryList legend {
+  margin-bottom: 10px;
+  padding: 0;
+  color: #8e8e93;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.track {
+  display: flex;
+  gap: 8px;
+  margin-inline: -16px;
+  padding: 2px 16px 10px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 16px;
+  scroll-snap-type: inline proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  --category-color: #ff9f0a;
+  --category-tint: rgb(255 159 10 / 14%);
+  position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category[data-color="white"] {
+  --category-color: #ffffff;
+  --category-tint: rgba(244, 243, 243, 0.14);
+}
+
+.category[data-color="red"] {
+  --category-color: #ff453a;
+  --category-tint: rgb(255 69 58 / 14%);
+}
+
+.category[data-color="purple"] {
+  --category-color: #bf5af2;
+  --category-tint: rgb(191 90 242 / 14%);
+}
+
+.category[data-color="green"] {
+  --category-color: #30d158;
+  --category-tint: rgb(48 209 88 / 14%);
+}
+
+.category[data-color="blue"] {
+  --category-color: #0a84ff;
+  --category-tint: rgb(10 132 255 / 14%);
+}
+
+.category[data-color="black"] {
+  --category-color: #48484a;
+  --category-tint: rgb(72 72 74 / 14%);
+}
+
+.category[data-color="yellow"] {
+  --category-color: #d69e00;
+  --category-tint: rgb(255 214 10 / 18%);
+}
+
+.category[data-color="tomato"] {
+  --category-color: #ff6347;
+  --category-tint: rgb(255 99 71 / 14%);
+}
+
+.category[data-color="pink"] {
+  --category-color: #ff375f;
+  --category-tint: rgb(255 55 95 / 14%);
+}
+
+.category[data-color="teal"] {
+  --category-color: #40c8e0;
+  --category-tint: rgb(64 200 224 / 14%);
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.button {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  padding-inline: 11px;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #e2e2e7;
+  border-radius: 15px;
+  background: #f2f2f7;
+  color: #636366;
+  transition:
+    width 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    gap 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 150ms ease;
+}
+
+.icon {
+  display: grid;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  font-size: 21px;
+}
+
+.icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.title {
+  max-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  opacity: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    max-width 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 160ms ease;
+}
+
+.input:checked + .button {
+  width: auto;
+  gap: 8px;
+  border-color: transparent;
+  background: var(--category-tint);
+  color: var(--category-color);
+}
+
+.input:checked + .button .title {
+  max-width: 120px;
+  opacity: 1;
+}
+
+.input:focus-visible + .button {
+  outline: 3px solid rgb(10 132 255 / 35%);
+  outline-offset: 2px;
+}
+
+.category:active .button {
+  transform: scale(0.94);
+}
+
+@media (min-width: 768px) {
+  .track {
+    margin-inline: -24px;
+    padding-inline: 24px;
+    scroll-padding-inline: 24px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    border-color: #3a3a3c;
+    background: #2c2c2e;
+    color: #aeaeb2;
+  }
+
+  .category[data-color="black"] {
+    --category-color: #d1d1d6;
+    --category-tint: rgb(209 209 214 / 14%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .title {
+    transition: none;
+  }
+}

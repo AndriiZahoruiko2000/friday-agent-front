@@ -1,0 +1,193 @@
+.loginForm {
+  display: grid;
+  width: 100%;
+  min-height: calc(100dvh - 120px);
+  padding: 24px 16px;
+  place-items: center;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", sans-serif;
+}
+
+.card {
+  width: min(100%, 420px);
+  padding: 28px 20px 22px;
+  border: 1px solid rgb(255 255 255 / 78%);
+  border-radius: 28px;
+  background: rgb(255 255 255 / 72%);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 9%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+}
+
+.header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.logo {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #262932, #090a0d);
+  box-shadow: 0 10px 24px rgb(17 17 20 / 24%), inset 0 1px 0 rgb(255 255 255 / 22%);
+  color: #fff;
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.05em;
+}
+
+.header h1 {
+  margin: 0 0 7px;
+  color: #111114;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.header p,
+.alternative {
+  margin: 0;
+  color: #8e8e93;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.loginForm form {
+  display: grid;
+  gap: 18px;
+}
+
+.fields {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 9%);
+  border-radius: 16px;
+  background: #f2f2f7;
+}
+
+.fields label {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  padding: 9px 14px 8px;
+}
+
+.fields label + label::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 14px;
+  height: 1px;
+  background: rgb(60 60 67 / 14%);
+  content: "";
+}
+
+.fields label > span {
+  color: #8e8e93;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.fields input {
+  width: 100%;
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #111114;
+  font-size: 16px;
+}
+
+.fields input::placeholder {
+  color: #aeaeb2;
+}
+
+.fields label:focus-within {
+  background: rgb(255 255 255 / 74%);
+  box-shadow: inset 3px 0 0 #0a84ff;
+}
+
+.fields label:has(input:user-invalid) {
+  box-shadow: inset 3px 0 0 #ff3b30;
+}
+
+.loginForm form > button {
+  min-height: 54px;
+  border: 0;
+  border-radius: 15px;
+  outline: 0;
+  background: #0a84ff;
+  box-shadow: 0 8px 20px rgb(10 132 255 / 26%);
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 650;
+  transition: background-color 150ms ease, box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.loginForm form > button:hover {
+  background: #0077ed;
+  box-shadow: 0 10px 24px rgb(10 132 255 / 32%);
+}
+
+.loginForm form > button:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.loginForm form > button:active {
+  transform: scale(0.985);
+}
+
+.alternative {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.alternative a {
+  color: #0a84ff;
+  font-weight: 650;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 34px 32px 28px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(28 28 30 / 76%);
+    box-shadow: 0 18px 50px rgb(0 0 0 / 30%);
+  }
+
+  .header h1,
+  .fields input {
+    color: #f5f5f7;
+  }
+
+  .fields {
+    border-color: rgb(255 255 255 / 8%);
+    background: #2c2c2e;
+  }
+
+  .fields label + label::before {
+    background: rgb(255 255 255 / 10%);
+  }
+
+  .fields label:focus-within {
+    background: #363638;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loginForm form > button {
+    transition: none;
+  }
+}

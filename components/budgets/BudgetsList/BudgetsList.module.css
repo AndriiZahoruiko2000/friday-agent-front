@@ -1,0 +1,83 @@
+.budgetsList {
+  width: 100%;
+  padding-block: 20px;
+  overflow: hidden;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-inline: 16px;
+  margin-bottom: 14px;
+}
+
+.header h2 {
+  margin: 2px 0 0;
+  color: #101114;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #8a8a91;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.counter {
+  display: grid;
+  min-width: 28px;
+  height: 28px;
+  padding-inline: 8px;
+  place-items: center;
+  border-radius: 999px;
+  background: #e9e9ee;
+  color: #66666d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.track {
+  --budget-card-width: min(82vw, 310px);
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 8px max(16px, calc((100% - var(--budget-card-width)) / 2)) 22px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: calc((100% - var(--budget-card-width)) / 2);
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+  list-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .budgetsList {
+    padding-block: 28px;
+  }
+
+  .header,
+  .track {
+    padding-inline: 24px;
+  }
+
+  .track {
+    --budget-card-width: 340px;
+    gap: 16px;
+    padding-inline: max(24px, calc((100% - var(--budget-card-width)) / 2));
+    scroll-padding-inline: calc((100% - var(--budget-card-width)) / 2);
+  }
+}

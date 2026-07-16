@@ -1,0 +1,175 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: max(16px, env(safe-area-inset-top));
+  isolation: isolate;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(0 0 0 / 42%);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  opacity: var(--backdrop-opacity, 1);
+  animation: backdrop-in 240ms ease-out both;
+}
+
+.sheet {
+  position: relative;
+  width: 100%;
+  max-height: calc(100dvh - max(16px, env(safe-area-inset-top)));
+  padding: 10px 16px max(16px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-bottom: 0;
+  border-radius: 28px 28px 0 0;
+  background: rgb(248 248 250 / 96%);
+  box-shadow: 0 -12px 40px rgb(0 0 0 / 18%);
+  color: #111114;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", sans-serif;
+  -webkit-overflow-scrolling: touch;
+  animation: sheet-in 420ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.dragArea {
+  display: grid;
+  width: calc(100% + 32px);
+  height: 34px;
+  margin: -10px -16px 0;
+  place-items: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dragArea:active {
+  cursor: grabbing;
+}
+
+.handle {
+  width: 36px;
+  height: 5px;
+  border-radius: 999px;
+  background: #c7c7cc;
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.dragArea:active .handle {
+  width: 42px;
+  background: #aeaeb2;
+}
+
+.dragging {
+  animation: none;
+  transform: translate3d(0, var(--drag-y), 0);
+  transition: none;
+}
+
+.sheet:not(.dragging) {
+  transform: translate3d(0, var(--drag-y, 0), 0);
+  transition: transform 360ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.closing .sheet {
+  pointer-events: none;
+  animation: sheet-out 320ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.closing .backdrop {
+  pointer-events: none;
+  animation: backdrop-out 260ms ease-in forwards;
+}
+
+.content {
+  width: 100%;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0.65;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sheet-out {
+  from {
+    transform: translate3d(0, var(--drag-y, 0), 0);
+  }
+
+  to {
+    transform: translate3d(0, 110dvh, 0);
+  }
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: var(--backdrop-opacity, 1);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding-inline: 24px;
+  }
+
+  .sheet {
+    width: min(100%, 560px);
+    margin-bottom: 24px;
+    padding: 10px 24px 24px;
+    border-bottom: 1px solid rgb(255 255 255 / 70%);
+    border-radius: 28px;
+  }
+
+  .dragArea {
+    width: calc(100% + 48px);
+    margin-inline: -24px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .sheet {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(30 30 32 / 97%);
+    box-shadow: 0 -12px 40px rgb(0 0 0 / 35%);
+    color: #f5f5f7;
+  }
+
+  .handle {
+    background: #636366;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .sheet {
+    animation-duration: 1ms;
+  }
+}

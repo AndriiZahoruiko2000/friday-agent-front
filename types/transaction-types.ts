@@ -14,7 +14,7 @@ export interface TransactionBody {
   transactionType: string;
   currency: string;
   category: string;
-  tags: string;
+  tags?: string;
   note: string;
 }
 export interface Transaction {

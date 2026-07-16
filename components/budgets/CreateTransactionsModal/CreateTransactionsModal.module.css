@@ -1,0 +1,238 @@
+.createTransactionsModal {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  padding: 2px 0 4px;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+}
+
+.createTransactionsModal::before {
+  color: #111114;
+  content: "New transaction";
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.amount {
+  min-width: 0;
+  min-height: 112px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 22px;
+  outline: none;
+  background: #f2f2f7;
+  box-shadow: inset 0 0 0 1px rgb(60 60 67 / 6%);
+  color: #111114;
+  font: inherit;
+  font-size: clamp(46px, 15vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+  -moz-appearance: textfield;
+}
+
+.amount::-webkit-inner-spin-button,
+.amount::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.amount:focus {
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 2px #0a84ff,
+    0 0 0 4px rgb(10 132 255 / 12%);
+}
+
+.transactionType {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 16px;
+  background: #e9e9ee;
+}
+
+.transactionType label {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 12px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: #6c6c70;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.transactionType input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.transactionType .deposit:has(input:checked) {
+  border-color: rgb(52 199 89 / 18%);
+  background: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 8%);
+  color: #248a3d;
+}
+
+.transactionType .withdraw:has(input:checked) {
+  border-color: rgb(255 59 48 / 18%);
+  background: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 8%);
+  color: #d70015;
+}
+
+.transactionType label:has(input:focus-visible) {
+  outline: 3px solid rgb(10 132 255 / 35%);
+  outline-offset: 2px;
+}
+
+.transactionType label:active {
+  transform: scale(0.97);
+}
+
+.note {
+  min-height: 92px;
+  padding: 14px 16px;
+  resize: vertical;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  outline: none;
+  background: #f2f2f7;
+  color: #111114;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.note::placeholder {
+  color: #8e8e93;
+}
+
+.note:focus {
+  border-color: #0a84ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(10 132 255 / 12%);
+}
+
+.submit {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-radius: 15px;
+  background: #0a84ff;
+  box-shadow: 0 7px 18px rgb(10 132 255 / 24%);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submit:hover {
+  background: #0077ed;
+  box-shadow: 0 9px 22px rgb(10 132 255 / 30%);
+}
+
+.submit:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.submit:active {
+  background: #006edb;
+  box-shadow: 0 4px 10px rgb(10 132 255 / 20%);
+  transform: scale(0.985);
+}
+
+@media (min-width: 768px) {
+  .createTransactionsModal {
+    gap: 22px;
+    padding-inline: 4px;
+  }
+
+  .amount {
+    min-height: 128px;
+    font-size: 68px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .createTransactionsModal::before,
+  .amount,
+  .note {
+    color: #f5f5f7;
+  }
+
+  .amount,
+  .note,
+  .transactionType {
+    background: #2c2c2e;
+  }
+
+  .amount:focus,
+  .note:focus {
+    background: #363638;
+  }
+
+  .transactionType .deposit:has(input:checked) {
+    border-color: rgb(48 209 88 / 18%);
+    background: #3a3a3c;
+    color: #30d158;
+  }
+
+  .transactionType .withdraw:has(input:checked) {
+    border-color: rgb(255 69 58 / 18%);
+    background: #3a3a3c;
+    color: #ff453a;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amount,
+  .transactionType label,
+  .note,
+  .submit {
+    transition: none;
+  }
+}
