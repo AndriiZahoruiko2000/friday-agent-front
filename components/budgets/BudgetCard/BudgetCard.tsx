@@ -2,6 +2,7 @@ import { Budget } from "@/types/budget-types";
 import css from "./BudgetCard.module.css";
 import { useModal } from "@/hooks/useModal";
 import EditBudgetModal from "../EditBudgetModal/EditBudgetModal";
+import Modal from "@/components/custom/Modal/Modal";
 
 interface BudgetCardProps {
   item: Budget;
@@ -48,9 +49,11 @@ const BudgetCard = ({ item, isActive = false }: BudgetCardProps) => {
           <time dateTime={item.createdAt}>{createdAt}</time>
         </div>
       </div>
-      <Modal>
-        <EditBudgetModal budgetId={item._id} closeModal={hideModal} />
-      </Modal>
+      {isOpenModal && (
+        <Modal onClose={hideModal}>
+          <EditBudgetModal budgetId={item._id} closeModal={hideModal} />
+        </Modal>
+      )}
     </li>
   );
 };

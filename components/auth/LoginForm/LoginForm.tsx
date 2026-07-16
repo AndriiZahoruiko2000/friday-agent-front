@@ -1,12 +1,15 @@
 "use client";
 
-import { login } from "@/services/auth";
+import { googlePayload, login } from "@/services/auth";
 import css from "./LoginForm.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { GoogleLogin } from "@react-oauth/google";
+import { useUserStore } from "@/stores/userStore";
 
 const LoginForm = () => {
   const router = useRouter();
+  const updateUser = useUserStore((s) => s.updateUser);
 
   const handleSubmit = async (formData: FormData) => {
     const loginData = {
@@ -28,7 +31,6 @@ const LoginForm = () => {
           <h1>Welcome back</h1>
           <p>Sign in to continue to Friday</p>
         </header>
-
         <form action={handleSubmit}>
           <div className={css.fields}>
             <label>
@@ -54,9 +56,20 @@ const LoginForm = () => {
           </div>
           <button type="submit">Log in</button>
         </form>
+        <GoogleLogin
+          onSuccess={async (credentialResponse) => {
+            await googlePayload(credentialResponse.credential as string);
+            updateUser();
+            router.push("/budgets");
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
 
         <p className={css.alternative}>
-          Don&apos;t have an account? <Link href="/auth/register">Register</Link>
+          Don&apos;t have an account?{" "}
+          <Link href="/auth/register">Register</Link>
         </p>
       </div>
     </section>

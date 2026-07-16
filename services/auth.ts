@@ -31,3 +31,11 @@ export const getMe = async () => {
   const response = await serverAPI.get("/auth/me");
   return response.data;
 };
+
+export const googlePayload = async (token: string) => {
+  const response = await serverAPI.post<{ accessToken: string }>(
+    "/auth/google",
+    { token },
+  );
+  return response.data;
+};

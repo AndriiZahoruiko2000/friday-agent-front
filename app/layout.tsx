@@ -4,6 +4,8 @@ import "./globals.css";
 import TanStackProvider from "@/components/providers/TanStackProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import Navigation from "@/components/navigation/Navigation/Navigation";
+import { Toaster } from "react-hot-toast";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,12 +38,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <TanStackProvider>
-          <AuthProvider>
-            <main className="app-content">{children}</main>
-            <Navigation />
-          </AuthProvider>
-        </TanStackProvider>
+        <GoogleOAuthProvider clientId="143636454282-6v65191bah83k9md5ebl6vlq7bc91gf5.apps.googleusercontent.com">
+          <TanStackProvider>
+            <AuthProvider>
+              <main className="app-content">{children}</main>
+              <Navigation />
+              <div id="modal-section"></div>
+              <Toaster position="top-center" reverseOrder={false} />
+            </AuthProvider>
+          </TanStackProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

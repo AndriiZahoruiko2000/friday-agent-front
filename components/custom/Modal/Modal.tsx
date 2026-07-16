@@ -1,5 +1,6 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
 import { CSSProperties, PointerEvent, useRef, useState } from "react";
 
@@ -58,7 +59,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
     "--backdrop-opacity": String(1 - progress * 0.85),
   } as CSSProperties;
 
-  return (
+  return createPortal(
     <div
       className={`${css.modal} ${isClosing ? css.closing : ""}`}
       role="presentation"
@@ -83,7 +84,8 @@ const Modal = ({ children, onClose }: ModalProps) => {
         </div>
         <div className={css.content}>{children}</div>
       </div>
-    </div>
+    </div>,
+    document.querySelector("#modal-section") as Element,
   );
 };
 

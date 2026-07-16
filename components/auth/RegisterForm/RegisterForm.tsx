@@ -4,16 +4,24 @@ import { register } from "@/services/auth";
 import css from "./RegisterForm.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const RegisterForm = () => {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
+    const confirmPassword = formData.get("confirm-password") as string;
+
     const registerData = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
       nickname: formData.get("nickname") as string,
     };
+
+    if (confirmPassword !== registerData.password) {
+      toast.error("Password does not match!");
+      return;
+    }
 
     await register(registerData);
     router.push("/auth/login");
@@ -58,6 +66,16 @@ const RegisterForm = () => {
                 type="password"
                 name="password"
                 placeholder="Create a password"
+                autoComplete="new-password"
+                required
+              />
+            </label>
+            <label>
+              <span>Confirm Password</span>
+              <input
+                type="password"
+                name="confirm-password"
+                placeholder="Confirm password"
                 autoComplete="new-password"
                 required
               />

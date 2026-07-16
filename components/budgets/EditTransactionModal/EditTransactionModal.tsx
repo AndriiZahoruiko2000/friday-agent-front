@@ -1,17 +1,21 @@
-"use client";
-import { useTransactionModal } from "@/hooks/useTransactionModal";
-import css from "./CreateTransactionsModal.module.css";
 import TransactionCategoryList from "../TransactionCategoryList/TransactionCategoryList";
-import BudgetSelector from "@/components/custom/BudgetSelector/BudgetSelector";
-import CalendarDateSelector from "@/components/custom/CalendarDateSelector/CalendarDateSelector";
+import css from "./EditTransactionModal.module.css";
+import { useState } from "react";
 import CurrencySelector from "@/components/custom/CurrencySelector/CurrencySelector";
-import { createTransaction } from "@/services/transaction";
+import CalendarDateSelector from "@/components/custom/CalendarDateSelector/CalendarDateSelector";
 import { TransactionBody } from "@/types/transaction-types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { updateTransaction } from "@/services/transaction";
 
-const CreateTransactionsModal = () => {
-  const [, , hideModal] = useTransactionModal();
+interface EditTransactionModalProps {
+  transactionId: string;
+  closeModal: () => void;
+}
+
+const EditTransactionModal = ({
+  transactionId,
+  closeModal,
+}: EditTransactionModalProps) => {
   const queryClient = useQueryClient();
   const [isDeposit, setIsDeposit] = useState(false);
 
@@ -25,7 +29,7 @@ const CreateTransactionsModal = () => {
       currency: formData.get("currency") as string,
     };
 
-    await createTransaction(transactionData);
+    await updateTransaction(transactionId, transactionData);
 
     queryClient.invalidateQueries({
       queryKey: ["transactions", transactionData.budgetId],
@@ -35,11 +39,11 @@ const CreateTransactionsModal = () => {
       queryKey: ["budgets"],
     });
 
-    hideModal();
+    closeModal();
   };
 
   return (
-    <form className={css.createTransactionsModal} action={handleSubmit}>
+    <form className={css["editTransactionModal"]} action={handleSubmit}>
       <input
         className={css.amount}
         type="number"
@@ -49,7 +53,6 @@ const CreateTransactionsModal = () => {
         aria-label="Transaction amount"
       />
       <TransactionCategoryList isDeposit={isDeposit} />
-      <BudgetSelector />
 
       <div className={css.transactionType}>
         <label className={css.deposit}>
@@ -85,10 +88,10 @@ const CreateTransactionsModal = () => {
 
       <textarea className={css.note} name="note" placeholder="Note"></textarea>
       <button className={css.submit} type="submit">
-        Add Transaction
+        Save
       </button>
     </form>
   );
 };
 
-export default CreateTransactionsModal;
+export default EditTransactionModal;

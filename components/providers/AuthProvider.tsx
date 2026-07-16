@@ -1,6 +1,7 @@
 "use client";
 import { getMe, refresh } from "@/services/auth";
 import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "next/navigation";
 
 import { useEffect } from "react";
 
@@ -10,6 +11,7 @@ interface AuthProviderProps {
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const setUser = useUserStore((s) => s.setUser);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchUser() {
@@ -17,7 +19,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         await refresh();
         const user = await getMe();
         setUser(user);
-      } catch (error) {}
+      } catch (error) {
+        // router.push("/auth/login");
+      }
     }
     fetchUser();
   }, []);

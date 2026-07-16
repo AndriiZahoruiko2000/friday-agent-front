@@ -2,19 +2,13 @@
   position: relative;
   min-width: 0;
   overflow: hidden;
-  background: #e9e9ee;
+  border-radius: 18px;
+  background: transparent;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 7%);
 }
 
 .transactionCard + .transactionCard::before {
-  position: absolute;
-  top: 0;
-  right: 16px;
-  left: 70px;
-  z-index: 3;
-  height: 1px;
-  background: rgb(60 60 67 / 11%);
-  content: "";
-  pointer-events: none;
+  content: none;
 }
 
 .actions {
@@ -22,47 +16,67 @@
   inset: 0 0 0 auto;
   display: grid;
   width: 144px;
-  grid-template-columns: 1fr 1fr;
+  padding: 8px 10px;
+  grid-template-columns: repeat(2, 52px);
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
 }
 
 .actions button {
-  display: flex;
+  display: grid;
+  width: 52px;
+  height: 52px;
   padding: 0;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
   border: 0;
+  border-radius: 50%;
+  place-items: center;
   color: #fff;
   cursor: pointer;
   font: inherit;
-  font-size: 11px;
-  font-weight: 650;
+  box-shadow: 0 6px 14px rgb(0 0 0 / 16%), inset 0 1px 0 rgb(255 255 255 / 25%);
+  transition: filter 140ms ease, box-shadow 140ms ease, transform 140ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 .actions button svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
+}
+
+.actions button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .edit {
-  background: #ff9f0a;
+  background: linear-gradient(145deg, #ffb12e, #ff9500);
 }
 
 .delete {
-  background: #ff3b30;
+  background: linear-gradient(145deg, #ff6259, #ff3b30);
 }
 
 .actions button:focus-visible {
   position: relative;
   z-index: 2;
-  outline: 3px solid rgb(255 255 255 / 70%);
-  outline-offset: -4px;
+  outline: 3px solid rgb(10 132 255 / 45%);
+  outline-offset: 2px;
 }
 
 .actions button:active {
   filter: brightness(0.9);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 14%), inset 0 1px 0 rgb(255 255 255 / 20%);
+  transform: scale(0.9);
+}
+
+.actions button:disabled {
+  pointer-events: none;
 }
 
 .content {
@@ -74,6 +88,8 @@
   grid-template-columns: 42px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 18px;
   background: #fff;
   color: #111114;
   cursor: grab;
@@ -162,14 +178,12 @@
 
 @media (prefers-color-scheme: dark) {
   .transactionCard {
-    background: #3a3a3c;
-  }
-
-  .transactionCard + .transactionCard::before {
-    background: rgb(255 255 255 / 9%);
+    background: transparent;
+    box-shadow: 0 7px 20px rgb(0 0 0 / 24%);
   }
 
   .content {
+    border-color: rgb(255 255 255 / 8%);
     background: #1c1c1e;
     color: #f5f5f7;
   }
@@ -193,7 +207,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .content {
+  .content,
+  .actions button {
     transition: none;
   }
 }

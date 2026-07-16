@@ -3,6 +3,7 @@ import CurrencySelector from "@/components/custom/CurrencySelector/CurrencySelec
 import css from "./EditBudgetModal.module.css";
 import { deleteBudget, updateBudget } from "@/services/budget";
 import { useQueryClient } from "@tanstack/react-query";
+import { useBudgetStore } from "@/stores/budgetStore";
 
 interface EditBudgetModalProps {
   budgetId: string;
@@ -11,6 +12,7 @@ interface EditBudgetModalProps {
 
 const EditBudgetModal = ({ budgetId, closeModal }: EditBudgetModalProps) => {
   const queryClient = useQueryClient();
+  const setCurrentBudgetId = useBudgetStore((s) => s.setCurrentBudgetId);
 
   const handleSubmit = async (formData: FormData) => {
     const budgetData = {
@@ -23,7 +25,7 @@ const EditBudgetModal = ({ budgetId, closeModal }: EditBudgetModalProps) => {
     queryClient.invalidateQueries({
       queryKey: ["budgets"],
     });
-
+    setCurrentBudgetId("");
     closeModal();
   };
 
@@ -34,14 +36,16 @@ const EditBudgetModal = ({ budgetId, closeModal }: EditBudgetModalProps) => {
   };
 
   return (
-    <div>
+    <div className={css["edit-budget-modal"]}>
       <form action={handleSubmit}>
         <input type="number" name="balance" defaultValue={0} required />
         <input type="text" name="title" placeholder="title" required />
         <CurrencySelector />
         <button type="submit">Save</button>
       </form>
-      <button onClick={handleDelete}>Delete Budget</button>
+      <button onClick={handleDelete} className={css["delete-btn"]}>
+        Delete Budget
+      </button>
     </div>
   );
 };

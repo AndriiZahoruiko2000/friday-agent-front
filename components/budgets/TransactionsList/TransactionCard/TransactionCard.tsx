@@ -5,6 +5,11 @@ import css from "./TransactionCard.module.css";
 import { transactionCategories } from "../../TransactionCategoryList/TransactionCategoryList";
 import { PointerEvent, useRef, useState } from "react";
 import { IoPencilOutline, IoTrashOutline } from "react-icons/io5";
+import { deleteTransaction } from "@/services/transaction";
+import { useQueryClient } from "@tanstack/react-query";
+import EditTransactionModal from "../../EditTransactionModal/EditTransactionModal";
+import Modal from "@/components/custom/Modal/Modal";
+import { useModal } from "@/hooks/useModal";
 
 interface TransactionCardProps {
   item: Transaction;
@@ -13,7 +18,8 @@ interface TransactionCardProps {
 const TransactionCard = ({ item }: TransactionCardProps) => {
   const ACTIONS_WIDTH = 144;
   const category =
-    transactionCategories[item.category] ?? transactionCategories["no-category"];
+    transactionCategories[item.category] ??
+    transactionCategories["no-category"];
   const isWithdraw = item.transactionType === "withdraw";
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -30,6 +36,9 @@ const TransactionCard = ({ item }: TransactionCardProps) => {
     minute: "2-digit",
   }).format(new Date(item.createdAt));
 
+  const queryClient = useQueryClient();
+  const [isOpenModal, showModal, hideModal] = useModal();
+
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
     dragRef.current = {
@@ -45,7 +54,9 @@ const TransactionCard = ({ item }: TransactionCardProps) => {
     if (!isDragging) return;
     const distance = event.clientX - dragRef.current.x;
     if (Math.abs(distance) > 5) dragRef.current.moved = true;
-    setOffset(Math.max(-ACTIONS_WIDTH, Math.min(0, dragRef.current.offset + distance)));
+    setOffset(
+      Math.max(-ACTIONS_WIDTH, Math.min(0, dragRef.current.offset + distance)),
+    );
   };
 
   const finishSwipe = (event: PointerEvent<HTMLDivElement>) => {
@@ -64,12 +75,20 @@ const TransactionCard = ({ item }: TransactionCardProps) => {
     setOffset(shouldOpen && !shouldClose ? -ACTIONS_WIDTH : 0);
   };
 
-  const handleEdit = () => {
-    // TODO: add edit transaction logic.
+  const handleEdit = async () => {
+    showModal();
   };
 
-  const handleDelete = () => {
-    // TODO: add delete transaction logic.
+  const handleDelete = async () => {
+    await deleteTransaction(item._id);
+
+    queryClient.invalidateQueries({
+      queryKey: ["budgets"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["transactions", item.budgetId],
+    });
   };
 
   return (
@@ -106,7 +125,11 @@ const TransactionCard = ({ item }: TransactionCardProps) => {
           if (!dragRef.current.moved && offset !== 0) setOffset(0);
         }}
       >
-        <span className={css.categoryIcon} data-color={category.color} aria-hidden="true">
+        <span
+          className={css.categoryIcon}
+          data-color={category.color}
+          aria-hidden="true"
+        >
           {category.icon}
         </span>
         <span className={css.details}>
@@ -115,11 +138,20 @@ const TransactionCard = ({ item }: TransactionCardProps) => {
         </span>
         <span className={css.meta}>
           <strong className={isWithdraw ? css.expense : css.income}>
-            {isWithdraw ? "−" : "+"}{formattedAmount}
+            {isWithdraw ? "−" : "+"}
+            {formattedAmount}
           </strong>
           <small>{formattedTime}</small>
         </span>
       </div>
+      {isOpenModal && (
+        <Modal onClose={hideModal}>
+          <EditTransactionModal
+            closeModal={hideModal}
+            transactionId={item._id}
+          />
+        </Modal>
+      )}
     </li>
   );
 };

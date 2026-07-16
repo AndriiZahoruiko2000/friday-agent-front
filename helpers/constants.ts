@@ -1,1 +1,1 @@
-export const currencyList = ["UAH", "USD", "EUR", "PL", "GBP"];
+export const currencyList = ["UAH", "USD", "EUR", "PLZ", "GBP"];

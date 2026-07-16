@@ -10,12 +10,19 @@ import { MdPets } from "react-icons/md";
 import { IoMdAirplane } from "react-icons/io";
 import { IoBookSharp } from "react-icons/io5";
 import { TbSquareRotatedForbid2 } from "react-icons/tb";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { AiOutlineGift } from "react-icons/ai";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { GiSellCard } from "react-icons/gi";
+import { TbPigMoney } from "react-icons/tb";
 
 interface Category {
   title: string;
   value: string;
   icon: React.ReactNode;
   color: string;
+  isDeposit?: boolean;
 }
 
 export const transactionCategories: Record<string, Category> = {
@@ -85,16 +92,71 @@ export const transactionCategories: Record<string, Category> = {
     icon: <IoBookSharp />,
     color: "teal",
   },
+  "others-income": {
+    title: "Others-income",
+    value: "other-income",
+    icon: <TbPigMoney />,
+    color: "green",
+    isDeposit: true,
+  },
+  salary: {
+    title: "Salary",
+    value: "salary",
+    icon: <RiMoneyDollarCircleLine />,
+    color: "green",
+    isDeposit: true,
+  },
+  gift: {
+    title: "Gift",
+    value: "gift",
+    icon: <AiOutlineGift />,
+    color: "red",
+    isDeposit: true,
+  },
+  "side-income": {
+    title: "Side-income",
+    value: "side-income",
+    icon: <GiTakeMyMoney />,
+    color: "orange",
+    isDeposit: true,
+  },
+  "investment-income": {
+    title: "Investment-income",
+    value: "Investment-income",
+    icon: <FcMoneyTransfer />,
+    color: "blue",
+    isDeposit: true,
+  },
+  sales: {
+    title: "Sales",
+    value: "Sales",
+    icon: <GiSellCard />,
+    color: "blue",
+    isDeposit: true,
+  },
 };
 
-export const categoryArray = Object.values(transactionCategories);
+export const categoryArray = Object.values(transactionCategories).filter(
+  (item) => !item.isDeposit,
+);
+export const depositArray = Object.values(transactionCategories).filter(
+  (item) => item.isDeposit,
+);
 
-const TransactionCategoryList = () => {
+interface TransactionCategoryListProps {
+  isDeposit?: boolean;
+}
+
+const TransactionCategoryList = ({
+  isDeposit,
+}: TransactionCategoryListProps) => {
+  const array = isDeposit ? depositArray : categoryArray;
+
   return (
     <fieldset className={css.transactionCategoryList}>
       <legend>Category</legend>
       <div className={css.track}>
-        {categoryArray.map((item) => {
+        {array.map((item) => {
           return (
             <label
               className={css.category}

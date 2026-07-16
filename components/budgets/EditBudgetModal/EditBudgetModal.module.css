@@ -1,0 +1,146 @@
+.edit-budget-modal {
+  width: 100%;
+  padding: 2px 0 4px;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+}
+
+.edit-budget-modal::before {
+  display: block;
+  margin-bottom: 22px;
+  color: #111114;
+  content: "Новий бюджет";
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.edit-budget-modal form {
+  display: grid;
+  gap: 12px;
+}
+
+.edit-budget-modal input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  outline: none;
+  background-color: #e9e9ee;
+  color: #111114;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.edit-budget-modal input:first-child {
+  min-height: 68px;
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.edit-budget-modal input::placeholder {
+  color: #8e8e93;
+  opacity: 1;
+}
+
+.edit-budget-modal input:focus {
+  border-color: #0a84ff;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(10 132 255 / 14%);
+}
+
+.edit-budget-modal input:user-invalid {
+  border-color: #ff3b30;
+  box-shadow: 0 0 0 4px rgb(255 59 48 / 10%);
+}
+
+.edit-budget-modal button {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 14px;
+  background: #0a84ff;
+  box-shadow: 0 7px 18px rgb(10 132 255 / 24%);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.edit-budget-modal button:hover {
+  background: #0077ed;
+  box-shadow: 0 9px 22px rgb(10 132 255 / 30%);
+}
+
+.edit-budget-modal button:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.edit-budget-modal button:active {
+  background: #006edb;
+  box-shadow: 0 4px 10px rgb(10 132 255 / 20%);
+  transform: scale(0.985);
+}
+
+button.delete-btn {
+  background-color: red;
+}
+
+@media (min-width: 768px) {
+  .edit-budget-modal {
+    padding: 4px 4px 0;
+  }
+
+  .edit-budget-modal::before {
+    font-size: 26px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .edit-budget-modal::before {
+    color: #f5f5f7;
+  }
+
+  .edit-budget-modal input {
+    background-color: #2c2c2e;
+    color: #f5f5f7;
+  }
+
+  .edit-budget-modal input:focus {
+    background-color: #363638;
+  }
+
+  .edit-budget-modal input::placeholder {
+    color: #8e8e93;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-budget-modal input,
+  .edit-budget-modal button {
+    transition: none;
+  }
+}
