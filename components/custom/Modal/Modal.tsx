@@ -2,7 +2,13 @@
 
 import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
-import { CSSProperties, PointerEvent, useRef, useState } from "react";
+import {
+  CSSProperties,
+  PointerEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -15,6 +21,34 @@ const Modal = ({ children, onClose }: ModalProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef({ y: 0, time: 0 });
+
+  useEffect(() => {
+    const body = document.body;
+    const root = document.documentElement;
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+    };
+    const previousOverscrollBehavior = root.style.overscrollBehavior;
+
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    root.style.overscrollBehavior = "none";
+
+    return () => {
+      body.style.overflow = previousBodyStyles.overflow;
+      body.style.position = previousBodyStyles.position;
+      body.style.top = previousBodyStyles.top;
+      body.style.width = previousBodyStyles.width;
+      root.style.overscrollBehavior = previousOverscrollBehavior;
+      window.scrollTo(0, scrollY);
+    };
+  }, []);
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (isClosing) return;
@@ -65,7 +99,14 @@ const Modal = ({ children, onClose }: ModalProps) => {
       role="presentation"
       style={modalStyle}
     >
-      <div className={css.backdrop} aria-hidden="true" />
+      <div
+        className={css.backdrop}
+        aria-hidden="true"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={finishDrag}
+        onPointerCancel={finishDrag}
+      />
       <div
         className={`${css.sheet} ${isDragging ? css.dragging : ""}`}
         ref={sheetRef}
