@@ -1,0 +1,24 @@
+.budgetStatistic {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+  overflow-x: clip;
+}
+
+.budgetStatistic > * {
+  min-width: 0;
+}
+
+.budgetStatistic > :not(:first-child) {
+  width: calc(100% - 32px);
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .budgetStatistic > :not(:first-child) {
+    width: 100%;
+  }
+}

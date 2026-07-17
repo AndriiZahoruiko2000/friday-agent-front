@@ -176,11 +176,101 @@
 }
 
 .googleButton {
-  display: flex;
-  min-height: 44px;
-  justify-content: center;
+  position: relative;
+  min-height: 56px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 17px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.googleButton:hover .googleVisual {
+  border-color: rgb(255 255 255 / 18%);
+  box-shadow: 0 16px 34px rgb(0 0 0 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 12%);
+  transform: translateY(-1px);
+}
+
+.googleButton:active .googleVisual {
+  transform: scale(0.985);
+}
+
+.googleButton:focus-within {
+  outline: 3px solid rgb(10 132 255 / 32%);
+  outline-offset: 3px;
+}
+
+.googleVisual {
+  display: flex;
+  min-height: 56px;
+  padding: 0 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 17px;
+  background:
+    linear-gradient(180deg, rgb(36 47 62 / 92%), rgb(18 25 36 / 96%)),
+    #111827;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 24%),
+    inset 0 1px 0 rgb(255 255 255 / 9%);
+  color: #f7fbff;
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  transition: border-color 160ms ease, box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.googleVisual::after {
+  position: absolute;
+  inset: 1px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgb(255 255 255 / 10%), transparent 38%);
+  content: "";
+  pointer-events: none;
+}
+
+.googleVisual span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  place-items: center;
+  border-radius: 11px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 16%);
+  font-size: 20px;
+}
+
+.googleVisual strong {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.googleNative {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.01;
+}
+
+.googleNative :global(div),
+.googleNative :global(iframe) {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.googleNative :global(div[role="button"]) {
+  min-width: 100% !important;
+  min-height: 56px !important;
+  cursor: pointer;
 }
 
 .alternative {
@@ -255,11 +345,31 @@
   .divider::after {
     background: rgb(255 255 255 / 12%);
   }
+
+  .googleButton {
+    background: transparent;
+  }
+
+  .googleVisual {
+    border-color: rgb(255 255 255 / 10%);
+    background:
+      linear-gradient(180deg, rgb(35 42 54 / 92%), rgb(17 22 31 / 96%)),
+      #111827;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 28%),
+      inset 0 1px 0 rgb(255 255 255 / 8%);
+  }
+
+  .googleButton:hover .googleVisual {
+    border-color: rgb(255 255 255 / 16%);
+    box-shadow: 0 16px 34px rgb(0 0 0 / 34%),
+      inset 0 1px 0 rgb(255 255 255 / 10%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .fields,
-  .loginForm form > button {
+  .loginForm form > button,
+  .googleVisual {
     transition: none;
   }
 }

@@ -45,7 +45,8 @@
 }
 
 .trigger:focus-visible,
-.menu a:focus-visible {
+.menu a:focus-visible,
+.menu li > button:focus-visible {
   outline: 3px solid rgb(10 132 255 / 38%);
   outline-offset: 3px;
 }
@@ -76,14 +77,22 @@
     cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.menu a {
+.menu a,
+.menu li > button {
   display: flex;
+  width: 100%;
   min-height: 44px;
   padding: 0 11px;
   align-items: center;
   gap: 11px;
+  border: 0;
   border-radius: 14px;
+  outline: 0;
+  background: transparent;
   color: #3a3a3c;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   transition:
     color 150ms ease,
     background-color 150ms ease,
@@ -91,12 +100,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.menu a:hover {
+.menu a:hover,
+.menu li > button:hover {
   background: rgb(118 118 128 / 10%);
   color: #0a84ff;
 }
 
-.menu a:active {
+.menu a:active,
+.menu li > button:active {
   transform: scale(0.97);
 }
 
@@ -120,7 +131,12 @@
   border-top: 1px solid rgb(60 60 67 / 12%);
 }
 
-.menu li:last-child a {
+.menu li:last-child button {
+  color: #ff3b30;
+}
+
+.menu li:last-child button:hover {
+  background: rgb(255 59 48 / 9%);
   color: #ff3b30;
 }
 
@@ -155,11 +171,13 @@
     color: #fff;
   }
 
-  .menu a {
+  .menu a,
+  .menu li > button {
     color: #f2f2f7;
   }
 
-  .menu a:hover {
+  .menu a:hover,
+  .menu li > button:hover {
     background: rgb(255 255 255 / 8%);
     color: #0a84ff;
   }
@@ -167,11 +185,18 @@
   .menu li:last-child {
     border-color: rgb(255 255 255 / 10%);
   }
+
+  .menu li:last-child button,
+  .menu li:last-child button:hover {
+    background: rgb(255 69 58 / 8%);
+    color: #ff453a;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .trigger,
-  .menu a {
+  .menu a,
+  .menu li > button {
     transition: none;
   }
 

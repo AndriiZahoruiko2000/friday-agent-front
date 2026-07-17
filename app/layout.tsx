@@ -6,6 +6,7 @@ import AuthProvider from "@/components/providers/AuthProvider";
 import Navigation from "@/components/navigation/Navigation/Navigation";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import GlobalModals from "@/components/custom/GlobalModals/GlobalModals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +45,7 @@ export default function RootLayout({
               <main className="app-content">{children}</main>
               <Navigation />
               <div id="modal-section"></div>
+              <GlobalModals />
               <Toaster position="top-center" reverseOrder={false} />
             </AuthProvider>
           </TanStackProvider>

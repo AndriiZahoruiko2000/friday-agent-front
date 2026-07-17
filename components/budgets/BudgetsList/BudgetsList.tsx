@@ -7,7 +7,11 @@ import CreateBudgetCard from "../CreateBudgetCard/CreateBudgetCard";
 import { UIEvent, useEffect, useRef, useState } from "react";
 import { useBudgetStore } from "@/stores/budgetStore";
 
-const BudgetsList = () => {
+interface BudgetsListProps {
+  showNewCard?: boolean;
+}
+
+const BudgetsList = ({ showNewCard = true }: BudgetsListProps) => {
   const budgetsQuery = useQuery({
     queryKey: ["budgets"],
     queryFn: () => getBudget({}),
@@ -20,7 +24,7 @@ const BudgetsList = () => {
 
   useEffect(() => {
     setCurrentBudgetId(selectedBudgetId);
-  }, [selectedBudgetId]);
+  }, [selectedBudgetId, setCurrentBudgetId]);
 
   const updateActiveBudget = (track: HTMLUListElement) => {
     const trackRect = track.getBoundingClientRect();
@@ -79,7 +83,7 @@ const BudgetsList = () => {
             />
           );
         })}
-        <CreateBudgetCard />
+        {showNewCard && <CreateBudgetCard />}
       </ul>
     </section>
   );

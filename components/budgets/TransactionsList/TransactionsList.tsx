@@ -67,7 +67,10 @@ const TransactionsList = () => {
   );
 
   return (
-    <section className={css.transactionsList} aria-labelledby="transactions-title">
+    <section
+      className={css.transactionsList}
+      aria-labelledby="transactions-title"
+    >
       <header className={css.header}>
         <div>
           <p>Activity</p>
@@ -80,11 +83,15 @@ const TransactionsList = () => {
         <p className={css.state}>Loading transactions…</p>
       )}
       {transactionsQuery.isError && (
-        <p className={`${css.state} ${css.error}`}>Could not load transactions</p>
+        <p className={`${css.state} ${css.error}`}>
+          Could not load transactions
+        </p>
       )}
-      {!transactionsQuery.isPending && !transactionsQuery.isError && transactions.length === 0 && (
-        <p className={css.state}>No transactions yet</p>
-      )}
+      {!transactionsQuery.isPending &&
+        !transactionsQuery.isError &&
+        transactions.length === 0 && (
+          <p className={css.state}>No transactions yet</p>
+        )}
 
       <div className={css.groups}>
         {groupedTransactions.map(([dateKey, items]) => (
@@ -98,12 +105,6 @@ const TransactionsList = () => {
           </section>
         ))}
       </div>
-
-      {isOpenTransactionModal && (
-        <Modal onClose={hideModal}>
-          <CreateTransactionsModal />
-        </Modal>
-      )}
     </section>
   );
 };

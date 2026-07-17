@@ -10,9 +10,22 @@ import { BsCalendar2Day } from "react-icons/bs";
 import { GrTask } from "react-icons/gr";
 import { GrMoney } from "react-icons/gr";
 import { BsHouseHeart } from "react-icons/bs";
+import { logout } from "@/services/auth";
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "next/navigation";
+import { TiHomeOutline } from "react-icons/ti";
 
 const CommonNavigation = () => {
   const [isOpenModal, , hideModal, toggle] = useModal();
+  const clearUser = useUserStore((s) => s.clearUser);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    clearUser();
+    hideModal();
+    router.push("/auth/login");
+  };
 
   const navigationItems = [
     {
@@ -20,30 +33,30 @@ const CommonNavigation = () => {
       label: "Budgets",
       icon: <GrMoney aria-hidden="true" />,
     },
-    {
-      href: "/tasks",
-      label: "Tasks",
-      icon: <GrTask aria-hidden="true" />,
-    },
-    {
-      href: "/calendar",
-      label: "Calendar",
-      icon: <BsCalendar2Day aria-hidden="true" />,
-    },
-    {
-      href: "/settings",
-      label: "Settings",
-      icon: <TbSettingsCog aria-hidden="true" />,
-    },
+    // {
+    //   href: "/tasks",
+    //   label: "Tasks",
+    //   icon: <GrTask aria-hidden="true" />,
+    // },
+    // {
+    //   href: "/calendar",
+    //   label: "Calendar",
+    //   icon: <BsCalendar2Day aria-hidden="true" />,
+    // },
+    // {
+    //   href: "/settings",
+    //   label: "Settings",
+    //   icon: <TbSettingsCog aria-hidden="true" />,
+    // },
     {
       href: "/profile",
       label: "Profile",
       icon: <IoPersonCircleOutline aria-hidden="true" />,
     },
     {
-      href: "/auth/login",
-      label: "Sign out",
-      icon: <MdLogout aria-hidden="true" />,
+      href: "/",
+      label: "Home",
+      icon: <TiHomeOutline aria-hidden="true" />,
     },
   ];
 
@@ -66,13 +79,29 @@ const CommonNavigation = () => {
               </Link>
             </li>
           ))}
+          <li
+            key={"/auth/login"}
+            style={{ "--item-index": 5 } as React.CSSProperties}
+          >
+            <button
+              onClick={() => {
+                handleLogout();
+              }}
+              aria-label={"Sign out"}
+            >
+              <MdLogout aria-hidden="true" />
+              <span>Sign out</span>
+            </button>
+          </li>
         </ul>
       )}
       <button
         className={`${css.trigger} ${isOpenModal ? css.open : ""}`}
         type="button"
         onClick={toggle}
-        aria-label={isOpenModal ? "Close navigation menu" : "Open navigation menu"}
+        aria-label={
+          isOpenModal ? "Close navigation menu" : "Open navigation menu"
+        }
         aria-expanded={isOpenModal}
       >
         <BsHouseHeart aria-hidden="true" />

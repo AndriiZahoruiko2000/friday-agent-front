@@ -1,0 +1,97 @@
+.navigationCard {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  padding: 7px 12px;
+  align-items: center;
+  gap: 11px;
+  border: 0;
+  border-top: 1px solid rgb(60 60 67 / 12%);
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navigationCard:active {
+  background: rgb(118 118 128 / 9%);
+}
+
+.navigationCard:focus-visible {
+  z-index: 1;
+  outline: 3px solid rgb(255 59 48 / 25%);
+  outline-offset: -3px;
+}
+
+.cardIcon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 8px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 17px;
+}
+
+.navigationCard > div {
+  min-width: 0;
+}
+
+.navigationCard strong {
+  display: block;
+  overflow: hidden;
+  color: #ff3b30;
+  font-size: 15px;
+  font-weight: 570;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navigationCard p {
+  display: none;
+}
+
+.chevron {
+  margin-left: auto;
+  flex: 0 0 auto;
+  color: #c7c7cc;
+  font-size: 17px;
+}
+
+@media (min-width: 600px) {
+  .navigationCard {
+    min-height: 58px;
+  }
+
+  .navigationCard p {
+    display: block;
+    margin: 2px 0 0;
+    color: #8e8e93;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .navigationCard {
+    border-color: rgb(84 84 88 / 70%);
+  }
+
+  .cardIcon {
+    background: #ff453a;
+  }
+
+  .navigationCard strong {
+    color: #ff453a;
+  }
+
+  .chevron {
+    color: #636366;
+  }
+}

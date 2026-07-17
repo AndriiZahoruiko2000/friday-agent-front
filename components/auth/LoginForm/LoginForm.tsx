@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { GoogleLogin } from "@react-oauth/google";
 import { useUserStore } from "@/stores/userStore";
 import { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -71,16 +72,25 @@ const LoginForm = () => {
         </div>
 
         <div className={css.googleButton}>
-          <GoogleLogin
-            onSuccess={async (credentialResponse) => {
-              await googlePayload(credentialResponse.credential as string);
-              updateUser();
-              router.push("/budgets");
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
+          <div className={css.googleVisual} aria-hidden="true">
+            <span>
+              <FcGoogle />
+            </span>
+            <strong>Sign in with Google</strong>
+          </div>
+          <div className={css.googleNative}>
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                await googlePayload(credentialResponse.credential as string);
+                updateUser();
+                router.push("/budgets");
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              width="360"
+            />
+          </div>
         </div>
 
         <p className={css.alternative}>

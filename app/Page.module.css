@@ -1,112 +1,110 @@
 .page {
   width: 100%;
+  min-width: 0;
   min-height: calc(100dvh - 104px);
-  padding: 20px 16px 36px;
+  padding: 20px 16px 40px;
   background:
-    radial-gradient(circle at 90% 4%, rgb(255 255 255 / 58%), transparent 24%),
-    linear-gradient(180deg, #dcecff 0%, #d4e8fb 100%);
-  color: #14243a;
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
-    "SF Pro Display", "SF Pro Text", sans-serif;
+    radial-gradient(circle at 90% -8%, rgb(0 122 255 / 10%), transparent 28%),
+    radial-gradient(circle at 5% 12%, rgb(175 82 222 / 5%), transparent 24%),
+    #f2f2f7;
+  color: #1c1c1e;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    sans-serif;
 }
 
 .header,
 .page main {
-  width: min(100%, 760px);
+  width: min(100%, 680px);
   margin-inline: auto;
 }
 
 .header {
   display: flex;
   margin-bottom: 22px;
+  padding-inline: 4px;
   align-items: center;
   justify-content: space-between;
-  animation: appear 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 10px;
 }
 
 .brand > span {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   place-items: center;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #4aa5ca, #257ba5);
-  box-shadow: 0 8px 18px rgb(40 117 155 / 22%),
-    inset 0 1px 0 rgb(255 255 255 / 45%);
+  border-radius: 11px;
+  background: #007aff;
   color: #fff;
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .brand p,
 .sectionTitle p,
 .planCard div > p {
   margin: 0 0 2px;
-  color: #70879d;
+  color: #8e8e93;
   font-size: 10px;
-  font-weight: 750;
-  letter-spacing: 0.09em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
 }
 
 .brand h1 {
   margin: 0;
-  color: #12243a;
-  font-size: 30px;
-  line-height: 1;
+  font-size: 27px;
+  font-weight: 740;
   letter-spacing: -0.045em;
+  line-height: 1;
 }
 
 .avatar {
   position: relative;
   display: grid;
-  width: 43px;
-  height: 43px;
+  width: 38px;
+  height: 38px;
   padding: 0;
   place-items: center;
-  border: 2px solid rgb(255 255 255 / 72%);
+  border: 0;
   border-radius: 50%;
-  background: #18324c;
-  box-shadow: 0 7px 18px rgb(30 69 105 / 18%);
-  color: #fff;
+  background: #e5e5ea;
+  color: #3a3a3c;
   cursor: pointer;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .avatar span {
   position: absolute;
-  right: -1px;
+  right: 0;
   bottom: 0;
-  width: 11px;
-  height: 11px;
-  border: 2px solid #d9eafd;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f2f2f7;
   border-radius: 50%;
-  background: #30d158;
+  background: #34c759;
 }
 
 .page main {
   display: grid;
-  gap: 18px;
-}
-
-.welcome,
-.weekCard,
-.planCard {
-  border: 1px solid rgb(255 255 255 / 72%);
-  border-radius: 22px;
-  background: rgb(248 251 255 / 82%);
-  box-shadow: 0 12px 30px rgb(50 91 129 / 8%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  backdrop-filter: blur(20px) saturate(140%);
+  gap: 22px;
 }
 
 .welcome {
-  padding: 20px;
-  animation: appear 550ms 50ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+  padding: 19px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #0a84ff, #3478f6);
+  box-shadow: 0 10px 25px rgb(0 122 255 / 18%);
+  color: #fff;
 }
 
 .welcome > div {
@@ -117,149 +115,114 @@
 }
 
 .statusDot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border: 2px solid rgb(255 255 255 / 70%);
   border-radius: 50%;
-  background: #30c65b;
-  box-shadow: 0 0 0 4px rgb(48 198 91 / 12%);
+  background: #34c759;
 }
 
-.welcome > div p {
+.welcome > div p,
+.welcome > p {
   margin: 0;
-  color: #5d758d;
+  color: rgb(255 255 255 / 72%);
   font-size: 12px;
-  font-weight: 600;
-}
-
-.welcome h2,
-.sectionTitle h2,
-.planCard h2 {
-  margin: 0;
-  color: #15283e;
-  letter-spacing: -0.025em;
-}
-
-.welcome h2 {
-  margin-bottom: 5px;
-  font-size: 23px;
 }
 
 .welcome > p {
-  margin: 0;
-  color: #7890a6;
-  font-size: 13px;
+  max-width: 430px;
   line-height: 1.45;
 }
 
 .navigationSection {
-  padding-top: 3px;
+  min-width: 0;
 }
 
 .sectionTitle {
   display: flex;
-  margin-bottom: 12px;
-  padding-inline: 3px;
+  margin-bottom: 9px;
+  padding-inline: 4px;
   align-items: flex-end;
   justify-content: space-between;
 }
 
+.sectionTitle h2,
+.planCard h2 {
+  margin: 0;
+  color: #1c1c1e;
+  letter-spacing: -0.025em;
+}
+
 .sectionTitle h2 {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 680;
 }
 
 .sectionTitle > span {
-  color: #70879d;
-  font-size: 12px;
-  font-weight: 600;
+  color: #8e8e93;
+  font-size: 11px;
 }
 
 .navigationGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 17px;
+  background: rgb(255 255 255 / 88%);
 }
 
 .navigationCard {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 126px;
-  padding: 17px 14px;
+  min-height: 54px;
+  padding: 7px 12px;
   align-items: center;
   gap: 11px;
-  overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 76%);
-  border-radius: 21px;
-  background: rgb(249 252 255 / 84%);
-  box-shadow: 0 10px 26px rgb(50 91 129 / 7%);
+  background: transparent;
   -webkit-tap-highlight-color: transparent;
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
-  animation: cardIn 550ms var(--delay) cubic-bezier(0.22, 1, 0.36, 1) both;
-  transition: border-color 180ms ease, box-shadow 180ms ease,
-    transform 180ms ease;
 }
 
-.navigationCard::after {
+.navigationCard:not(:first-child)::before {
   position: absolute;
-  right: -24px;
-  bottom: -38px;
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  background: rgb(68 151 190 / 5%);
+  top: 0;
+  right: 12px;
+  left: 53px;
+  height: 1px;
+  background: rgb(60 60 67 / 12%);
   content: "";
-}
-
-.navigationCard:hover {
-  border-color: rgb(72 153 190 / 25%);
-  box-shadow: 0 14px 30px rgb(50 91 129 / 12%);
-  transform: translateY(-2px);
-}
-
-.navigationCard:active {
-  transform: scale(0.975);
+  transform: scaleY(0.5);
 }
 
 .cardIcon {
   display: grid;
-  width: 43px;
-  height: 43px;
-  flex: 0 0 43px;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
   place-items: center;
-  border-radius: 14px;
-  font-size: 21px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 17px;
 }
 
 .blue {
-  background: rgb(49 145 190 / 14%);
-  color: #287fa9;
+  background: #007aff;
 }
 
 .purple {
-  background: rgb(88 86 214 / 13%);
-  color: #5856d6;
+  background: #5856d6;
 }
 
 .orange {
-  background: rgb(255 149 0 / 14%);
-  color: #e88700;
+  background: #ff9500;
 }
 
 .green {
-  background: rgb(48 209 88 / 14%);
-  color: #25a849;
+  background: #34c759;
 }
 
 .gray {
-  background: rgb(99 116 133 / 13%);
-  color: #526b82;
-}
-
-.red {
-  background: rgb(255 59 48 / 12%);
-  color: #e13d35;
+  background: #8e8e93;
 }
 
 .navigationCard > div {
@@ -269,150 +232,158 @@
 .navigationCard strong {
   display: block;
   overflow: hidden;
-  color: #172a40;
+  color: #1c1c1e;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 570;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .navigationCard p {
-  margin: 4px 0 0;
-  overflow: hidden;
-  color: #8095a8;
-  font-size: 10px;
-  line-height: 1.3;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: none;
 }
 
 .chevron {
-  display: none;
   margin-left: auto;
   flex: 0 0 auto;
-  color: #a6b7c6;
+  color: #c7c7cc;
+  font-size: 17px;
+}
+
+.navigationCard:active {
+  background: rgb(118 118 128 / 9%);
 }
 
 .weekCard {
-  padding: 19px;
-  animation: appear 550ms 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  padding: 15px;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 88%);
 }
 
 .weekCard .sectionTitle {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   padding: 0;
 }
 
 .sectionTitle button {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   place-items: center;
   border: 0;
-  border-radius: 11px;
-  background: rgb(42 132 174 / 11%);
-  color: #287fa9;
+  border-radius: 50%;
+  background: rgb(0 122 255 / 10%);
+  color: #007aff;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .metrics {
   display: grid;
-  overflow: hidden;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid rgb(87 121 153 / 8%);
-  border-radius: 16px;
-  background: rgb(231 242 252 / 60%);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .metrics > div {
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: 100px;
-  padding: 14px 6px;
-  place-items: center;
-  align-content: center;
+  padding: 8px 4px 5px;
+  justify-items: center;
 }
 
 .metrics > div + div::before {
   position: absolute;
-  top: 13px;
-  bottom: 13px;
+  top: 5px;
+  bottom: 5px;
   left: 0;
   width: 1px;
-  background: rgb(92 125 154 / 14%);
+  background: rgb(60 60 67 / 12%);
   content: "";
+  transform: scaleX(0.5);
 }
 
 .metricIcon {
   display: grid;
   margin-bottom: 5px;
   place-items: center;
-  color: #3190ae;
-  font-size: 18px;
+  color: #007aff;
+  font-size: 17px;
 }
 
 .metrics strong {
-  color: #172a40;
-  font-size: 20px;
-  line-height: 1.1;
+  max-width: 100%;
+  overflow: hidden;
+  color: #1c1c1e;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .metrics p {
-  margin: 4px 0 0;
-  color: #8297aa;
+  margin: 3px 0 0;
+  color: #8e8e93;
   font-size: 10px;
   text-align: center;
 }
 
 .planCard {
   display: grid;
-  padding: 18px;
+  min-width: 0;
+  padding: 12px;
   align-items: center;
-  grid-template-columns: 44px 1fr 32px;
-  gap: 12px;
-  animation: appear 550ms 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  grid-template-columns: 36px minmax(0, 1fr) 28px;
+  gap: 10px;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 17px;
+  background: rgb(255 255 255 / 88%);
 }
 
 .planIcon {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   place-items: center;
-  border-radius: 14px;
-  background: rgb(50 194 190 / 13%);
-  color: #20a9a5;
-  font-size: 20px;
+  border-radius: 10px;
+  background: #ff9500;
+  color: #fff;
+  font-size: 18px;
+}
+
+.planCard > div {
+  min-width: 0;
 }
 
 .planCard h2 {
-  margin-bottom: 3px;
-  font-size: 16px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 590;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .planCard div > span {
-  color: #8297aa;
+  color: #8e8e93;
   font-size: 11px;
 }
 
 .planCard > a {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   place-items: center;
-  border-radius: 50%;
-  background: rgb(42 132 174 / 10%);
-  color: #287fa9;
+  color: #c7c7cc;
 }
 
 .navigationCard:focus-visible,
 .avatar:focus-visible,
 .sectionTitle button:focus-visible,
 .planCard > a:focus-visible {
-  outline: 3px solid rgb(10 132 255 / 34%);
-  outline-offset: 3px;
+  outline: 3px solid rgb(0 122 255 / 28%);
+  outline-offset: 2px;
 }
 
 @media (min-width: 600px) {
@@ -420,117 +391,94 @@
     padding: 28px 24px 48px;
   }
 
-  .navigationGrid {
-    gap: 15px;
-  }
-
-  .navigationCard {
-    min-height: 142px;
+  .welcome {
     padding: 22px;
   }
 
-  .cardIcon {
-    width: 52px;
-    height: 52px;
-    flex-basis: 52px;
-    border-radius: 17px;
-    font-size: 24px;
-  }
-
-  .navigationCard strong {
-    font-size: 17px;
+  .navigationCard {
+    min-height: 58px;
   }
 
   .navigationCard p {
-    font-size: 12px;
-  }
-
-  .chevron {
     display: block;
+    margin: 2px 0 0;
+    color: #8e8e93;
+    font-size: 11px;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .page {
     background:
-      radial-gradient(circle at 90% 4%, rgb(45 80 112 / 36%), transparent 25%),
-      linear-gradient(180deg, #0d1a27, #0a1622);
+      radial-gradient(circle at 90% -8%, rgb(10 132 255 / 13%), transparent 28%),
+      #000;
+    color: #f5f5f7;
   }
 
   .brand h1,
-  .welcome h2,
   .sectionTitle h2,
   .planCard h2,
   .navigationCard strong,
   .metrics strong {
-    color: #f4f8fb;
+    color: #f5f5f7;
+  }
+
+  .avatar {
+    background: #2c2c2e;
+    color: #f5f5f7;
   }
 
   .avatar span {
-    border-color: #0d1a27;
+    border-color: #000;
   }
 
-  .welcome,
+  .navigationGrid,
   .weekCard,
-  .planCard,
-  .navigationCard {
-    border-color: rgb(255 255 255 / 8%);
-    background: rgb(27 42 56 / 82%);
-    box-shadow: 0 12px 30px rgb(0 0 0 / 24%);
+  .planCard {
+    border-color: rgb(255 255 255 / 7%);
+    background: rgb(28 28 30 / 92%);
   }
 
-  .metrics {
-    border-color: rgb(255 255 255 / 6%);
-    background: rgb(13 29 43 / 62%);
-  }
-
+  .navigationCard:not(:first-child)::before,
   .metrics > div + div::before {
-    background: rgb(255 255 255 / 9%);
+    background: rgb(84 84 88 / 70%);
   }
 
-  .quickAccess,
-  .welcome > p,
-  .navigationCard p,
-  .metrics p,
-  .planCard div > span {
-    color: #8fa6ba;
+  .chevron,
+  .planCard > a {
+    color: #636366;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .header,
+@media (prefers-reduced-motion: no-preference) {
   .welcome,
-  .navigationCard,
+  .navigationSection,
   .weekCard,
   .planCard {
-    animation: none;
+    animation: appear 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .navigationCard {
-    transition: none;
+  .navigationSection {
+    animation-delay: 40ms;
+  }
+
+  .weekCard {
+    animation-delay: 80ms;
+  }
+
+  .planCard {
+    animation-delay: 120ms;
   }
 }
 
 @keyframes appear {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(8px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }

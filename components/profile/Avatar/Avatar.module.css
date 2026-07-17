@@ -1,0 +1,41 @@
+.avatar {
+  position: relative;
+  display: grid;
+  width: 88px;
+  height: 88px;
+  place-items: center;
+  border: 3px solid rgb(255 255 255 / 90%);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #5ac8fa, #0a84ff);
+  box-shadow:
+    0 10px 24px rgb(0 122 255 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 35%);
+  color: #fff;
+}
+
+.avatar > svg {
+  width: 64px;
+  height: 64px;
+  stroke-width: 1.25;
+}
+
+.status {
+  position: absolute;
+  right: 3px;
+  bottom: 5px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #34c759;
+}
+
+@media (prefers-color-scheme: dark) {
+  .avatar {
+    border-color: #2c2c2e;
+  }
+
+  .status {
+    border-color: #2c2c2e;
+  }
+}

@@ -1,0 +1,196 @@
+.budgetPreview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 1px;
+  overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 18px;
+  background: rgb(60 60 67 / 10%);
+  box-shadow: 0 5px 18px rgb(28 28 30 / 6%);
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    sans-serif;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.deposit,
+.withdraw,
+.balance,
+.transactions {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 74px;
+  padding: 12px;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: rgb(255 255 255 / 86%);
+  box-shadow: none;
+  transition:
+    transform 180ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 180ms ease;
+}
+
+.deposit {
+  --accent: #34c759;
+  --tint: rgb(52 199 89 / 13%);
+}
+
+.withdraw {
+  --accent: #ff3b30;
+  --tint: rgb(255 59 48 / 12%);
+}
+
+.balance {
+  --accent: #007aff;
+  --tint: rgb(0 122 255 / 12%);
+}
+
+.transactions {
+  --accent: #af52de;
+  --tint: rgb(175 82 222 / 12%);
+}
+
+.icon {
+  display: grid;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--tint);
+  color: var(--accent);
+  font-size: 19px;
+}
+
+.icon svg {
+  width: 1em;
+  height: 1em;
+  stroke-width: 1.7;
+}
+
+.budgetPreview > div > div {
+  min-width: 0;
+}
+
+.budgetPreview p {
+  margin: 0;
+}
+
+.budgetPreview p:first-child {
+  margin: 0 0 4px;
+  color: #8e8e93;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.budgetPreview p:last-child {
+  max-width: 100%;
+  overflow: hidden;
+  color: #1c1c1e;
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 720;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .deposit:hover,
+  .withdraw:hover,
+  .balance:hover,
+  .transactions:hover {
+    z-index: 1;
+    background: rgb(255 255 255 / 100%);
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+@media (min-width: 720px) {
+  .budgetPreview {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .deposit,
+  .withdraw,
+  .balance,
+  .transactions {
+    min-height: 78px;
+  }
+}
+
+@media (max-width: 390px) {
+  .budgetPreview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .deposit,
+  .withdraw,
+  .balance,
+  .transactions {
+    min-height: 68px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 18px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .budgetPreview {
+    border-color: rgb(255 255 255 / 8%);
+    background: rgb(84 84 88 / 55%);
+    box-shadow: 0 5px 18px rgb(0 0 0 / 24%);
+  }
+
+  .deposit,
+  .withdraw,
+  .balance,
+  .transactions {
+    background: rgb(36 36 38 / 92%);
+    box-shadow: none;
+  }
+
+  .budgetPreview p:first-child {
+    color: #98989d;
+  }
+
+  .budgetPreview p:last-child {
+    color: #f5f5f7;
+  }
+
+  .icon {
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deposit,
+  .withdraw,
+  .balance,
+  .transactions {
+    transition: none;
+  }
+}

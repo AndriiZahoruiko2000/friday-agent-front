@@ -2,7 +2,11 @@ import BudgetStatistic from "@/components/budgets/BudgetStatistic/BudgetStatisti
 import css from "./Page.module.css";
 
 const Page = () => {
-  return <BudgetStatistic />;
+  return (
+    <div className={css.page}>
+      <BudgetStatistic />
+    </div>
+  );
 };
 
 export default Page;

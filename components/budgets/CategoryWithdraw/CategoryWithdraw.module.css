@@ -1,0 +1,174 @@
+.categoryWithdraw {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 12px 0 0;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    sans-serif;
+}
+
+.title {
+  margin: 0 4px 9px;
+  color: #1c1c1e;
+  font-size: 17px;
+  font-weight: 680;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.categoryWithdraw ul {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 7%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 4px 14px rgb(28 28 30 / 5%);
+  list-style: none;
+}
+
+.categoryWithdraw li {
+  position: relative;
+  display: grid;
+  min-height: 52px;
+  padding: 7px 12px;
+  align-items: center;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 10px;
+  transition: background-color 150ms ease;
+}
+
+.categoryWithdraw li:not(:last-child)::after {
+  position: absolute;
+  right: 14px;
+  bottom: 0;
+  left: 56px;
+  height: 1px;
+  background: rgb(60 60 67 / 12%);
+  content: "";
+  transform: scaleY(0.5);
+  transform-origin: bottom;
+}
+
+.categoryIcon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  background: #ff9500;
+  color: #fff;
+  font-size: 18px;
+  box-shadow: none;
+}
+
+.categoryIcon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.categoryName,
+.amount {
+  max-width: min(42vw, 180px);
+  overflow: hidden;
+  margin: 0;
+}
+
+.categoryName {
+  overflow: hidden;
+  color: #1c1c1e;
+  font-size: 14px;
+  font-weight: 590;
+  letter-spacing: -0.018em;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.amount {
+  padding-left: 8px;
+  color: #ff3b30;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 680;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.amount::before {
+  content: "−";
+}
+
+.emptyState {
+  margin: 0;
+  padding: 22px 16px;
+  color: #8e8e93;
+  font-size: 15px;
+  font-weight: 520;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .categoryWithdraw li:hover {
+    background: rgb(0 122 255 / 4%);
+  }
+}
+
+@media (max-width: 390px) {
+  .categoryWithdraw {
+    padding-inline: 0;
+  }
+
+  .categoryWithdraw li {
+    padding-inline: 12px;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+
+  .categoryIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .categoryWithdraw li:not(:last-child)::after {
+    left: 53px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .categoryWithdraw {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .title,
+  .categoryName {
+    color: #f5f5f7;
+  }
+
+  .categoryWithdraw ul {
+    border-color: rgb(255 255 255 / 7%);
+    background: rgb(36 36 38 / 92%);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 20%);
+  }
+
+  .categoryWithdraw li:not(:last-child)::after {
+    background: rgb(84 84 88 / 65%);
+  }
+
+  .emptyState {
+    color: #98989d;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .categoryWithdraw li {
+    transition: none;
+  }
+}

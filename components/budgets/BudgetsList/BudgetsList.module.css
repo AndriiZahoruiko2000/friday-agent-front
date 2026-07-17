@@ -1,5 +1,7 @@
 .budgetsList {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding-block: 20px;
   overflow: hidden;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
@@ -48,6 +50,8 @@
 .track {
   --budget-card-width: min(82vw, 310px);
   display: flex;
+  width: 100%;
+  min-width: 0;
   gap: 12px;
   margin: 0;
   padding: 8px max(16px, calc((100% - var(--budget-card-width)) / 2)) 22px;

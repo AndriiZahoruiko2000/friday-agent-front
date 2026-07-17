@@ -1,15 +1,11 @@
+import SignOutButton from "@/components/custom/SignOutButton/SignOutButton";
 import css from "./Page.module.css";
 import Link from "next/link";
-import {
-  BsCalendar2Day,
-  BsCheck2Circle,
-  BsHouseHeart,
-} from "react-icons/bs";
+import { BsCalendar2Day, BsCheck2Circle, BsHouseHeart } from "react-icons/bs";
 import { FiArrowUpRight, FiChevronRight, FiClock } from "react-icons/fi";
-import { GrMoney, GrTask } from "react-icons/gr";
+import { GrMoney } from "react-icons/gr";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
-import { TbSettingsCog } from "react-icons/tb";
+import Greetings from "@/components/custom/Greetings/Greetings";
 
 const Page = () => {
   const navigationCards = [
@@ -20,20 +16,20 @@ const Page = () => {
       icon: <GrMoney />,
       color: "blue",
     },
-    {
-      href: "/tasks",
-      label: "Tasks",
-      description: "Plan your day",
-      icon: <GrTask />,
-      color: "purple",
-    },
-    {
-      href: "/calendar",
-      label: "Calendar",
-      description: "View your schedule",
-      icon: <BsCalendar2Day />,
-      color: "orange",
-    },
+    // {
+    //   href: "/tasks",
+    //   label: "Tasks",
+    //   description: "Plan your day",
+    //   icon: <GrTask />,
+    //   color: "purple",
+    // },
+    // {
+    //   href: "/calendar",
+    //   label: "Calendar",
+    //   description: "View your schedule",
+    //   icon: <BsCalendar2Day />,
+    //   color: "orange",
+    // },
     {
       href: "/profile",
       label: "Profile",
@@ -41,20 +37,13 @@ const Page = () => {
       icon: <IoPersonCircleOutline />,
       color: "green",
     },
-    {
-      href: "/settings",
-      label: "Settings",
-      description: "Tune your Friday",
-      icon: <TbSettingsCog />,
-      color: "gray",
-    },
-    {
-      href: "/auth/login",
-      label: "Sign out",
-      description: "End this session",
-      icon: <MdLogout />,
-      color: "red",
-    },
+    // {
+    //   href: "/settings",
+    //   label: "Settings",
+    //   description: "Tune your Friday",
+    //   icon: <TbSettingsCog />,
+    //   color: "gray",
+    // },
   ];
 
   return (
@@ -81,7 +70,7 @@ const Page = () => {
             <span className={css.statusDot} aria-hidden="true" />
             <p>Everything looks good</p>
           </div>
-          <h2>Good afternoon, Andrii</h2>
+          <Greetings />
           <p>Your plans, finances and daily focus are all in one place.</p>
         </section>
 
@@ -91,7 +80,7 @@ const Page = () => {
               <p>QUICK ACCESS</p>
               <h2>Your space</h2>
             </div>
-            <span>6 sections</span>
+            <span>3 actions</span>
           </div>
 
           <div className={css.navigationGrid}>
@@ -115,6 +104,7 @@ const Page = () => {
                 <FiChevronRight className={css.chevron} aria-hidden="true" />
               </Link>
             ))}
+            <SignOutButton />
           </div>
         </section>
 
