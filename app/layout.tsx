@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Friday",
+  title: "Friday-Agent",
   description: "Your personal finance companion",
 };
 
