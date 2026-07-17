@@ -1,6 +1,7 @@
+import { site_url } from "@/helpers/constants";
 import axios from "axios";
 
 export const serverAPI = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: `${site_url}/api`,
   withCredentials: true,
 });
