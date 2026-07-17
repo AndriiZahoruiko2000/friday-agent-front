@@ -21,6 +21,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef({ y: 0, time: 0 });
+  const didDragRef = useRef(false);
 
   useEffect(() => {
     const body = document.body;
@@ -54,13 +55,16 @@ const Modal = ({ children, onClose }: ModalProps) => {
     if (isClosing) return;
     event.currentTarget.setPointerCapture(event.pointerId);
     dragStartRef.current = { y: event.clientY, time: performance.now() };
+    didDragRef.current = false;
     setIsDragging(true);
     setDragY(0);
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!isDragging || isClosing) return;
-    setDragY(Math.max(0, event.clientY - dragStartRef.current.y));
+    const distance = event.clientY - dragStartRef.current.y;
+    if (Math.abs(distance) > 5) didDragRef.current = true;
+    setDragY(Math.max(0, distance));
   };
 
   const finishDrag = (event: PointerEvent<HTMLDivElement>) => {
@@ -106,6 +110,9 @@ const Modal = ({ children, onClose }: ModalProps) => {
         onPointerMove={handlePointerMove}
         onPointerUp={finishDrag}
         onPointerCancel={finishDrag}
+        onClick={() => {
+          if (!didDragRef.current && !isClosing) onClose();
+        }}
       />
       <div
         className={`${css.sheet} ${isDragging ? css.dragging : ""}`}
