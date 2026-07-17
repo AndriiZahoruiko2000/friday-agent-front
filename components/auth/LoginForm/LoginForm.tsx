@@ -12,6 +12,7 @@ const LoginForm = () => {
   const router = useRouter();
   const updateUser = useUserStore((s) => s.updateUser);
   const isAuth = useUserStore((s) => s.isAuth);
+  console.log("");
 
   useEffect(() => {
     if (isAuth) {
