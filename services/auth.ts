@@ -39,3 +39,16 @@ export const googlePayload = async (token: string) => {
   );
   return response.data;
 };
+
+export const forgotPassword = async (email: string) => {
+  const response = await serverAPI.post("/auth/forgot", { email });
+  return response.data;
+};
+
+export const confirmPassword = async (token: string, newPassword: string) => {
+  const response = await serverAPI.post("/auth/confirm-password", {
+    token,
+    newPassword,
+  });
+  return response.data;
+};

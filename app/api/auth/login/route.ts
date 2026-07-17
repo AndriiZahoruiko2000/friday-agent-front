@@ -3,30 +3,43 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { parseCookie } from "cookie";
 import { globalAPI } from "../../global-config";
+import { AxiosError } from "axios";
 
 export const POST = async (req: NextRequest) => {
-  const cookieStore = await cookies();
-  const body = await req.json();
-  const response = await globalAPI.post("/auth/login", body);
+  try {
+    const cookieStore = await cookies();
+    const body = await req.json();
+    const response = await globalAPI.post("/auth/login", body);
 
-  const cookiesArray = response.headers["set-cookie"] || [];
+    const cookiesArray = response.headers["set-cookie"] || [];
 
-  for (const token of cookiesArray) {
-    const object = parseCookie(token);
-    const options = {
-      expires: object.Expires ? new Date(object.Expires) : undefined,
-      path: object.Path,
-      maxAge: Number(object["Max-Age"]),
-    };
-    if (object.accessToken) {
-      cookieStore.set("accessToken", object.accessToken, options);
+    for (const token of cookiesArray) {
+      const object = parseCookie(token);
+      const options = {
+        expires: object.Expires ? new Date(object.Expires) : undefined,
+        path: object.Path,
+        maxAge: Number(object["Max-Age"]),
+      };
+      if (object.accessToken) {
+        cookieStore.set("accessToken", object.accessToken, options);
+      }
+
+      if (object.refreshToken) {
+        cookieStore.set("refreshToken", object.refreshToken, options);
+      }
     }
+    console.log(cookiesArray);
 
-    if (object.refreshToken) {
-      cookieStore.set("refreshToken", object.refreshToken, options);
-    }
+    return NextResponse.json(response.data);
+  } catch (error) {
+    const err = error as AxiosError<{ message: string }>;
+    return NextResponse.json(
+      {
+        error: err.response?.data.message || err.message,
+      },
+      {
+        status: err.status || 500,
+      },
+    );
   }
-  console.log(cookiesArray);
-
-  return NextResponse.json(response.data);
 };

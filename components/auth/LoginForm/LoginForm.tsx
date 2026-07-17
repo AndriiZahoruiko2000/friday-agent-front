@@ -6,10 +6,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GoogleLogin } from "@react-oauth/google";
 import { useUserStore } from "@/stores/userStore";
+import { useEffect } from "react";
 
 const LoginForm = () => {
   const router = useRouter();
   const updateUser = useUserStore((s) => s.updateUser);
+  const isAuth = useUserStore((s) => s.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      router.push("/");
+    }
+  }, [isAuth]);
 
   const handleSubmit = async (formData: FormData) => {
     const loginData = {
@@ -18,6 +26,7 @@ const LoginForm = () => {
     };
 
     await login(loginData);
+    updateUser();
     router.push("/");
   };
 
@@ -56,21 +65,30 @@ const LoginForm = () => {
           </div>
           <button type="submit">Log in</button>
         </form>
-        <GoogleLogin
-          onSuccess={async (credentialResponse) => {
-            await googlePayload(credentialResponse.credential as string);
-            updateUser();
-            router.push("/budgets");
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+        <div className={css.divider}>
+          <span>or continue with</span>
+        </div>
+
+        <div className={css.googleButton}>
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              await googlePayload(credentialResponse.credential as string);
+              updateUser();
+              router.push("/budgets");
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </div>
 
         <p className={css.alternative}>
           Don&apos;t have an account?{" "}
           <Link href="/auth/register">Register</Link>
         </p>
+        <Link className={css.forgotLink} href={"/auth/forgot"}>
+          Forgot password?
+        </Link>
       </div>
     </section>
   );

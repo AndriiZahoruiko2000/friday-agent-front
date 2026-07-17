@@ -1,0 +1,206 @@
+.commonNavigation {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.trigger {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 76%);
+  border-radius: 23px;
+  outline: 0;
+  background: rgb(249 249 251 / 84%);
+  box-shadow: 0 14px 40px rgb(24 41 60 / 16%);
+  color: #3a3a3c;
+  cursor: pointer;
+  font-size: 27px;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+.trigger:hover {
+  color: #0a84ff;
+  transform: translateY(-2px);
+}
+
+.trigger:active {
+  transform: scale(0.94);
+}
+
+.trigger.open {
+  border-color: rgb(10 132 255 / 22%);
+  background: #0a84ff;
+  box-shadow: 0 12px 32px rgb(10 132 255 / 32%);
+  color: #fff;
+}
+
+.trigger:focus-visible,
+.menu a:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 12px);
+  display: grid;
+  width: 174px;
+  margin: 0;
+  padding: 8px;
+  gap: 3px;
+  border: 1px solid rgb(255 255 255 / 76%);
+  border-radius: 22px;
+  background: rgb(249 249 251 / 88%);
+  box-shadow: 0 18px 48px rgb(24 41 60 / 20%);
+  list-style: none;
+  transform-origin: right bottom;
+  animation: menuIn 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+}
+
+.menu li {
+  min-width: 0;
+  animation: itemIn 260ms calc(var(--item-index) * 28ms)
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.menu a {
+  display: flex;
+  min-height: 44px;
+  padding: 0 11px;
+  align-items: center;
+  gap: 11px;
+  border-radius: 14px;
+  color: #3a3a3c;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu a:hover {
+  background: rgb(118 118 128 / 10%);
+  color: #0a84ff;
+}
+
+.menu a:active {
+  transform: scale(0.97);
+}
+
+.menu svg {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+}
+
+.menu span {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu li:last-child {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgb(60 60 67 / 12%);
+}
+
+.menu li:last-child a {
+  color: #ff3b30;
+}
+
+@media (min-width: 768px) {
+  .trigger {
+    width: 64px;
+    height: 64px;
+  }
+
+  .menu {
+    right: auto;
+    left: 0;
+    transform-origin: left bottom;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .trigger,
+  .menu {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(28 28 30 / 86%);
+    box-shadow: 0 16px 44px rgb(0 0 0 / 36%);
+  }
+
+  .trigger {
+    color: #d1d1d6;
+  }
+
+  .trigger.open {
+    border-color: rgb(10 132 255 / 38%);
+    background: #0a84ff;
+    color: #fff;
+  }
+
+  .menu a {
+    color: #f2f2f7;
+  }
+
+  .menu a:hover {
+    background: rgb(255 255 255 / 8%);
+    color: #0a84ff;
+  }
+
+  .menu li:last-child {
+    border-color: rgb(255 255 255 / 10%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .menu a {
+    transition: none;
+  }
+
+  .menu,
+  .menu li {
+    animation: none;
+  }
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

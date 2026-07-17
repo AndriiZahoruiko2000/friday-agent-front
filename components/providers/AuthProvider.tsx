@@ -20,7 +20,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         const user = await getMe();
         setUser(user);
       } catch (error) {
-        // router.push("/auth/login");
+        router.push("/auth/login");
       }
     }
     fetchUser();

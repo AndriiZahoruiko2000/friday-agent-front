@@ -1,12 +1,18 @@
 .navigationList {
   display: grid;
-  width: min(100%, 430px);
+  width: min(270px, calc(100vw - 94px));
   height: 64px;
-  margin: 0 auto;
-  padding: 0;
-  grid-template-columns: 1fr 76px 1fr;
+  margin: 0;
+  padding: 6px 8px;
+  grid-template-columns: 1fr 68px 1fr;
   align-items: center;
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 23px;
+  background: rgb(249 249 251 / 82%);
+  box-shadow: 0 14px 40px rgb(24 41 60 / 16%);
   list-style: none;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
 }
 
 .navigationList li {
@@ -18,7 +24,7 @@
 .navItem {
   display: flex;
   min-width: 72px;
-  min-height: 52px;
+  min-height: 50px;
   padding: 5px 10px;
   align-items: center;
   justify-content: center;
@@ -67,8 +73,8 @@
 
 .createButton {
   display: grid;
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   padding: 0;
   place-items: center;
   border: 0;
@@ -98,6 +104,12 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .navigationList {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(28 28 30 / 84%);
+    box-shadow: 0 14px 40px rgb(0 0 0 / 34%);
+  }
+
   .navItem {
     color: #8e8e93;
   }
@@ -108,6 +120,13 @@
 
   .navItem:hover {
     background: rgb(255 255 255 / 7%);
+  }
+}
+
+@media (min-width: 768px) {
+  .navigationList {
+    width: 300px;
+    grid-template-columns: 1fr 72px 1fr;
   }
 }
 
