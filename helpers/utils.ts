@@ -6,6 +6,10 @@ export const checkDate = (date1: MyDate, date2: MyDate) => {
   const x = new Date(date1).toISOString().slice(0, 10);
   const y = new Date(date2).toISOString().slice(0, 10);
 
+  if (x === y) {
+    console.log(x);
+    console.log(y);
+  }
   return x === y;
 };
 

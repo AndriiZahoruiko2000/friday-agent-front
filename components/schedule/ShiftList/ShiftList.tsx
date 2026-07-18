@@ -39,31 +39,32 @@ const ShiftList = () => {
           <p>Натисніть «+», щоб створити першу зміну.</p>
         </div>
       )}
+      <div>
+        <CreateShiftModal />
+        {shifts.length > 0 && (
+          <ul className={css.list}>
+            {shifts.map((item) => {
+              const style = {
+                "--shift-color": item.color || "#0a84ff",
+              } as CSSProperties;
 
-      {shifts.length > 0 && (
-        <ul className={css.list}>
-          <CreateShiftModal />
-          {shifts.map((item) => {
-            const style = {
-              "--shift-color": item.color || "#0a84ff",
-            } as CSSProperties;
-
-            return (
-              <li className={css.item} key={item._id} style={style}>
-                <span className={css.icon} aria-hidden="true">
-                  {getIconByValue(item.icon) || "⏱️"}
-                </span>
-                <span className={css.copy}>
-                  <strong>{item.title}</strong>
-                  <span className={css.time}>
-                    {item.startTime}–{item.endTime}
+              return (
+                <li className={css.item} key={item._id} style={style}>
+                  <span className={css.icon} aria-hidden="true">
+                    {getIconByValue(item.icon) || "⏱️"}
                   </span>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+                  <span className={css.copy}>
+                    <strong>{item.title}</strong>
+                    <span className={css.time}>
+                      {item.startTime}–{item.endTime}
+                    </span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </section>
   );
 };

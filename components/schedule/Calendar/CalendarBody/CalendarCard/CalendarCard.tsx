@@ -15,6 +15,9 @@ interface CalendarCardProps {
   isOutsideMonth: boolean;
 }
 
+const myDate = new Date();
+myDate.setDate(myDate.getDate() - 1);
+
 const CalendarCard = ({
   date,
   schedule,
@@ -32,7 +35,7 @@ const CalendarCard = ({
 
   const shift = shiftsQuery.data;
 
-  const isToday = checkDate(date, new Date());
+  const isToday = checkDate(date, myDate);
   const label = new Intl.DateTimeFormat("uk-UA", {
     weekday: "long",
     day: "numeric",

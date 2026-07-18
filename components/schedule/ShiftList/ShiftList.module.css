@@ -29,12 +29,50 @@
   font-weight: 750;
 }
 
-.list {
+.shiftList > div:last-child {
+  position: relative;
+  z-index: 2;
   display: flex;
   width: 100%;
-  margin: 6px 0 0;
+  margin-top: 6px;
   padding: 2px 4px 8px;
   align-items: stretch;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.shiftList > div:last-child > div {
+  display: grid;
+  width: 54px;
+  min-width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  place-items: center;
+}
+
+.shiftList > div:last-child > div > button {
+  width: 54px;
+  height: 54px;
+  border-color: rgb(10 132 255 / 16%);
+  border-radius: 17px;
+  background: rgb(10 132 255 / 9%);
+  box-shadow: none;
+  pointer-events: auto;
+}
+
+.shiftList > div:last-child > div > button:hover {
+  background: rgb(10 132 255 / 14%);
+  box-shadow: none;
+}
+
+.list {
+  display: flex;
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  flex: 1;
   gap: 8px;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -47,29 +85,6 @@
 
 .list::-webkit-scrollbar {
   display: none;
-}
-
-.list > div {
-  display: grid;
-  flex: 0 0 54px;
-  width: 54px;
-  min-width: 54px;
-  place-items: center;
-  scroll-snap-align: start;
-}
-
-.list > div > button {
-  width: 54px;
-  height: 54px;
-  border-color: rgb(10 132 255 / 16%);
-  border-radius: 17px;
-  background: rgb(10 132 255 / 9%);
-  box-shadow: none;
-}
-
-.list > div > button:hover {
-  background: rgb(10 132 255 / 14%);
-  box-shadow: none;
 }
 
 .item {
@@ -187,7 +202,7 @@
 }
 
 @media (min-width: 768px) {
-  .list {
+  .shiftList > div:last-child {
     padding-inline: 4px;
   }
 }
@@ -211,12 +226,12 @@
     background: transparent;
   }
 
-  .list > div > button {
+  .shiftList > div:last-child > div > button {
     border-color: rgb(10 132 255 / 22%);
     background: rgb(10 132 255 / 14%);
   }
 
-  .list > div > button:hover {
+  .shiftList > div:last-child > div > button:hover {
     background: rgb(10 132 255 / 20%);
   }
 
