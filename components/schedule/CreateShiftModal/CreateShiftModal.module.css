@@ -1,0 +1,279 @@
+.createShiftModal {
+  flex: 0 0 auto;
+}
+
+.trigger {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(10 132 255 / 14%);
+  border-radius: 16px;
+  outline: 0;
+  background: rgb(255 255 255 / 76%);
+  box-shadow: 0 6px 18px rgb(28 28 30 / 7%);
+  color: #0a84ff;
+  cursor: pointer;
+  transition: background-color 150ms ease, box-shadow 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+.trigger svg {
+  width: 28px;
+  height: 28px;
+}
+
+.trigger:hover {
+  background: #fff;
+  box-shadow: 0 9px 22px rgb(10 132 255 / 14%);
+  transform: translateY(-1px);
+}
+
+.trigger:active {
+  transform: scale(0.93);
+}
+
+.trigger:focus-visible,
+.cancel:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.form {
+  display: grid;
+  width: 100%;
+  padding-bottom: 4px;
+  gap: 18px;
+}
+
+.formHeader {
+  text-align: center;
+}
+
+.formHeader > span {
+  color: #0a84ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.formHeader h2 {
+  margin: 4px 0 0;
+  font-size: 26px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.formHeader p {
+  margin: 6px 0 0;
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.field,
+.timeGroup label {
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+}
+
+.field > span,
+.timeGroup legend,
+.timeGroup label > span:first-child {
+  color: #6c6c70;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field input,
+.inputWithIcon,
+.colorControl {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  border: 1px solid rgb(60 60 67 / 9%);
+  border-radius: 14px;
+  background: #f2f2f7;
+  color: #111114;
+}
+
+.field input {
+  padding: 0 14px;
+  outline: 0;
+  font-size: 16px;
+}
+
+.field input::placeholder {
+  color: #aeaeb2;
+}
+
+.field input:focus,
+.inputWithIcon:focus-within {
+  border-color: #0a84ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(10 132 255 / 12%);
+}
+
+.timeGroup {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 0;
+}
+
+.timeGroup legend {
+  margin-bottom: 7px;
+}
+
+.inputWithIcon {
+  display: grid;
+  padding: 0 10px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.inputWithIcon svg,
+.colorControl svg {
+  color: #0a84ff;
+  font-size: 20px;
+}
+
+.inputWithIcon input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(112px, 0.72fr);
+  gap: 10px;
+}
+
+.colorControl {
+  display: grid;
+  padding: 5px 7px 5px 12px;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorField .colorControl input {
+  width: 100%;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.colorField .colorControl input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorField .colorControl input::-webkit-color-swatch {
+  border: 0;
+  border-radius: 9px;
+}
+
+.field .emojiInput {
+  font-size: 24px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 10px;
+}
+
+.cancel,
+.submit {
+  min-height: 52px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.cancel {
+  background: #e9e9ee;
+  color: #3a3a3c;
+}
+
+.submit {
+  background: #0a84ff;
+  box-shadow: 0 7px 18px rgb(10 132 255 / 24%);
+  color: #fff;
+}
+
+.submit:hover {
+  background: #0077ed;
+}
+
+.cancel:active,
+.submit:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-color-scheme: dark) {
+  .trigger {
+    border-color: rgb(10 132 255 / 22%);
+    background: rgb(44 44 46 / 84%);
+    box-shadow: none;
+  }
+
+  .trigger:hover {
+    background: #3a3a3c;
+  }
+
+  .field > span,
+  .timeGroup legend,
+  .timeGroup label > span:first-child {
+    color: #aeaeb2;
+  }
+
+  .field input,
+  .inputWithIcon,
+  .colorControl {
+    border-color: rgb(255 255 255 / 8%);
+    background: #2c2c2e;
+    color: #f5f5f7;
+  }
+
+  .field input:focus,
+  .inputWithIcon:focus-within {
+    background: #363638;
+  }
+
+  .cancel {
+    background: #3a3a3c;
+    color: #f5f5f7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .cancel,
+  .submit {
+    transition: none;
+  }
+}

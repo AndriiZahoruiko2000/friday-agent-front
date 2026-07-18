@@ -1,0 +1,60 @@
+.dateSelector {
+  display: grid;
+  grid-template-columns: 46px 1fr 46px;
+  align-items: center;
+  gap: 10px;
+}
+
+.dateSelector button {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(60 60 67 / 12%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 72%);
+  box-shadow: 0 4px 16px rgb(28 28 30 / 5%);
+  color: #0a84ff;
+  cursor: pointer;
+  transition: transform 140ms ease, background-color 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dateSelector button:hover {
+  background: #fff;
+}
+
+.dateSelector button:active {
+  transform: scale(0.92);
+}
+
+.dateSelector button:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 32%);
+  outline-offset: 2px;
+}
+
+.dateSelector button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.dateSelector time {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-transform: capitalize;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dateSelector button {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(44 44 46 / 82%);
+    box-shadow: none;
+  }
+
+  .dateSelector button:hover {
+    background: #3a3a3c;
+  }
+}

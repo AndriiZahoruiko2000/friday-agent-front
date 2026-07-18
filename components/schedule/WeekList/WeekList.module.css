@@ -1,0 +1,33 @@
+.week-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  border-bottom: 1px solid rgb(60 60 67 / 10%);
+  list-style: none;
+}
+
+.week-item {
+  width: calc(100% / 7);
+  padding: 14px 0 12px;
+  color: #8e8e93;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.week-item:nth-last-child(-n + 2) {
+  color: #0a84ff;
+}
+
+@media (min-width: 480px) {
+  .week-item {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .week-list {
+    border-color: rgb(255 255 255 / 9%);
+  }
+}

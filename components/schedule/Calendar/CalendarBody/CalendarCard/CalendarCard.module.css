@@ -1,0 +1,154 @@
+.calendar-item {
+  position: relative;
+  min-width: 0;
+  border-right: 1px solid rgb(60 60 67 / 8%);
+  border-bottom: 1px solid rgb(60 60 67 / 8%);
+}
+
+.calendar-item:nth-child(7n) {
+  border-right: 0;
+}
+
+.calendar-item:nth-last-child(-n + 7) {
+  border-bottom: 0;
+}
+
+.dayButton {
+  display: flex;
+  width: 100%;
+  min-height: 92px;
+  padding: 8px 3px 6px;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #111114;
+  cursor: pointer;
+  transition: background-color 140ms ease, transform 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dayButton:hover {
+  background: rgb(10 132 255 / 5%);
+}
+
+.dayButton:active {
+  transform: scale(0.96);
+}
+
+.dayButton:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid rgb(10 132 255 / 34%);
+  outline-offset: -3px;
+}
+
+.dayNumber {
+  display: grid;
+  min-width: 23px;
+  height: 23px;
+  padding-inline: 4px;
+  place-items: center;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.today {
+  background: #0a84ff;
+  box-shadow: 0 4px 10px rgb(10 132 255 / 28%);
+  color: #fff;
+}
+
+.shift {
+  display: flex;
+  width: calc(100% - 3px);
+  min-width: 0;
+  min-height: 48px;
+  padding: 6px 1px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid color-mix(in srgb, var(--shift-color) 18%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--shift-color) 14%, transparent);
+  color: var(--shift-color);
+}
+
+.shiftIcon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.shiftTime {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: clamp(7px, 2vw, 10px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.outside {
+  background: rgb(118 118 128 / 3%);
+}
+
+.outside .dayButton {
+  color: #c7c7cc;
+}
+
+.outside .shift {
+  opacity: 0.5;
+}
+
+@media (min-width: 480px) {
+  .dayButton {
+    min-height: 116px;
+    padding: 10px 5px 8px;
+    gap: 9px;
+  }
+
+  .dayNumber {
+    font-size: 14px;
+  }
+
+  .shift {
+    min-height: 62px;
+    padding: 8px 2px;
+  }
+
+  .shiftIcon {
+    font-size: 23px;
+  }
+
+  .shiftTime {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .calendar-item {
+    border-color: rgb(255 255 255 / 7%);
+  }
+
+  .dayButton {
+    color: #f5f5f7;
+  }
+
+  .shift {
+    border-color: color-mix(in srgb, var(--shift-color) 28%, transparent);
+    background: color-mix(in srgb, var(--shift-color) 22%, transparent);
+  }
+
+  .outside {
+    background: rgb(0 0 0 / 8%);
+  }
+
+  .outside .dayButton {
+    color: #636366;
+  }
+}

@@ -23,13 +23,13 @@ const Page = () => {
     //   icon: <GrTask />,
     //   color: "purple",
     // },
-    // {
-    //   href: "/calendar",
-    //   label: "Calendar",
-    //   description: "View your schedule",
-    //   icon: <BsCalendar2Day />,
-    //   color: "orange",
-    // },
+    {
+      href: "/schedule",
+      label: "Calendar",
+      description: "View your schedule",
+      icon: <BsCalendar2Day />,
+      color: "orange",
+    },
     {
       href: "/profile",
       label: "Profile",

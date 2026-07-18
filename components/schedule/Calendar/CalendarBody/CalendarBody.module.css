@@ -1,0 +1,12 @@
+.calendarBody {
+  width: 100%;
+}
+
+.calendar {
+  width: 100%;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  list-style: none;
+}
