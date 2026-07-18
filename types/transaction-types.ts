@@ -30,3 +30,12 @@ export interface Transaction {
   createdAt: string;
   updateAt: string;
 }
+
+export interface UpdateTransactionBody {
+  amount?: number;
+  transactionType?: string;
+  currency?: string;
+  category?: string;
+  tags?: string;
+  note?: string;
+}

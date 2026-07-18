@@ -2,6 +2,7 @@ import {
   Transaction,
   TransactionBody,
   TransactionParams,
+  UpdateTransactionBody,
 } from "@/types/transaction-types";
 import { serverAPI } from "./server-config";
 
@@ -26,7 +27,7 @@ export const createTransaction = async (body: TransactionBody) => {
 
 export const updateTransaction = async (
   transactionId: string,
-  body: TransactionBody,
+  body: UpdateTransactionBody,
 ) => {
   const response = await serverAPI.patch<Transaction>(
     `/transactions/${transactionId}`,

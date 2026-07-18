@@ -1,11 +1,13 @@
+"use client";
 import TransactionCategoryList from "../TransactionCategoryList/TransactionCategoryList";
 import css from "./EditTransactionModal.module.css";
 import { useState } from "react";
 import CurrencySelector from "@/components/custom/CurrencySelector/CurrencySelector";
 import CalendarDateSelector from "@/components/custom/CalendarDateSelector/CalendarDateSelector";
-import { TransactionBody } from "@/types/transaction-types";
+import { UpdateTransactionBody } from "@/types/transaction-types";
 import { useQueryClient } from "@tanstack/react-query";
 import { updateTransaction } from "@/services/transaction";
+import { useBudgetStore } from "@/stores/budgetStore";
 
 interface EditTransactionModalProps {
   transactionId: string;
@@ -18,11 +20,11 @@ const EditTransactionModal = ({
 }: EditTransactionModalProps) => {
   const queryClient = useQueryClient();
   const [isDeposit, setIsDeposit] = useState(false);
+  const currentBudgetId = useBudgetStore((s) => s.currentBudgetId);
 
   const handleSubmit = async (formData: FormData) => {
-    const transactionData: TransactionBody = {
+    const transactionData: UpdateTransactionBody = {
       amount: Number(formData.get("amount")),
-      budgetId: formData.get("budgetId") as string,
       transactionType: formData.get("transaction-type") as string,
       category: formData.get("category") as string,
       note: formData.get("note") as string,
@@ -32,7 +34,7 @@ const EditTransactionModal = ({
     await updateTransaction(transactionId, transactionData);
 
     queryClient.invalidateQueries({
-      queryKey: ["transactions", transactionData.budgetId],
+      queryKey: ["transactions", currentBudgetId],
     });
 
     queryClient.invalidateQueries({
@@ -49,8 +51,9 @@ const EditTransactionModal = ({
         type="number"
         name="amount"
         defaultValue={0}
-        min={1}
+        min={0.01}
         aria-label="Transaction amount"
+        step={0.01}
       />
       <TransactionCategoryList isDeposit={isDeposit} />
 
@@ -73,7 +76,6 @@ const EditTransactionModal = ({
             type="radio"
             name="transaction-type"
             value={"withdraw"}
-            defaultChecked
             onChange={() => {
               setIsDeposit(false);
             }}

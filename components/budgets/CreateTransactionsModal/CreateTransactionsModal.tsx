@@ -45,8 +45,9 @@ const CreateTransactionsModal = () => {
         type="number"
         name="amount"
         defaultValue={0}
-        min={1}
+        min={0.01}
         aria-label="Transaction amount"
+        step={0.01}
       />
       <TransactionCategoryList isDeposit={isDeposit} />
       <BudgetSelector />
@@ -70,7 +71,6 @@ const CreateTransactionsModal = () => {
             type="radio"
             name="transaction-type"
             value={"withdraw"}
-            defaultChecked
             onChange={() => {
               setIsDeposit(false);
             }}

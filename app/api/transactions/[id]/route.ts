@@ -33,17 +33,18 @@ export const GET = async (req: NextRequest, { params }: Props) => {
 };
 
 export const PATCH = async (req: NextRequest, { params }: Props) => {
-  const { id } = await params;
-  const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
-  const body = await req.json();
-  const response = await globalAPI.patch(`/transactions/${id}`, body, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
   try {
+    const { id } = await params;
+    const cookieStore = await cookies();
+    const token = cookieStore.get("accessToken")?.value;
+    const body = await req.json();
+    const response = await globalAPI.patch(`/transactions/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return NextResponse.json(response.data);
   } catch (error) {
     const err = error as AxiosError<{ message: string }>;
     return NextResponse.json(
