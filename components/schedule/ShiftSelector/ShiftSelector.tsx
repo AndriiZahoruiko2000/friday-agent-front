@@ -2,6 +2,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import css from "./ShiftSelector.module.css";
 import { createSchedule, getShifts } from "@/services/schedule";
+import { getIconByValue } from "@/helpers/utils";
 
 interface ShiftSelectorProps {
   date?: Date;
@@ -73,7 +74,7 @@ const ShiftSelector = ({ date, onClose }: ShiftSelectorProps) => {
             <li key={item._id}>
               <button type="button" onClick={() => handleSubmit(item._id)}>
                 <span className={css.pickerIcon} aria-hidden="true">
-                  {item.icon}
+                  {getIconByValue(item.icon)}
                 </span>
                 <span className={css.pickerCopy}>
                   <strong>{item.title}</strong>
