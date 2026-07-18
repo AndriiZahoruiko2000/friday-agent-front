@@ -38,11 +38,11 @@ const CommonNavigation = () => {
     //   label: "Tasks",
     //   icon: <GrTask aria-hidden="true" />,
     // },
-    // {
-    //   href: "/calendar",
-    //   label: "Calendar",
-    //   icon: <BsCalendar2Day aria-hidden="true" />,
-    // },
+    {
+      href: "/schedule",
+      label: "Calendar",
+      icon: <BsCalendar2Day aria-hidden="true" />,
+    },
     // {
     //   href: "/settings",
     //   label: "Settings",
