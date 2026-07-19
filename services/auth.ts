@@ -52,3 +52,16 @@ export const confirmPassword = async (token: string, newPassword: string) => {
   });
   return response.data;
 };
+
+export const sendVerificationCode = async (email: string) => {
+  const response = await serverAPI.post("/auth/send-verify-code", { email });
+  return response.data;
+};
+
+export const checkVerificationCode = async (newCode: string, email: string) => {
+  const response = await serverAPI.post("/auth/check-verify-code", {
+    newCode,
+    email,
+  });
+  return response.data;
+};

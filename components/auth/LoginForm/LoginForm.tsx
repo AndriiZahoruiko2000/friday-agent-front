@@ -6,20 +6,38 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GoogleLogin } from "@react-oauth/google";
 import { useUserStore } from "@/stores/userStore";
-import { useEffect } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { useEffect, useRef, useState } from "react";
 
 const LoginForm = () => {
   const router = useRouter();
   const updateUser = useUserStore((s) => s.updateUser);
   const isAuth = useUserStore((s) => s.isAuth);
-  console.log("");
+  const googleButtonRef = useRef<HTMLDivElement>(null);
+  const [googleButtonWidth, setGoogleButtonWidth] = useState(360);
 
   useEffect(() => {
     if (isAuth) {
       router.push("/");
     }
-  }, [isAuth]);
+  }, [isAuth, router]);
+
+  useEffect(() => {
+    const container = googleButtonRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const updateWidth = () => {
+      setGoogleButtonWidth(Math.min(360, Math.floor(container.clientWidth)));
+    };
+    const observer = new ResizeObserver(updateWidth);
+
+    updateWidth();
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (formData: FormData) => {
     const loginData = {
@@ -39,6 +57,7 @@ const LoginForm = () => {
           <span className={css.logo} aria-hidden="true">
             F
           </span>
+          <span className={css.eyebrow}>Friday</span>
           <h1>Welcome back</h1>
           <p>Sign in to continue to Friday</p>
         </header>
@@ -71,35 +90,44 @@ const LoginForm = () => {
           <span>or continue with</span>
         </div>
 
-        <div className={css.googleButton}>
-          <div className={css.googleVisual} aria-hidden="true">
-            <span>
-              <FcGoogle />
-            </span>
-            <strong>Sign in with Google</strong>
-          </div>
+        <div className={css.googleButton} ref={googleButtonRef}>
           <div className={css.googleNative}>
             <GoogleLogin
               onSuccess={async (credentialResponse) => {
-                await googlePayload(credentialResponse.credential as string);
-                updateUser();
-                router.push("/budgets");
+                if (!credentialResponse.credential) {
+                  console.error("Google did not return a credential");
+                  return;
+                }
+
+                try {
+                  await googlePayload(credentialResponse.credential);
+                  await updateUser();
+                  router.push("/");
+                } catch (error) {
+                  console.error("Google login failed", error);
+                }
               }}
               onError={() => {
-                console.log("Login Failed");
+                console.error("Google login failed");
               }}
-              width="360"
+              width={`${googleButtonWidth}`}
+              size="large"
+              shape="rectangular"
             />
           </div>
         </div>
 
-        <p className={css.alternative}>
-          Don&apos;t have an account?{" "}
-          <Link href="/auth/register">Register</Link>
-        </p>
-        <Link className={css.forgotLink} href={"/auth/forgot"}>
-          Forgot password?
-        </Link>
+        <div className={css.authLinks}>
+          <p className={css.alternative}>
+            Don&apos;t have an account?{" "}
+            <Link href="/auth/register">Register</Link>
+          </p>
+          <div className={css.secondaryLinks}>
+            <Link href="/auth/forgot">Forgot password?</Link>
+            <span aria-hidden="true"></span>
+            <Link href="/auth/verify">Verify your email</Link>
+          </div>
+        </div>
       </div>
     </section>
   );
