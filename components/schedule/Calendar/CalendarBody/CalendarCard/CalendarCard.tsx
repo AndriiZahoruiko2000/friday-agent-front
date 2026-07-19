@@ -8,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getShiftsById } from "@/services/schedule";
 import Modal from "@/components/custom/Modal/Modal";
 import { CSSProperties } from "react";
+import clsx from "clsx";
+import { useCalendarStore } from "@/stores/calendarStore";
 
 interface CalendarCardProps {
   date: Date;
@@ -25,13 +27,12 @@ const CalendarCard = ({
 }: CalendarCardProps) => {
   const [isOpenShiftModal, showModal, hideModal] = useModal();
 
-  const currentMonth = new Date();
-
+  const currentMonth = useCalendarStore((s) => s.date);
   const itemDate = new Date(date);
-
   const isCurrentMonth = itemDate.getMonth() === currentMonth.getMonth();
-
   const scheduleItem = schedule.find((item) => checkDate(item.date, date));
+
+  const isWeekend = itemDate.getDay() === 0 || itemDate.getDay() === 6;
 
   const shiftsQuery = useQuery({
     queryKey: ["shift", scheduleItem?.scheduleShiftId],
@@ -40,6 +41,8 @@ const CalendarCard = ({
   });
 
   const shift = shiftsQuery.data;
+
+  // `${css["calendar-item"]} ${isOutsideMonth ? css.outside : ""}`;
 
   const isToday = checkDate(date, myDate);
   const label = new Intl.DateTimeFormat("uk-UA", {
@@ -55,7 +58,11 @@ const CalendarCard = ({
 
   return (
     <li
-      className={`${css["calendar-item"]} ${isOutsideMonth ? css.outside : ""}`}
+      className={clsx(
+        css["calendar-item"],
+        isOutsideMonth && css.outside,
+        isWeekend && css.weekend,
+      )}
     >
       {isCurrentMonth && (
         <button

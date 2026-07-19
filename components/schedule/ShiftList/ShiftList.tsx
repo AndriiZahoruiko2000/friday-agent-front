@@ -5,6 +5,51 @@ import css from "./ShiftList.module.css";
 import { getShifts } from "@/services/schedule";
 import { CSSProperties } from "react";
 import { getIconByValue } from "@/helpers/utils";
+import { Shift } from "@/types/schedule-types";
+import { useModal } from "@/hooks/useModal";
+import Modal from "@/components/custom/Modal/Modal";
+import EditShiftModal from "../EditShiftModal/EditShiftModal";
+
+interface ShiftListItemProps {
+  item: Shift;
+}
+
+const ShiftListItem = ({ item }: ShiftListItemProps) => {
+  const [isOpenModal, showModal, hideModal] = useModal();
+  const style = {
+    "--shift-color": item.color || "#0a84ff",
+  } as CSSProperties;
+
+  return (
+    <li className={css.item} style={style}>
+      <button
+        className={css.itemButton}
+        type="button"
+        onClick={showModal}
+        aria-label={`Редагувати зміну ${item.title}`}
+      >
+        <span className={css.icon} aria-hidden="true">
+          {getIconByValue(item.icon) || "⏱️"}
+        </span>
+        <span className={css.copy}>
+          <strong>{item.title}</strong>
+          <span className={css.time}>
+            {item.startTime}–{item.endTime}
+          </span>
+        </span>
+        <span className={css.editIndicator} aria-hidden="true">
+          •••
+        </span>
+      </button>
+
+      {isOpenModal && (
+        <Modal onClose={hideModal}>
+          <EditShiftModal shift={item} closeModal={hideModal} />
+        </Modal>
+      )}
+    </li>
+  );
+};
 
 const ShiftList = () => {
   const shiftsQuery = useQuery({
@@ -44,23 +89,7 @@ const ShiftList = () => {
         {shifts.length > 0 && (
           <ul className={css.list}>
             {shifts.map((item) => {
-              const style = {
-                "--shift-color": item.color || "#0a84ff",
-              } as CSSProperties;
-
-              return (
-                <li className={css.item} key={item._id} style={style}>
-                  <span className={css.icon} aria-hidden="true">
-                    {getIconByValue(item.icon) || "⏱️"}
-                  </span>
-                  <span className={css.copy}>
-                    <strong>{item.title}</strong>
-                    <span className={css.time}>
-                      {item.startTime}–{item.endTime}
-                    </span>
-                  </span>
-                </li>
-              );
+              return <ShiftListItem item={item} key={item._id} />;
             })}
           </ul>
         )}

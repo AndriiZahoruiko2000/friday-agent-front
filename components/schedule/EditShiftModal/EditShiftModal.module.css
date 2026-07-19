@@ -1,0 +1,314 @@
+.form {
+  display: grid;
+  width: 100%;
+  padding-bottom: 4px;
+  gap: 18px;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "SF Pro Text", sans-serif;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.previewIcon {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 1px solid
+    color-mix(in srgb, var(--preview-color) 20%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--preview-color) 14%, transparent);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 44%);
+  color: var(--preview-color);
+  font-size: 30px;
+}
+
+.header > div {
+  min-width: 0;
+}
+
+.header > div > span {
+  color: #0a84ff;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 3px 0 0;
+  color: #111114;
+  font-size: 25px;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.header p {
+  margin: 5px 0 0;
+  color: #8e8e93;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.field,
+.timeGroup label {
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+}
+
+.field > span,
+.timeGroup legend,
+.timeGroup label > span:first-child {
+  color: #6c6c70;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field input,
+.inputWithIcon,
+.colorControl {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  border: 1px solid rgb(60 60 67 / 9%);
+  border-radius: 14px;
+  background: #f2f2f7;
+  color: #111114;
+  transition: background-color 150ms ease, border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.field input {
+  padding: 0 14px;
+  outline: 0;
+  font-size: 16px;
+}
+
+.field input:focus,
+.inputWithIcon:focus-within {
+  border-color: #0a84ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(10 132 255 / 12%);
+}
+
+.field input:user-invalid {
+  border-color: #ff3b30;
+  box-shadow: 0 0 0 4px rgb(255 59 48 / 9%);
+}
+
+.timeGroup {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 0;
+}
+
+.timeGroup legend {
+  margin-bottom: 7px;
+}
+
+.inputWithIcon {
+  display: grid;
+  padding: 0 10px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.inputWithIcon svg,
+.colorControl svg {
+  color: #0a84ff;
+  font-size: 20px;
+}
+
+.inputWithIcon input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(112px, 0.72fr);
+  gap: 10px;
+}
+
+.colorControl {
+  display: grid;
+  padding: 5px 7px 5px 12px;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorField .colorControl input {
+  width: 100%;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.colorField .colorControl input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorField .colorControl input::-webkit-color-swatch {
+  border: 0;
+  border-radius: 9px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 10px;
+}
+
+.cancel,
+.submit,
+.deleteButton {
+  min-height: 52px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 15px;
+  outline: 0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  transition: background-color 150ms ease, box-shadow 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cancel {
+  background: #e9e9ee;
+  color: #3a3a3c;
+}
+
+.submit {
+  background: #0a84ff;
+  box-shadow: 0 7px 18px rgb(10 132 255 / 24%);
+  color: #fff;
+}
+
+.submit:hover {
+  background: #0077ed;
+}
+
+.cancel:hover {
+  background: #dedee4;
+}
+
+.cancel:active,
+.submit:active,
+.deleteButton:active {
+  transform: scale(0.98);
+}
+
+.cancel:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 3px;
+}
+
+.deleteButton {
+  display: flex;
+  margin-top: -4px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgb(255 59 48 / 13%);
+  background: rgb(255 59 48 / 9%);
+  color: #ff3b30;
+}
+
+.deleteButton svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.deleteButton:hover {
+  border-color: rgb(255 59 48 / 22%);
+  background: rgb(255 59 48 / 14%);
+}
+
+.deleteButton:focus-visible {
+  outline: 3px solid rgb(255 59 48 / 30%);
+  outline-offset: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header h2 {
+    color: #f5f5f7;
+  }
+
+  .previewIcon {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 9%);
+  }
+
+  .field > span,
+  .timeGroup legend,
+  .timeGroup label > span:first-child {
+    color: #aeaeb2;
+  }
+
+  .field input,
+  .inputWithIcon,
+  .colorControl {
+    border-color: rgb(255 255 255 / 8%);
+    background: #2c2c2e;
+    color: #f5f5f7;
+  }
+
+  .field input:focus,
+  .inputWithIcon:focus-within {
+    background: #363638;
+  }
+
+  .cancel {
+    background: #3a3a3c;
+    color: #f5f5f7;
+  }
+
+  .cancel:hover {
+    background: #48484a;
+  }
+
+  .deleteButton {
+    border-color: rgb(255 69 58 / 20%);
+    background: rgb(255 69 58 / 14%);
+    color: #ff6961;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field input,
+  .inputWithIcon,
+  .colorControl,
+  .cancel,
+  .submit,
+  .deleteButton {
+    transition: none;
+  }
+}

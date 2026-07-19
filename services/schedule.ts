@@ -1,13 +1,13 @@
-import { SearchParams } from "next/dist/server/request/search-params";
 import { serverAPI } from "./server-config";
 import {
   Schedule,
   ScheduleBody,
+  SearcHParams,
   Shift,
   ShiftBody,
 } from "@/types/schedule-types";
 
-export const getSchedule = async (userParams: SearchParams) => {
+export const getSchedule = async (userParams: SearcHParams) => {
   const params = {
     startTime: new Date(0),
     endTine: new Date("2030"),
@@ -34,7 +34,7 @@ export const updateSchedule = async (id: string, body: ScheduleBody) => {
 };
 
 export const deleteSchedule = async (id: string) => {
-  const response = await serverAPI.get(`/schedule/${id}`);
+  const response = await serverAPI.delete(`/schedule/${id}`);
   return response.data;
 };
 

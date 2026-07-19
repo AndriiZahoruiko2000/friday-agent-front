@@ -68,11 +68,27 @@
 }
 
 .picker {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
   padding: 0 0 8px;
 }
 
 .pickerHeader {
-  padding: 2px 4px 20px;
+  position: relative;
+  padding: 2px 4px 18px;
+}
+
+.pickerHeader::after {
+  position: absolute;
+  right: 4px;
+  bottom: 18px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 0 5px rgb(52 199 89 / 12%);
+  content: "";
 }
 
 .pickerHeader span {
@@ -83,7 +99,9 @@
 
 .pickerHeader h2 {
   margin: 3px 0 0;
+  color: #111114;
   font-size: 28px;
+  line-height: 1.12;
   letter-spacing: -0.035em;
   text-transform: capitalize;
 }
@@ -92,9 +110,13 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 8%);
   border-radius: 18px;
-  background: rgb(255 255 255 / 80%);
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 8px 26px rgb(28 28 30 / 6%);
   list-style: none;
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
 }
 
 .shiftList li:not(:last-child) {
@@ -113,10 +135,17 @@
   color: inherit;
   cursor: pointer;
   text-align: left;
+  transition: background-color 150ms ease, transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shiftList button:hover {
+  background: color-mix(in srgb, var(--shift-color) 6%, transparent);
 }
 
 .shiftList button:active {
-  background: rgb(10 132 255 / 8%);
+  background: color-mix(in srgb, var(--shift-color) 10%, transparent);
+  transform: scale(0.985);
 }
 
 .shiftList button:focus-visible {
@@ -128,6 +157,9 @@
   width: 48px;
   height: 48px;
   flex: 0 0 48px;
+  border: 1px solid color-mix(in srgb, var(--shift-color) 14%, transparent);
+  background: color-mix(in srgb, var(--shift-color) 13%, transparent);
+  color: var(--shift-color);
   font-size: 24px;
 }
 
@@ -147,9 +179,144 @@
 }
 
 .chevron {
-  color: #aeaeb2;
+  color: color-mix(in srgb, var(--shift-color) 60%, #aeaeb2);
   font-size: 28px;
   font-weight: 300;
+}
+
+.currentSchedule {
+  margin-top: 28px;
+}
+
+.sectionHeader {
+  display: flex;
+  min-height: 48px;
+  padding: 0 4px 10px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sectionHeader > div {
+  display: grid;
+  gap: 3px;
+}
+
+.sectionHeader > div > span {
+  color: #8e8e93;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h3 {
+  margin: 0;
+  color: #1c1c1e;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.count {
+  display: grid;
+  min-width: 28px;
+  height: 28px;
+  padding-inline: 8px;
+  place-items: center;
+  border-radius: 10px;
+  background: rgb(10 132 255 / 12%);
+  color: #007aff;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.scheduleList {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 8px 26px rgb(28 28 30 / 6%);
+  list-style: none;
+}
+
+.scheduleList > li:not(:last-child) {
+  border-bottom: 1px solid rgb(60 60 67 / 9%);
+}
+
+.swipeHint {
+  margin: 8px 4px 0;
+  color: #aeaeb2;
+  font-size: 11px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.scheduleStatus,
+.emptySchedule {
+  display: flex;
+  min-height: 82px;
+  padding: 14px;
+  align-items: center;
+  border: 1px solid rgb(60 60 67 / 8%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 72%);
+  color: #8e8e93;
+}
+
+.scheduleStatus {
+  justify-content: center;
+  gap: 9px;
+  font-size: 13px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgb(10 132 255 / 18%);
+  border-top-color: #0a84ff;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.emptySchedule {
+  gap: 12px;
+}
+
+.emptySchedule > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  place-items: center;
+  border-radius: 15px;
+  background: rgb(10 132 255 / 10%);
+  color: #0a84ff;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.emptySchedule div {
+  display: grid;
+  gap: 3px;
+}
+
+.emptySchedule strong {
+  color: #3a3a3c;
+  font-size: 14px;
+}
+
+.emptySchedule p {
+  margin: 0;
+  font-size: 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -165,10 +332,53 @@
   }
 
   .shiftList {
+    border-color: rgb(255 255 255 / 8%);
     background: rgb(44 44 46 / 90%);
+    box-shadow: none;
   }
 
   .shiftList li:not(:last-child) {
     border-color: rgb(255 255 255 / 9%);
+  }
+
+  .pickerHeader h2,
+  .sectionHeader h3 {
+    color: #f5f5f7;
+  }
+
+  .count {
+    background: rgb(10 132 255 / 20%);
+    color: #64b5ff;
+  }
+
+  .scheduleList,
+  .scheduleStatus,
+  .emptySchedule {
+    border-color: rgb(255 255 255 / 8%);
+    background: rgb(44 44 46 / 88%);
+    box-shadow: none;
+  }
+
+  .scheduleList > li:not(:last-child) {
+    border-color: rgb(255 255 255 / 9%);
+  }
+
+  .emptySchedule strong {
+    color: #f5f5f7;
+  }
+
+  .emptySchedule > span {
+    background: rgb(10 132 255 / 18%);
+    color: #64b5ff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiftList button {
+    transition: none;
+  }
+
+  .spinner {
+    animation-duration: 1.5s;
   }
 }

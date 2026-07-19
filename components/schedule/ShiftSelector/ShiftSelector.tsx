@@ -1,8 +1,10 @@
 "use client";
+import { CSSProperties } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import css from "./ShiftSelector.module.css";
-import { createSchedule, getShifts } from "@/services/schedule";
+import { createSchedule, getSchedule, getShifts } from "@/services/schedule";
 import { getIconByValue } from "@/helpers/utils";
+import ScheduleItem from "./ScheduleItem/ScheduleItem";
 
 interface ShiftSelectorProps {
   date?: Date;
@@ -18,6 +20,23 @@ const ShiftSelector = ({ date, onClose }: ShiftSelectorProps) => {
   });
 
   const shifts = shiftsQuery.data || [];
+
+  const scheduleQuery = useQuery({
+    queryKey: [
+      "schedule",
+      {
+        startDate: date?.toISOString(),
+        endDate: date?.toISOString(),
+      },
+    ],
+    queryFn: () =>
+      getSchedule({
+        startDate: date?.toISOString(),
+        endDate: date?.toISOString(),
+      }),
+  });
+
+  const schedule = scheduleQuery.data || [];
 
   const handleSubmit = async (shiftId: string) => {
     if (!date) return;
@@ -70,8 +89,12 @@ const ShiftSelector = ({ date, onClose }: ShiftSelectorProps) => {
       </div>
       <ul className={css.shiftList}>
         {shifts.map((item) => {
+          const shiftStyle = {
+            "--shift-color": item.color || "#0a84ff",
+          } as CSSProperties;
+
           return (
-            <li key={item._id}>
+            <li key={item._id} style={shiftStyle}>
               <button type="button" onClick={() => handleSubmit(item._id)}>
                 <span className={css.pickerIcon} aria-hidden="true">
                   {getIconByValue(item.icon)}
@@ -90,6 +113,42 @@ const ShiftSelector = ({ date, onClose }: ShiftSelectorProps) => {
           );
         })}
       </ul>
+
+      <section className={css.currentSchedule} aria-labelledby="schedule-title">
+        <div className={css.sectionHeader}>
+          <div>
+            <span>Поточний розклад</span>
+            <h3 id="schedule-title">Заплановано на цей день</h3>
+          </div>
+          {schedule.length > 0 && (
+            <span className={css.count}>{schedule.length}</span>
+          )}
+        </div>
+
+        {scheduleQuery.isLoading ? (
+          <div className={css.scheduleStatus}>
+            <span className={css.spinner} aria-hidden="true"></span>
+            Завантажуємо розклад…
+          </div>
+        ) : schedule.length > 0 ? (
+          <>
+            <ul className={css.scheduleList}>
+              {schedule.map((item) => {
+                return <ScheduleItem item={item} key={item._id} />;
+              })}
+            </ul>
+            <p className={css.swipeHint}>Проведіть вліво, щоб видалити</p>
+          </>
+        ) : (
+          <div className={css.emptySchedule}>
+            <span aria-hidden="true">＋</span>
+            <div>
+              <strong>Зміну ще не вибрано</strong>
+              <p>Оберіть одну зі змін вище.</p>
+            </div>
+          </div>
+        )}
+      </section>
     </section>
   );
 };

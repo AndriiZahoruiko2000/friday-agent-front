@@ -59,12 +59,20 @@ export const iconsList = [
   },
 ];
 
-const IconsSelector = () => {
+interface IconsSelectorProps {
+  defaultValue?: string;
+}
+
+const IconsSelector = ({ defaultValue = iconsList[0].value }: IconsSelectorProps) => {
+  const selectedValue = iconsList.some((item) => item.value === defaultValue)
+    ? defaultValue
+    : iconsList[0].value;
+
   return (
     <fieldset className={css.iconsSelector}>
       <legend>Іконка</legend>
       <div className={css.track}>
-        {iconsList.map((item, index) => (
+        {iconsList.map((item) => (
           <label
             className={css.option}
             data-color={item.color}
@@ -75,7 +83,7 @@ const IconsSelector = () => {
               type="radio"
               name="icon"
               value={item.value}
-              defaultChecked={index === 0}
+              defaultChecked={item.value === selectedValue}
               required
             />
             <span className={css.button}>

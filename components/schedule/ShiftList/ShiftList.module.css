@@ -88,20 +88,33 @@
 }
 
 .item {
-  display: flex;
   min-width: max-content;
   min-height: 54px;
-  padding: 6px 11px 6px 6px;
-  align-items: center;
   flex: 0 0 auto;
-  gap: 8px;
   border: 1px solid color-mix(in srgb, var(--shift-color) 14%, transparent);
   border-radius: 17px;
   background: color-mix(in srgb, var(--shift-color) 8%, white);
+  overflow: hidden;
   scroll-snap-align: start;
   transition:
     background-color 150ms ease,
     transform 150ms ease;
+}
+
+.itemButton {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  padding: 6px 9px 6px 6px;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .item:hover {
@@ -110,6 +123,16 @@
 
 .item:active {
   transform: scale(0.96);
+}
+
+.item:focus-within {
+  border-color: color-mix(in srgb, var(--shift-color) 40%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--shift-color) 15%, transparent);
+}
+
+.itemButton:focus-visible {
+  outline: 2px solid var(--shift-color);
+  outline-offset: -3px;
 }
 
 .icon {
@@ -146,6 +169,21 @@
   color: #8e8e93;
   font-size: 11px;
   font-weight: 600;
+}
+
+.editIndicator {
+  display: grid;
+  min-width: 25px;
+  height: 25px;
+  padding-bottom: 6px;
+  place-items: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--shift-color) 10%, transparent);
+  color: var(--shift-color);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 .loading,
