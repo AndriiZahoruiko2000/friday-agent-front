@@ -4,7 +4,7 @@ import css from "./VerifyEmail.module.css";
 import { useModal } from "@/hooks/useModal";
 import { checkVerificationCode, sendVerificationCode } from "@/services/auth";
 import { useRouter } from "next/navigation";
-import iziToast from "izitoast";
+import toast from "react-hot-toast";
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState("");
@@ -16,12 +16,14 @@ const VerifyEmail = () => {
     const message = await sendVerificationCode(email);
 
     if (message === "You have been already verified") {
-      iziToast.info(message);
+      toast.success(message);
       router.push("/auth/login");
     }
 
     if (message === "Code was sended") {
-      iziToast.info(message);
+      toast(message, {
+        icon: "👏",
+      });
     }
 
     showModal();
@@ -31,12 +33,12 @@ const VerifyEmail = () => {
     const message = await checkVerificationCode(email, code);
 
     if (message === "Code is not correct") {
-      iziToast.error(message);
+      toast.error(message);
       return;
     }
 
     if (message === "You have been already verified") {
-      iziToast.success(message);
+      toast.success(message);
     }
     router.push("/auth/login");
   };

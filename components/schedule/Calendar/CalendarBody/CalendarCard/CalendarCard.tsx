@@ -25,6 +25,12 @@ const CalendarCard = ({
 }: CalendarCardProps) => {
   const [isOpenShiftModal, showModal, hideModal] = useModal();
 
+  const currentMonth = new Date();
+
+  const itemDate = new Date(date);
+
+  const isCurrentMonth = itemDate.getMonth() === currentMonth.getMonth();
+
   const scheduleItem = schedule.find((item) => checkDate(item.date, date));
 
   const shiftsQuery = useQuery({
@@ -51,26 +57,28 @@ const CalendarCard = ({
     <li
       className={`${css["calendar-item"]} ${isOutsideMonth ? css.outside : ""}`}
     >
-      <button
-        className={css.dayButton}
-        type="button"
-        onClick={showModal}
-        aria-label={`${label}${shift ? `, ${shift.title}` : ", зміни немає"}`}
-      >
-        <span className={`${css.dayNumber} ${isToday ? css.today : ""}`}>
-          {date.getDate()}
-        </span>
-        {shift && (
-          <span className={css.shift} style={shiftStyle}>
-            <span className={css.shiftIcon} aria-hidden="true">
-              {getIconByValue(shift.icon)}
-            </span>
-            <span className={css.shiftTime}>
-              {shift.startTime.slice(0, 2)}–{shift.endTime.slice(0, 2)}
-            </span>
+      {isCurrentMonth && (
+        <button
+          className={css.dayButton}
+          type="button"
+          onClick={showModal}
+          aria-label={`${label}${shift ? `, ${shift.title}` : ", зміни немає"}`}
+        >
+          <span className={`${css.dayNumber} ${isToday ? css.today : ""}`}>
+            {date.getDate()}
           </span>
-        )}
-      </button>
+          {shift && (
+            <span className={css.shift} style={shiftStyle}>
+              <span className={css.shiftIcon} aria-hidden="true">
+                {getIconByValue(shift.icon)}
+              </span>
+              <span className={css.shiftTime}>
+                {shift.startTime.slice(0, 2)}–{shift.endTime.slice(0, 2)}
+              </span>
+            </span>
+          )}
+        </button>
+      )}
       {isOpenShiftModal && (
         <Modal onClose={hideModal}>
           <ShiftSelector date={date} onClose={hideModal} />
