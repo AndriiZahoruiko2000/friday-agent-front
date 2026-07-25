@@ -1,0 +1,119 @@
+.toDoNavigation {
+  display: grid;
+  width: min(270px, calc(100vw - 94px));
+  height: 64px;
+  padding: 6px 8px;
+  grid-template-columns: 1fr 68px 1fr;
+  align-items: center;
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 23px;
+  background: rgb(249 249 251 / 82%);
+  box-shadow: 0 14px 40px rgb(24 41 60 / 16%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+.toDoNavigation > a,
+.toDoNavigation > button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toDoNavigation > a {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  place-items: center;
+  color: #8e8e93;
+  border-radius: 14px;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    transform 140ms ease;
+}
+
+.toDoNavigation > a svg {
+  width: 23px;
+  height: 23px;
+}
+
+.toDoNavigation > a:hover {
+  color: #0a84ff;
+  background: rgb(118 118 128 / 8%);
+}
+
+.toDoNavigation > a:active {
+  transform: scale(0.94);
+}
+
+.toDoNavigation > button {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  place-self: center;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #1b91ff, #0077ed);
+  border: 0;
+  border-radius: 19px;
+  box-shadow:
+    0 8px 20px rgb(10 132 255 / 34%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.toDoNavigation > button:hover {
+  box-shadow:
+    0 10px 24px rgb(10 132 255 / 42%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-2px);
+}
+
+.toDoNavigation > button:active {
+  box-shadow: 0 4px 12px rgb(10 132 255 / 28%);
+  transform: scale(0.94);
+}
+
+.toDoNavigation > a:focus-visible,
+.toDoNavigation > button:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 38%);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .toDoNavigation {
+    border-color: rgb(255 255 255 / 10%);
+    background: rgb(28 28 30 / 84%);
+    box-shadow: 0 14px 40px rgb(0 0 0 / 34%);
+  }
+
+  .toDoNavigation > a {
+    color: #8e8e93;
+  }
+
+  .toDoNavigation > a:hover {
+    color: #0a84ff;
+    background: rgb(255 255 255 / 7%);
+  }
+}
+
+@media (min-width: 768px) {
+  .toDoNavigation {
+    width: 300px;
+    grid-template-columns: 1fr 72px 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toDoNavigation > a,
+  .toDoNavigation > button {
+    transition: none;
+  }
+}

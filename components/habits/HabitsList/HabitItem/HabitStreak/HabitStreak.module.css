@@ -1,0 +1,106 @@
+.weekList {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(24px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.day {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+}
+
+.dayLabel {
+  margin: 0;
+  color: #aaaab0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.dayCheckbox {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  appearance: none;
+  cursor: pointer;
+  place-items: center;
+  background: transparent;
+  border: 2px solid #444448;
+  border-radius: 50%;
+}
+
+.dayCheckbox::after {
+  color: #fff;
+  content: "✓";
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.dayCheckbox:checked {
+  background: #34c759;
+  border-color: #34c759;
+}
+
+.dayCheckbox:checked::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dayCheckbox:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 35%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .weekList {
+    grid-template-columns: repeat(7, minmax(15px, 1fr));
+    gap: 4px;
+  }
+
+  .day {
+    gap: 4px;
+  }
+
+  .dayLabel {
+    font-size: 9px;
+  }
+
+  .dayCheckbox {
+    width: 16px;
+    height: 16px;
+    border-width: 1.5px;
+  }
+
+  .dayCheckbox::after {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .weekList {
+    grid-template-columns: repeat(7, minmax(14px, 1fr));
+    gap: 2px;
+  }
+
+  .dayCheckbox {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .dayLabel {
+    color: #6e6e73;
+  }
+
+  .dayCheckbox {
+    border-color: #c7c7cc;
+  }
+}

@@ -1,0 +1,219 @@
+.habitOverview {
+  width: calc(100% - 32px);
+  max-width: 760px;
+  margin: 8px auto 20px;
+  padding: 18px 22px 22px;
+  overflow: hidden;
+  color: #f5f5f7;
+  background: #19191b;
+  border: 1px solid rgb(255 255 255 / 6%);
+  border-radius: 24px;
+}
+
+.title {
+  margin: 0 0 18px;
+  color: #aaaab0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(220px, 1.15fr);
+  align-items: center;
+  gap: 38px;
+}
+
+.progress {
+  position: relative;
+  display: grid;
+  width: 156px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(from -90deg, #30d158 0 75%, #2c2c2e 75% 100%);
+}
+
+.progress::before {
+  position: absolute;
+  width: calc(100% - 12px);
+  aspect-ratio: 1;
+  content: "";
+  background: #19191b;
+  border-radius: inherit;
+}
+
+.progressValue {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.progressValue span {
+  display: block;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.progressValue p {
+  margin: 7px 0 0;
+  color: #a1a1a6;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.stats {
+  display: grid;
+  gap: 20px;
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: 30px 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+}
+
+.statRow p {
+  margin: 0;
+}
+
+.icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  font-size: 28px;
+  line-height: 0;
+}
+
+.completed {
+  color: #30d158;
+}
+
+.inProgress {
+  color: #0a84ff;
+}
+
+.skipped {
+  color: #3a3a3c;
+}
+
+.count {
+  color: #f5f5f7;
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.label {
+  color: #aaaab0;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .habitOverview {
+    width: calc(100% - 24px);
+    margin-bottom: 16px;
+    padding: 13px 16px 15px;
+    border-radius: 18px;
+  }
+
+  .title {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  .content {
+    grid-template-columns: 98px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .progress {
+    width: 98px;
+  }
+
+  .progressValue span {
+    font-size: 27px;
+  }
+
+  .progressValue p,
+  .label {
+    font-size: 11px;
+  }
+
+  .stats {
+    gap: 11px;
+  }
+
+  .statRow {
+    grid-template-columns: 21px 17px minmax(0, 1fr);
+    gap: 7px;
+  }
+
+  .icon {
+    width: 21px;
+    height: 21px;
+    font-size: 20px;
+  }
+
+  .count {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 380px) {
+  .habitOverview {
+    padding-inline: 16px;
+  }
+
+  .content {
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .progress {
+    width: 90px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .habitOverview {
+    color: #111114;
+    background: #fff;
+    border-color: rgb(0 0 0 / 5%);
+  }
+
+  .progress::before {
+    background: #fff;
+  }
+
+  .progress {
+    background: conic-gradient(from -90deg, #34c759 0 75%, #e5e5ea 75% 100%);
+  }
+
+  .title,
+  .progressValue p,
+  .label {
+    color: #6e6e73;
+  }
+
+  .count {
+    color: #111114;
+  }
+
+  .skipped {
+    color: #aeaeb2;
+  }
+}

@@ -5,6 +5,8 @@ import { BsCalendar2Day, BsCheck2Circle, BsHouseHeart } from "react-icons/bs";
 import { FiArrowUpRight, FiChevronRight, FiClock } from "react-icons/fi";
 import { GrMoney } from "react-icons/gr";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { GrTask } from "react-icons/gr";
+import { PiRadioButton } from "react-icons/pi";
 import Greetings from "@/components/custom/Greetings/Greetings";
 
 const Page = () => {
@@ -16,13 +18,13 @@ const Page = () => {
       icon: <GrMoney />,
       color: "blue",
     },
-    // {
-    //   href: "/tasks",
-    //   label: "Tasks",
-    //   description: "Plan your day",
-    //   icon: <GrTask />,
-    //   color: "purple",
-    // },
+    {
+      href: "/tasks",
+      label: "Tasks",
+      description: "Plan your day",
+      icon: <GrTask />,
+      color: "purple",
+    },
     {
       href: "/schedule",
       label: "Calendar",
@@ -37,13 +39,13 @@ const Page = () => {
       icon: <IoPersonCircleOutline />,
       color: "green",
     },
-    // {
-    //   href: "/settings",
-    //   label: "Settings",
-    //   description: "Tune your Friday",
-    //   icon: <TbSettingsCog />,
-    //   color: "gray",
-    // },
+    {
+      href: "/habits",
+      label: "Habits",
+      description: "Tune your Friday",
+      icon: <PiRadioButton />,
+      color: "gray",
+    },
   ];
 
   return (

@@ -5,7 +5,8 @@ import { useModal } from "@/hooks/useModal";
 import Link from "next/link";
 import { MdLogout } from "react-icons/md";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { TbSettingsCog } from "react-icons/tb";
+import { PiRadioButton } from "react-icons/pi";
+
 import { BsCalendar2Day } from "react-icons/bs";
 import { GrTask } from "react-icons/gr";
 import { GrMoney } from "react-icons/gr";
@@ -33,21 +34,21 @@ const CommonNavigation = () => {
       label: "Budgets",
       icon: <GrMoney aria-hidden="true" />,
     },
-    // {
-    //   href: "/tasks",
-    //   label: "Tasks",
-    //   icon: <GrTask aria-hidden="true" />,
-    // },
+    {
+      href: "/tasks",
+      label: "Tasks",
+      icon: <GrTask aria-hidden="true" />,
+    },
     {
       href: "/schedule",
       label: "Calendar",
       icon: <BsCalendar2Day aria-hidden="true" />,
     },
-    // {
-    //   href: "/settings",
-    //   label: "Settings",
-    //   icon: <TbSettingsCog aria-hidden="true" />,
-    // },
+    {
+      href: "/habits",
+      label: "Habits",
+      icon: <PiRadioButton />,
+    },
     {
       href: "/profile",
       label: "Profile",
