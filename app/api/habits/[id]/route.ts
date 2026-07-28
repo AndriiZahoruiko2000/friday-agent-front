@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { AxiosError } from "axios";
 import { globalAPI } from "../../global-config";
@@ -8,7 +8,7 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-export const DELETE = async ({ params }: Props) => {
+export const DELETE = async (req: NextRequest, { params }: Props) => {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
