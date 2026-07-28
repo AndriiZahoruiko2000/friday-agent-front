@@ -1,14 +1,8 @@
-import TasksCalendar from "@/components/tasks/TasksCalendar/TasksCalendar";
+import TasksPage from "@/components/tasks/TasksPage/TasksPage";
 import css from "./Page.module.css";
-import TasksList from "@/components/tasks/TasksList/TasksList";
 
 const Page = () => {
-  return (
-    <div className={css["page"]}>
-      <TasksCalendar />
-      <TasksList />
-    </div>
-  );
+  return <TasksPage />;
 };
 
 export default Page;
