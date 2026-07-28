@@ -17,11 +17,15 @@ const HabitButton = ({ habit }: HabitButtonProps) => {
       isCompleted: true,
       isDaily: true,
       habitId: habit._id,
+      dateTime: new Date().toISOString(),
     };
 
     await createTask(body);
     queryClient.invalidateQueries({
       queryKey: ["habitTasks", habit._id],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["tasks"],
     });
   };
 

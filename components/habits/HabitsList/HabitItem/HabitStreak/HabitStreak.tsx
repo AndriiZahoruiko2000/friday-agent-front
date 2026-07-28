@@ -1,7 +1,7 @@
 import { Habit } from "@/types/habits-types";
 import css from "./HabitStreak.module.css";
-import { useQuery } from "@tanstack/react-query";
-import { getTasks } from "@/services/tasks";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteTask, getTasks } from "@/services/tasks";
 import { startOfWeek, endOfWeek } from "date-fns";
 
 const week = ["M", "T", "W", "T", "F", "S", "S"];
@@ -11,6 +11,7 @@ interface HabitStreakProps {
 }
 
 const HabitStreak = ({ habit }: HabitStreakProps) => {
+  const queryClient = useQueryClient();
   const today = new Date();
 
   const firstDay = startOfWeek(today, {
@@ -32,15 +33,39 @@ const HabitStreak = ({ habit }: HabitStreakProps) => {
   });
 
   const weekTasks = tasksQuery.data || [];
+  const weekDays = weekTasks.map((task) => {
+    return new Date(task.dateTime!).getDay() - 1;
+  });
 
-  console.log(weekTasks);
+  const handleDelete = async (index: number) => {
+    const task = weekTasks.find(
+      (item) => new Date(item.dateTime!).getDay() - 1 === index,
+    );
+    if (task) {
+      await deleteTask(task._id);
+    }
+
+    queryClient.invalidateQueries({
+      queryKey: ["habitTasks"],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["tasks"],
+    });
+  };
 
   return (
     <div className={css["habitStreak"]}>
       <ul className={css["weekList"]}>
-        {week.map((item) => {
+        {week.map((item, index) => {
           return (
-            <li className={css["day"]} key={item}>
+            <li
+              className={css["day"]}
+              key={item}
+              onClick={() => {
+                handleDelete(index);
+              }}
+            >
               <p className={css["dayLabel"]}>{item}</p>
               <input
                 className={css["dayCheckbox"]}
@@ -48,6 +73,7 @@ const HabitStreak = ({ habit }: HabitStreakProps) => {
                 name="weekDay"
                 value={item}
                 aria-label={item}
+                checked={weekDays.includes(index)}
               />
             </li>
           );

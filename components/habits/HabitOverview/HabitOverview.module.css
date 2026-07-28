@@ -33,7 +33,6 @@
   margin-inline: auto;
   place-items: center;
   border-radius: 50%;
-  background: conic-gradient(from -90deg, #30d158 0 75%, #2c2c2e 75% 100%);
 }
 
 .progress::before {
