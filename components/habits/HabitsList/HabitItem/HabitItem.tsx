@@ -5,25 +5,28 @@ import css from "./HabitItem.module.css";
 import HabitStreak from "./HabitStreak/HabitStreak";
 import HabitButton from "./HabitButton/HabitButton";
 import { CSSProperties, PointerEvent, useRef, useState } from "react";
+import { deleteHabits } from "@/services/habits";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface HabitItemProps {
   habit: Habit;
 }
 
-const deleteHabit = async (habitId: string) => {
-  // TODO: Add the habit deletion request here.
-  void habitId;
-};
-
 const HabitItem = ({ habit }: HabitItemProps) => {
+  const queryClient = useQueryClient();
   const [swipeX, setSwipeX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ startX: 0, startOffset: 0 });
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
+    const itemBounds = event.currentTarget.getBoundingClientRect();
+    const pointerX = event.clientX - itemBounds.left;
+    const swipeAreaWidth = Math.min(140, itemBounds.width * 0.35);
 
-    if (target.closest("button, input, label")) return;
+    if (pointerX > swipeAreaWidth || target.closest("button, input, label")) {
+      return;
+    }
 
     event.currentTarget.setPointerCapture(event.pointerId);
     dragRef.current = { startX: event.clientX, startOffset: swipeX };
@@ -35,18 +38,23 @@ const HabitItem = ({ habit }: HabitItemProps) => {
 
     const distance = event.clientX - dragRef.current.startX;
     const nextPosition = dragRef.current.startOffset + distance;
-    setSwipeX(Math.max(-88, Math.min(0, nextPosition)));
+    setSwipeX(Math.max(0, Math.min(88, nextPosition)));
   };
 
   const finishSwipe = () => {
     if (!isDragging) return;
 
     setIsDragging(false);
-    setSwipeX(swipeX < -42 ? -88 : 0);
+    setSwipeX(swipeX > 42 ? 88 : 0);
   };
 
   const handleDelete = async () => {
-    await deleteHabit(habit._id);
+    await deleteHabits(habit._id);
+
+    queryClient.invalidateQueries({
+      queryKey: ["habitTasks"],
+    });
+
     setSwipeX(0);
   };
 
@@ -60,7 +68,7 @@ const HabitItem = ({ habit }: HabitItemProps) => {
         className={css["deleteAction"]}
         type="button"
         aria-label={`Delete ${habit.title}`}
-        onFocus={() => setSwipeX(-88)}
+        onFocus={() => setSwipeX(88)}
         onClick={handleDelete}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">

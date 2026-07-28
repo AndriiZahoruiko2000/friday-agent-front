@@ -11,10 +11,11 @@ interface Props {
 export const DELETE = async (req: NextRequest, { params }: Props) => {
   try {
     const cookieStore = await cookies();
+
     const token = cookieStore.get("accessToken")?.value;
     const { id } = await params;
 
-    const response = await globalAPI.get(`/habits/${id}`, {
+    const response = await globalAPI.delete(`/habits/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

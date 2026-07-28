@@ -50,7 +50,7 @@ const HabitOverview = () => {
           }}
         >
           <div className={css["progressValue"]}>
-            <span>{persantage}%</span>
+            <span>{habits.length ? persantage : 0}%</span>
             <p>Done</p>
           </div>
         </div>

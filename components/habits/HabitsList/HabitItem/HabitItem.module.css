@@ -11,7 +11,7 @@
   position: absolute;
   z-index: 0;
   top: 50%;
-  right: 16px;
+  left: 16px;
   display: grid;
   width: 56px;
   height: 56px;
@@ -27,7 +27,9 @@
     0 7px 18px rgb(255 59 48 / 34%),
     inset 0 1px 0 rgb(255 255 255 / 30%);
   transform: translateY(-50%);
-  transition: box-shadow 160ms ease, transform 160ms ease;
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -84,7 +86,6 @@
   background: #19191b;
   border: 1px solid rgb(255 255 255 / 6%);
   border-radius: 22px;
-  cursor: grab;
   touch-action: pan-y;
   transform: translate3d(var(--swipe-x, 0), 0, 0);
   transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
@@ -164,7 +165,7 @@
   }
 
   .deleteAction {
-    right: 20px;
+    left: 20px;
     width: 48px;
     height: 48px;
   }
