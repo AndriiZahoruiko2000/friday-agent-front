@@ -1,0 +1,92 @@
+.habitIconSelector {
+  width: 100%;
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(42px, 1fr));
+  gap: 8px;
+}
+
+.iconOption {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  cursor: pointer;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.iconOption input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.iconOption span {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #3a3a3c;
+  background: #fff;
+  border: 1px solid #d1d1d6;
+  border-radius: 14px;
+  font-size: clamp(21px, 6vw, 27px);
+  line-height: 0;
+  transition: border-color 150ms ease, box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.iconOption:hover span {
+  border-color: #8e8e93;
+  transform: translateY(-1px);
+}
+
+.iconOption input:checked + span {
+  color: #0a84ff;
+  background: rgb(10 132 255 / 10%);
+  border-color: #0a84ff;
+  box-shadow: 0 0 0 3px rgb(10 132 255 / 13%);
+}
+
+.iconOption input:focus-visible + span {
+  outline: 3px solid rgb(10 132 255 / 35%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 390px) {
+  .iconGrid {
+    gap: 6px;
+  }
+
+  .iconOption span {
+    border-radius: 12px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iconOption span {
+    color: #d1d1d6;
+    background: #2c2c2e;
+    border-color: #48484a;
+  }
+
+  .iconOption:hover span {
+    border-color: #636366;
+  }
+
+  .iconOption input:checked + span {
+    color: #0a84ff;
+    background: rgb(10 132 255 / 15%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconOption span {
+    transition: none;
+  }
+}

@@ -1,4 +1,79 @@
+.swipeItem {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 22px;
+  isolation: isolate;
+}
+
+.deleteAction {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 16px;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  cursor: pointer;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #ff5a52, #ff3b30);
+  border: 0;
+  border-radius: 50%;
+  outline: 0;
+  box-shadow:
+    0 7px 18px rgb(255 59 48 / 34%),
+    inset 0 1px 0 rgb(255 255 255 / 30%);
+  transform: translateY(-50%);
+  transition: box-shadow 160ms ease, transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.deleteAction svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.deleteAction span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.deleteAction:hover {
+  background: linear-gradient(145deg, #ff6961, #ff453a);
+  box-shadow:
+    0 9px 22px rgb(255 59 48 / 42%),
+    inset 0 1px 0 rgb(255 255 255 / 35%);
+}
+
+.deleteAction:active {
+  background: #e83229;
+  box-shadow: 0 3px 10px rgb(255 59 48 / 28%);
+  transform: translateY(-50%) scale(0.92);
+}
+
+.deleteAction:focus-visible {
+  z-index: 2;
+  outline: 3px solid rgb(255 59 48 / 32%);
+  outline-offset: 3px;
+}
+
 .habitItem {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -9,6 +84,21 @@
   background: #19191b;
   border: 1px solid rgb(255 255 255 / 6%);
   border-radius: 22px;
+  cursor: grab;
+  touch-action: pan-y;
+  transform: translate3d(var(--swipe-x, 0), 0, 0);
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.habitItem:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  cursor: grabbing;
+  transition: none;
 }
 
 .habitInfo {
@@ -69,6 +159,21 @@
 }
 
 @media (max-width: 720px) {
+  .swipeItem {
+    border-radius: 14px;
+  }
+
+  .deleteAction {
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .deleteAction svg {
+    width: 21px;
+    height: 21px;
+  }
+
   .habitItem {
     grid-template-columns: minmax(0, 1.2fr) minmax(126px, 1fr) 42px;
     min-height: 58px;
@@ -152,5 +257,12 @@
 
   .today {
     border-color: rgb(0 0 0 / 7%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .habitItem,
+  .deleteAction {
+    transition: none;
   }
 }

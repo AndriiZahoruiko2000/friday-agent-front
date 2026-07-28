@@ -18,16 +18,23 @@ const habitIcons = [
 const HabitIconSelector = () => {
   return (
     <div className={css["habitIconSelector"]}>
-      <ul>
+      <div className={css["iconGrid"]}>
         {habitIcons.map((item) => {
           return (
-            <div key={item.iconName}>
-              <input type="radio" value={item.iconName} name="iconName" />
-              <div>{item.icon}</div>
-            </div>
+            <label className={css["iconOption"]} key={item.iconName}>
+              <input
+                type="radio"
+                value={item.iconName}
+                name="iconName"
+                defaultChecked={item.iconName === habitIcons[0].iconName}
+                aria-label={item.iconName}
+                required
+              />
+              <span aria-hidden="true">{item.icon}</span>
+            </label>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };
