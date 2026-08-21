@@ -40,6 +40,13 @@ const Page = () => {
       color: "green",
     },
     {
+      href: "/shifts",
+      label: "Shifts",
+      description: "Tune your Friday",
+      icon: <PiRadioButton />,
+      color: "gray",
+    },
+    {
       href: "/habits",
       label: "Habits",
       description: "Tune your Friday",

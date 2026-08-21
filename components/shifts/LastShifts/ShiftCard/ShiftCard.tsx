@@ -8,7 +8,7 @@ interface ShiftCardProps {
 const ShiftCard = ({ shift }: ShiftCardProps) => {
   return (
     <li className={css.card}>
-      <p>{shift.date}</p>
+      <p>{new Date(shift.date).toLocaleDateString("uk-UA")}</p>
       <p>
         <span>{shift.startTime}</span>
         <span>{shift.endTime}</span>
