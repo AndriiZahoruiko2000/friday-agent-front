@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest) => {
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
 
-    const response = await globalAPI.get("/shifts", {
+    const response = await globalAPI.get("/schedule/shifts", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest) => {
     const token = cookieStore.get("accessToken")?.value;
     const body = await req.json();
 
-    const response = await globalAPI.post("/shifts", body, {
+    const response = await globalAPI.post("/schedule/shifts", body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest, { params }: Props) => {
     const token = cookieStore.get("accessToken")?.value;
     const { id } = await params;
 
-    const response = await globalAPI.get(`/shifts/${id}`, {
+    const response = await globalAPI.get(`/schedule/shifts/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -35,7 +35,7 @@ export const PATCH = async (req: NextRequest, { params }: Props) => {
     const { id } = await params;
     const body = await req.json();
 
-    const response = await globalAPI.patch(`/shifts/${id}`, body, {
+    const response = await globalAPI.patch(`/schedule/shifts/${id}`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -56,7 +56,7 @@ export const DELETE = async (req: NextRequest, { params }: Props) => {
     const token = cookieStore.get("accessToken")?.value;
     const { id } = await params;
 
-    const response = await globalAPI.delete(`/shifts/${id}`, {
+    const response = await globalAPI.delete(`/schedule/shifts/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
