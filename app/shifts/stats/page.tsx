@@ -1,5 +1,5 @@
 import DetailedStats from "@/components/shifts/DetailedStats/DetailedStats";
-import css from "./page.module.css";
+import css from "./Page.module.css";
 
 const Page = () => {
   return (
