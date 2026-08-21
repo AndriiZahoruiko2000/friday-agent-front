@@ -39,26 +39,26 @@ export const deleteSchedule = async (id: string) => {
 };
 
 export const getShifts = async () => {
-  const response = await serverAPI.get<Shift[]>("/shifts");
+  const response = await serverAPI.get<Shift[]>("/schedule/shifts");
   return response.data;
 };
 
 export const getShiftsById = async (id: string) => {
-  const response = await serverAPI.get<Shift>(`/shifts/${id}`);
+  const response = await serverAPI.get<Shift>(`/schedule/shifts/${id}`);
   return response.data;
 };
 
 export const createShifts = async (body: ShiftBody) => {
-  const response = await serverAPI.post<Shift>(`/shifts`, body);
+  const response = await serverAPI.post<Shift>(`/schedule/shifts`, body);
   return response.data;
 };
 
 export const updateShifts = async (id: string, body: ShiftBody) => {
-  const response = await serverAPI.patch<Shift>(`/shifts/${id}`, body);
+  const response = await serverAPI.patch<Shift>(`/schedule/shifts/${id}`, body);
   return response.data;
 };
 
 export const deleteShifts = async (id: string) => {
-  const response = await serverAPI.delete<Shift>(`/shifts/${id}`);
+  const response = await serverAPI.delete<Shift>(`/schedule/shifts/${id}`);
   return response.data;
 };
