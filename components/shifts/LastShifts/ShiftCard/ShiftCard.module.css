@@ -1,0 +1,146 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto 16px;
+  grid-template-rows: repeat(2, auto);
+  column-gap: 10px;
+  align-content: center;
+  min-height: 108px;
+  padding: 14px 16px 14px 14px;
+  border-bottom: 1px solid rgb(60 60 67 / 9%);
+  scroll-snap-align: start;
+}
+
+.card:last-child {
+  border-bottom: 0;
+}
+
+.card::before {
+  display: grid;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  place-items: center;
+  align-self: center;
+  width: 42px;
+  height: 42px;
+  color: #7166eb;
+  background: rgb(113 102 235 / 13%);
+  border-radius: 13px;
+  content: "◔";
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.card::after {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  align-self: center;
+  color: #8e8e98;
+  content: "›";
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.card p {
+  margin: 0;
+  min-width: 0;
+}
+
+.card > p:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+  overflow: hidden;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card > p:nth-child(2) {
+  display: flex;
+  grid-column: 2;
+  grid-row: 2;
+  align-items: center;
+  overflow: hidden;
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.card > p:nth-child(2) span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card > p:nth-child(2) span + span::before {
+  margin-inline: 5px;
+  color: #8e8e93;
+  content: "–";
+}
+
+.card > p:nth-child(3),
+.card > p:nth-child(4) {
+  display: none;
+}
+
+.card > p:nth-child(5) {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  align-self: center;
+  color: #17171b;
+  font-size: clamp(0.95rem, 4.6vw, 1.25rem);
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.card > p:nth-child(5)::before {
+  content: "€";
+}
+
+@media (min-width: 640px) {
+  .card {
+    grid-template-columns: 54px minmax(0, 1fr) auto 20px;
+    min-height: 116px;
+    padding: 16px 24px 16px 22px;
+    column-gap: 16px;
+  }
+
+  .card::before {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 1.8rem;
+  }
+
+  .card > p:nth-child(1) {
+    font-size: 0.98rem;
+  }
+
+  .card > p:nth-child(2) {
+    font-size: 1.05rem;
+  }
+
+  .card > p:nth-child(5) {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    border-bottom-color: rgb(140 150 175 / 10%);
+  }
+
+  .card::before {
+    color: #9a91ff;
+    background: rgb(116 104 255 / 14%);
+  }
+
+  .card > p:nth-child(5) {
+    color: #f5f5f7;
+  }
+}

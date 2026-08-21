@@ -55,6 +55,11 @@ const CommonNavigation = () => {
       icon: <IoPersonCircleOutline aria-hidden="true" />,
     },
     {
+      href: "/shifts",
+      label: "Shifts",
+      icon: <TiHomeOutline aria-hidden="true" />,
+    },
+    {
       href: "/",
       label: "Home",
       icon: <TiHomeOutline aria-hidden="true" />,

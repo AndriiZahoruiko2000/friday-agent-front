@@ -1,56 +1,46 @@
-import { AxiosError } from "axios";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { globalAPI } from "../global-config";
-import { cookies, headers } from "next/headers";
+
+import { AxiosError } from "axios";
+import { globalAPI } from "../../global-config";
 
 export const GET = async (req: NextRequest) => {
   try {
     const cookieStore = await cookies();
-
-    const userParams = Object.fromEntries(req.nextUrl.searchParams.entries());
+    const token = cookieStore.get("accessToken")?.value;
 
     const response = await globalAPI.get("/shifts", {
-      params: userParams,
       headers: {
-        Cookie: cookieStore.toString(),
+        Authorization: `Bearer ${token}`,
       },
     });
-
     return NextResponse.json(response.data);
   } catch (error) {
     const err = error as AxiosError<{ message: string }>;
-    return NextResponse.json(
-      {
-        error: err.response?.data.message || err.message,
-      },
-      {
-        status: err.status || 500,
-      },
-    );
+
+    return NextResponse.json({
+      error: err.response?.data.message || err.message,
+    });
   }
 };
 
 export const POST = async (req: NextRequest) => {
   try {
-    const body = await req.json();
     const cookieStore = await cookies();
+    const token = cookieStore.get("accessToken")?.value;
+    const body = await req.json();
 
     const response = await globalAPI.post("/shifts", body, {
       headers: {
-        Cookie: cookieStore.toString(),
+        Authorization: `Bearer ${token}`,
       },
     });
-
     return NextResponse.json(response.data);
   } catch (error) {
     const err = error as AxiosError<{ message: string }>;
-    return NextResponse.json(
-      {
-        error: err.response?.data.message || err.message,
-      },
-      {
-        status: err.status || 500,
-      },
-    );
+
+    return NextResponse.json({
+      error: err.response?.data.message || err.message,
+    });
   }
 };
