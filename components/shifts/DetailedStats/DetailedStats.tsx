@@ -104,7 +104,7 @@ const DetailedStats = () => {
         </article>
         <article>
           <span>Зароблено</span>
-          <strong>€{salary}</strong>
+          <strong>€{String(salary).slice(0, 6)}</strong>
         </article>
       </div>
     </section>
