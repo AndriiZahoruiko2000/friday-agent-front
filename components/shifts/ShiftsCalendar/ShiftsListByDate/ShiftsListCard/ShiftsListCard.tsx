@@ -73,16 +73,6 @@ const ShiftsListCard = ({ shift }: ShiftsListCardProps) => {
         aria-hidden={offset === 0}
       >
         <button
-          className={css.editAction}
-          type="button"
-          aria-label="Редагувати зміну"
-          tabIndex={offset === 0 ? -1 : 0}
-          onClick={handleEdit}
-        >
-          <IoPencilOutline aria-hidden="true" />
-          <span>Редагувати</span>
-        </button>
-        <button
           className={css.deleteAction}
           type="button"
           aria-label="Видалити зміну"
