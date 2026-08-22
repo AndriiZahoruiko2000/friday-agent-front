@@ -35,8 +35,6 @@ const DetailedStats = () => {
 
   const progress = Math.round((totalHours / 60 / targetTotalHours) * 100);
 
-  console.log(targetTotalHours, totalHours / 60, progress);
-
   return (
     <section className={css.detailedStats}>
       <header className={css.header}>
@@ -48,11 +46,19 @@ const DetailedStats = () => {
       </header>
 
       <div className={css.periodSelector}>
-        <button type="button" aria-label="Попередній місяць" onClick={handlePrevMonth}>
+        <button
+          type="button"
+          aria-label="Попередній місяць"
+          onClick={handlePrevMonth}
+        >
           ‹
         </button>
         <p>{currentMonth}</p>
-        <button type="button" aria-label="Наступний місяць" onClick={handleNextMonth}>
+        <button
+          type="button"
+          aria-label="Наступний місяць"
+          onClick={handleNextMonth}
+        >
           ›
         </button>
       </div>
@@ -70,18 +76,36 @@ const DetailedStats = () => {
           <span>Місячна ціль</span>
           <h2>Прогрес годин</h2>
           <div className={css.hoursComparison}>
-            <p><strong>{Math.round(totalHours / 60)}</strong><span>відпрацьовано</span></p>
+            <p>
+              <strong>{Math.round(totalHours / 60)}</strong>
+              <span>відпрацьовано</span>
+            </p>
             <span aria-hidden="true">/</span>
-            <p><strong>{targetTotalHours}</strong><span>годин ціль</span></p>
+            <p>
+              <strong>{targetTotalHours}</strong>
+              <span>годин ціль</span>
+            </p>
           </div>
         </div>
       </div>
 
       <div className={css.statsGrid}>
-        <article><span>Зміни</span><strong>{shifts.length}</strong></article>
-        <article><span>Денні години</span><strong>{Math.round(dayHours / 60)}</strong></article>
-        <article><span>Нічні години</span><strong>{Math.round(nightHours / 60)}</strong></article>
-        <article><span>Зароблено</span><strong>€{salary}</strong></article>
+        <article>
+          <span>Зміни</span>
+          <strong>{shifts.length}</strong>
+        </article>
+        <article>
+          <span>Денні години</span>
+          <strong>{Math.round(dayHours / 60)}</strong>
+        </article>
+        <article>
+          <span>Нічні години</span>
+          <strong>{Math.round(nightHours / 60)}</strong>
+        </article>
+        <article>
+          <span>Зароблено</span>
+          <strong>€{salary}</strong>
+        </article>
       </div>
     </section>
   );

@@ -26,7 +26,6 @@ export const POST = async (req: NextRequest) => {
       cookieStore.set("refreshToken", object.refreshToken, options);
     }
   }
-  console.log(cookiesArray);
 
   return NextResponse.json(response.data);
 };

@@ -1,7 +1,7 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+
 import css from "./ShortStats.module.css";
-import { getShifts } from "@/services/shiftsService";
+
 import { LuSun } from "react-icons/lu";
 import { RiMoonClearFill } from "react-icons/ri";
 import { FaRegClock } from "react-icons/fa";

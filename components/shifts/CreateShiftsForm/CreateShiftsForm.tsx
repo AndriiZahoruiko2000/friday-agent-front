@@ -4,6 +4,7 @@ import css from "./CreateShiftsForm.module.css";
 import { createShifts } from "@/services/shiftsService";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useShiftsStore } from "@/stores/shiftsStore";
 
 interface CreateShiftsFormProps {
   initialDate?: Date;
@@ -11,6 +12,8 @@ interface CreateShiftsFormProps {
 
 const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
   const queryClient = useQueryClient();
+  const storePricePerHour = useShiftsStore((state) => state.pricePerHour);
+  const [pricePerHour, setPricePerHour] = useState(storePricePerHour);
 
   const [startTime, setStartTime] = useState("08:00");
   const [endTime, setEndTime] = useState("16:00");
@@ -24,7 +27,6 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
       totalHours: 0,
       nightHours: 0,
     };
-
     shiftData.totalHours = getTotalHours(
       shiftData.startTime,
       shiftData.endTime,
@@ -34,6 +36,8 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
       shiftData.startTime,
       shiftData.endTime,
     );
+
+    console.log("SHIFT DATA:", shiftData);
 
     await createShifts(shiftData);
 
@@ -90,6 +94,10 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
               min="0"
               step="0.01"
               required
+              value={pricePerHour}
+              onChange={(e) => {
+                setPricePerHour(Number(e.target.value));
+              }}
             />
           </label>
         </div>
@@ -112,8 +120,8 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
             Орієнтовна оплата
             <span>
               €
-              {(nightHours / 60) * 15 * 1.25 +
-                ((totalHours - nightHours) / 60) * 15}
+              {(nightHours / 60) * pricePerHour * 1.25 +
+                ((totalHours - nightHours) / 60) * pricePerHour}
             </span>
           </p>
           <div className={css.notice}>

@@ -12,7 +12,6 @@ import { FaTasks } from "react-icons/fa";
 const ToDoNavigation = () => {
   const [isOpenModal, showModal, hideModal, toggle] = useModal();
   const currentPage = useToDoStore((s) => s.currentPage);
-  console.log(currentPage);
 
   return (
     <div className={css["toDoNavigation"]}>

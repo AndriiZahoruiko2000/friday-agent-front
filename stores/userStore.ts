@@ -17,16 +17,11 @@ export const useUserStore = create<UserStore>()((setStore) => {
     isAuth: false,
     updateUser: async () => {
       try {
-        console.log("update user");
-
         await refresh();
         const user = await getMe();
-        console.log(user);
 
         setStore({ user, isAuth: true });
       } catch (error) {
-        console.log(error);
-
         setStore({});
       }
     },

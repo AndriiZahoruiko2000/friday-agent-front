@@ -16,7 +16,6 @@ const EditProfileModal = () => {
       nickname: formData.get("nickname") as string,
       email: formData.get("email") as string,
     };
-    console.log(data);
   };
 
   return (

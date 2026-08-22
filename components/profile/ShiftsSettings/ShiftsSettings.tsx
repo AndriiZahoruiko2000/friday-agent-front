@@ -70,6 +70,7 @@ const ShiftsSettings = () => {
           <span className={css.control}>
             <input
               type="number"
+              step={0.01}
               name="pricePerHour"
               aria-label="Ставка за годину"
               value={pricePerHour}

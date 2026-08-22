@@ -26,8 +26,6 @@ const TasksCalendar = () => {
     setDateArray(array);
   }, []);
 
-  console.log(dateArray);
-
   return (
     <div className={css["tasksCalendar"]}>
       <ul>
