@@ -1,6 +1,6 @@
 export interface Shift {
   _id: string;
-  userid: string;
+  userId: string;
   date: string;
   startTime: string;
   endTime: string;

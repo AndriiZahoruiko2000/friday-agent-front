@@ -34,6 +34,12 @@ export const useShifts = (startTime: Date, endTime: Date) => {
   const salary = shifts.reduce((acc, el) => {
     const shiftDayHours = el.totalHours - el.nightHours;
 
+    console.log({
+      totalHours: el.totalHours,
+      nightHours: el.nightHours,
+      pricePerHour: el.pricePerHour,
+    });
+
     const shiftSalary =
       (el.nightHours / 60) * el.pricePerHour * 1.25 +
       (shiftDayHours / 60) * el.pricePerHour;
