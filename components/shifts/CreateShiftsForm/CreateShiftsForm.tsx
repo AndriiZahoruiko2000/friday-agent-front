@@ -37,8 +37,6 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
       shiftData.endTime,
     );
 
-    console.log("SHIFT DATA:", shiftData);
-
     await createShifts(shiftData);
 
     queryClient.invalidateQueries({

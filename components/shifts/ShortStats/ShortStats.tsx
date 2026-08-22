@@ -46,7 +46,7 @@ const ShortStats = () => {
         <p>Зароблено</p>
         <p>
           <FaEuroSign />
-          {salary}
+          {String(salary).slice(0, 6)}
         </p>
       </li>
     </ul>
