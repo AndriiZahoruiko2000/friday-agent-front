@@ -11,8 +11,6 @@ import { useModal } from "@/hooks/useModal";
 import Modal from "@/components/custom/Modal/Modal";
 import CreateShiftsForm from "../CreateShiftsForm/CreateShiftsForm";
 
-import { useQuery } from "@tanstack/react-query";
-import { getShifts } from "@/services/shiftsService";
 import CalendarCard from "./CalendarCard/CalendarCard";
 import { useShiftsStore } from "@/stores/shiftsStore";
 import { FaPlus } from "react-icons/fa6";
@@ -91,7 +89,9 @@ const ShiftsCalendar = () => {
       </ul>
       {isOpenModal && (
         <Modal onClose={hideModal}>
-          {isCreateModal && <CreateShiftsForm initialDate={selectedDate} />}
+          {isCreateModal && (
+            <CreateShiftsForm initialDate={selectedDate} onClose={hideModal} />
+          )}
           {!isCreateModal && <ShiftsListByDate initialDate={selectedDate} />}
         </Modal>
       )}

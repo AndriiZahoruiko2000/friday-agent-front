@@ -2,6 +2,7 @@
 import { useShiftsStore } from "@/stores/shiftsStore";
 import css from "./ShiftsSettings.module.css";
 import { IoCashOutline, IoMoonOutline, IoTimeOutline } from "react-icons/io5";
+import { useState } from "react";
 
 const ShiftsSettings = () => {
   const totalHours = useShiftsStore((s) => s.totalHours);
@@ -10,6 +11,7 @@ const ShiftsSettings = () => {
   const setNightHours = useShiftsStore((s) => s.setNightHours);
   const pricePerHour = useShiftsStore((s) => s.pricePerHour);
   const setPricePerHour = useShiftsStore((s) => s.setPricePerHour);
+  const [priceInput, setPriceInput] = useState(String(pricePerHour));
 
   return (
     <section className={css.shiftsSettings}>
@@ -70,12 +72,18 @@ const ShiftsSettings = () => {
           <span className={css.control}>
             <input
               type="number"
-              step={0.01}
+              step="0.01"
               name="pricePerHour"
               aria-label="Ставка за годину"
-              value={pricePerHour}
+              value={priceInput}
               onChange={(e) => {
-                setPricePerHour(Number(e.target.value));
+                const value = e.target.value;
+
+                setPriceInput(value);
+
+                if (value !== "" && !Number.isNaN(Number(value))) {
+                  setPricePerHour(Number(value));
+                }
               }}
             />
             <span>€</span>

@@ -8,12 +8,13 @@ import { useShiftsStore } from "@/stores/shiftsStore";
 
 interface CreateShiftsFormProps {
   initialDate?: Date;
+  onClose: () => void;
 }
 
-const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
+const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
   const queryClient = useQueryClient();
   const storePricePerHour = useShiftsStore((state) => state.pricePerHour);
-  const [pricePerHour, setPricePerHour] = useState(storePricePerHour);
+  const [pricePerHour, setPricePerHour] = useState(String(storePricePerHour));
 
   const [startTime, setStartTime] = useState("08:00");
   const [endTime, setEndTime] = useState("16:00");
@@ -38,11 +39,14 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
     );
 
     await createShifts(shiftData);
+    onClose();
 
     queryClient.invalidateQueries({
       queryKey: ["shifts"],
     });
   };
+
+  const rate = parseFloat(pricePerHour) || 0;
 
   const nightHours = getNightHours(startTime, endTime);
   const totalHours = getTotalHours(startTime, endTime);
@@ -94,7 +98,7 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
               required
               value={pricePerHour}
               onChange={(e) => {
-                setPricePerHour(Number(e.target.value));
+                setPricePerHour(e.target.value);
               }}
             />
           </label>
@@ -118,8 +122,8 @@ const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
             Орієнтовна оплата
             <span>
               €
-              {(nightHours / 60) * pricePerHour * 1.25 +
-                ((totalHours - nightHours) / 60) * pricePerHour}
+              {(nightHours / 60) * rate * 1.25 +
+                ((totalHours - nightHours) / 60) * rate}
             </span>
           </p>
           <div className={css.notice}>
