@@ -68,20 +68,26 @@
 .form input[type="date"],
 .form input[type="time"] {
   min-height: 52px;
+  line-height: 1.25;
 }
 
 .form input[type="date"]::-webkit-date-and-time-value,
 .form input[type="time"]::-webkit-date-and-time-value {
+  display: flex;
   width: 100%;
-  min-height: 1.25em;
+  height: 100%;
+  min-height: 100%;
   margin: 0;
+  align-items: center;
   text-align: left;
 }
 
 .form input[type="date"]::-webkit-datetime-edit,
 .form input[type="time"]::-webkit-datetime-edit {
-  display: block;
+  display: flex;
+  height: 100%;
   min-width: 0;
+  align-items: center;
   padding: 0;
 }
 
