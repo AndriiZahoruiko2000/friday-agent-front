@@ -34,21 +34,21 @@ const CommonNavigation = () => {
       label: "Budgets",
       icon: <GrMoney aria-hidden="true" />,
     },
-    {
-      href: "/tasks",
-      label: "Tasks",
-      icon: <GrTask aria-hidden="true" />,
-    },
+    // {
+    //   href: "/tasks",
+    //   label: "Tasks",
+    //   icon: <GrTask aria-hidden="true" />,
+    // },
     {
       href: "/schedule",
       label: "Calendar",
       icon: <BsCalendar2Day aria-hidden="true" />,
     },
-    {
-      href: "/habits",
-      label: "Habits",
-      icon: <PiRadioButton />,
-    },
+    // {
+    //   href: "/habits",
+    //   label: "Habits",
+    //   icon: <PiRadioButton />,
+    // },
     {
       href: "/profile",
       label: "Profile",

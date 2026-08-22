@@ -19,13 +19,13 @@ const Page = () => {
       icon: <GrMoney />,
       color: "blue",
     },
-    {
-      href: "/tasks",
-      label: "Tasks",
-      description: "Plan your day",
-      icon: <GrTask />,
-      color: "purple",
-    },
+    // {
+    //   href: "/tasks",
+    //   label: "Tasks",
+    //   description: "Plan your day",
+    //   icon: <GrTask />,
+    //   color: "purple",
+    // },
     {
       href: "/schedule",
       label: "Calendar",
@@ -47,13 +47,13 @@ const Page = () => {
       icon: <MdOutlineWorkHistory aria-hidden="true" />,
       color: "gray",
     },
-    {
-      href: "/habits",
-      label: "Habits",
-      description: "Tune your Friday",
-      icon: <PiRadioButton />,
-      color: "gray",
-    },
+    // {
+    //   href: "/habits",
+    //   label: "Habits",
+    //   description: "Tune your Friday",
+    //   icon: <PiRadioButton />,
+    //   color: "gray",
+    // },
   ];
 
   return (

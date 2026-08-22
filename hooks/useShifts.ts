@@ -31,6 +31,9 @@ export const useShifts = (startTime: Date, endTime: Date) => {
 
   const dayHours = totalHours - nightHours;
 
-  const salary = (nightHours / 60) * pricePerHour * 1.25 + (dayHours / 60) * 15;
+  const salary =
+    (nightHours / 60) * pricePerHour * 1.25 + (dayHours / 60) * pricePerHour;
+  console.log(pricePerHour, salary);
+
   return { shifts, totalHours, nightHours, salary, dayHours };
 };

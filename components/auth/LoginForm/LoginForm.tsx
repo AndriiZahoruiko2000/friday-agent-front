@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { GoogleLogin } from "@react-oauth/google";
 import { useUserStore } from "@/stores/userStore";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -40,14 +41,18 @@ const LoginForm = () => {
   }, []);
 
   const handleSubmit = async (formData: FormData) => {
-    const loginData = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-    };
+    try {
+      const loginData = {
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+      };
 
-    await login(loginData);
-    updateUser();
-    router.push("/");
+      await login(loginData);
+      updateUser();
+      router.push("/");
+    } catch (error) {
+      toast.error("Invalid credential");
+    }
   };
 
   return (

@@ -10,21 +10,25 @@ const RegisterForm = () => {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    const confirmPassword = formData.get("confirm-password") as string;
+    try {
+      const confirmPassword = formData.get("confirm-password") as string;
 
-    const registerData = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-      nickname: formData.get("nickname") as string,
-    };
+      const registerData = {
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+        nickname: formData.get("nickname") as string,
+      };
 
-    if (confirmPassword !== registerData.password) {
-      toast.error("Password does not match!");
-      return;
+      if (confirmPassword !== registerData.password) {
+        toast.error("Password does not match!");
+        return;
+      }
+
+      await register(registerData);
+      router.push("/auth/login");
+    } catch (error) {
+      toast.error("Invalid credentials");
     }
-
-    await register(registerData);
-    router.push("/auth/login");
   };
 
   return (

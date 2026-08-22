@@ -4,6 +4,8 @@ import { Shift } from "@/types/shifts";
 import css from "./ShiftsListCard.module.css";
 import { PointerEvent, useRef, useState } from "react";
 import { IoPencilOutline, IoTrashOutline } from "react-icons/io5";
+import { deleteShifts } from "@/services/shiftsService";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ShiftsListCardProps {
   shift: Shift;
@@ -14,6 +16,7 @@ const ShiftsListCard = ({ shift }: ShiftsListCardProps) => {
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ x: 0, offset: 0, time: 0, moved: false });
+  const queryClient = useQueryClient();
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -54,13 +57,12 @@ const ShiftsListCard = ({ shift }: ShiftsListCardProps) => {
     setOffset(shouldOpen && !shouldClose ? -ACTIONS_WIDTH : 0);
   };
 
-  const handleEdit = () => {
-    // TODO: Підключити відкриття форми редагування зміни.
-    setOffset(0);
-  };
+  const handleEdit = async () => {};
 
-  const handleDelete = () => {
-    // TODO: Підключити видалення зміни.
+  const handleDelete = async () => {
+    await deleteShifts(shift._id);
+    queryClient.invalidateQueries({ queryKey: ["shifts"] });
+
     setOffset(0);
   };
 

@@ -13,7 +13,7 @@ const Page = () => {
       <MonthSelector />
       <ShortStats />
       <ShiftsCalendar />
-      <NextShifts />
+      {/* <NextShifts /> */}
       <LastShifts />
     </div>
   );
