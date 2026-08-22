@@ -12,8 +12,8 @@ interface CreateShiftsFormProps {
 const CreateShiftsForm = ({ initialDate }: CreateShiftsFormProps) => {
   const queryClient = useQueryClient();
 
-  const [startTime, setStartTime] = useState("00:00");
-  const [endTime, setEndTime] = useState("00:00");
+  const [startTime, setStartTime] = useState("08:00");
+  const [endTime, setEndTime] = useState("16:00");
 
   const handleSubmit = async (formData: FormData) => {
     const shiftData = {

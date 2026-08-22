@@ -1,0 +1,211 @@
+.detailedStats {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  padding: 20px 12px 36px;
+  color: #17171b;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-inline: 4px;
+}
+
+.header > div > span {
+  display: block;
+  margin-bottom: 4px;
+  color: #7166eb;
+  font-size: 0.72rem;
+  font-weight: 740;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 8vw, 2.35rem);
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.status {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  color: #7166eb;
+  background: rgb(113 102 235 / 10%);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 680;
+}
+
+.periodSelector {
+  display: grid;
+  min-height: 52px;
+  margin-bottom: 12px;
+  padding: 5px;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  align-items: center;
+  background: rgb(255 255 255 / 86%);
+  border: 1px solid rgb(60 60 67 / 10%);
+  border-radius: 17px;
+  box-shadow:
+    0 8px 24px rgb(18 18 23 / 6%),
+    inset 0 1px 0 rgb(255 255 255 / 78%);
+}
+
+.periodSelector p {
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.98rem;
+  font-weight: 690;
+  letter-spacing: -0.015em;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.periodSelector button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  padding: 0 0 3px;
+  cursor: pointer;
+  place-items: center;
+  color: #7166eb;
+  background: rgb(113 102 235 / 9%);
+  border: 0;
+  border-radius: 12px;
+  font-size: 1.9rem;
+  font-weight: 320;
+  line-height: 1;
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.periodSelector button:hover { background: rgb(113 102 235 / 15%); }
+.periodSelector button:active { transform: scale(0.9); }
+.periodSelector button:focus-visible { outline: 3px solid rgb(10 132 255 / 32%); outline-offset: 2px; }
+
+.progressCard {
+  display: grid;
+  padding: 24px 18px;
+  align-items: center;
+  justify-items: center;
+  gap: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 8%, rgb(90 200 250 / 12%), transparent 34%),
+    radial-gradient(circle at 90% 95%, rgb(175 82 222 / 11%), transparent 36%),
+    rgb(255 255 255 / 90%);
+  border: 1px solid rgb(113 102 235 / 12%);
+  border-radius: 24px;
+  box-shadow:
+    0 12px 32px rgb(18 18 23 / 8%),
+    inset 0 1px 0 rgb(255 255 255 / 82%);
+}
+
+.diagram {
+  --progress: 0;
+  --diagram-size: min(54vw, 196px);
+  --diagram-track: #e8e8ee;
+  --diagram-center: #fff;
+
+  display: flex;
+  width: var(--diagram-size);
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #17171b;
+  background:
+    radial-gradient(circle, var(--diagram-center) 0 70%, transparent 70.5%),
+    conic-gradient(from -90deg, #5ac8fa 0, #7166eb calc(var(--progress) * 0.58%), #af52de calc(var(--progress) * 1%), var(--diagram-track) 0);
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 20px rgb(79 70 170 / 13%));
+}
+
+.diagram > span {
+  font-size: clamp(2rem, 10vw, 2.75rem);
+  font-weight: 780;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.diagram > small {
+  margin-top: 6px;
+  color: #8e8e93;
+  font-size: 0.68rem;
+  font-weight: 680;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progressDetails { min-width: 0; text-align: center; }
+.progressDetails > span { color: #7166eb; font-size: 0.7rem; font-weight: 720; letter-spacing: 0.08em; text-transform: uppercase; }
+.progressDetails h2 { margin: 5px 0 18px; font-size: 1.25rem; font-weight: 730; letter-spacing: -0.03em; }
+.hoursComparison { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.hoursComparison > span { color: #c7c7cc; font-size: 1.45rem; font-weight: 300; }
+.hoursComparison p { display: grid; margin: 0; gap: 3px; }
+.hoursComparison strong { font-size: 1.4rem; font-weight: 750; letter-spacing: -0.035em; }
+.hoursComparison p > span { color: #8e8e93; font-size: 0.69rem; white-space: nowrap; }
+
+.statsGrid {
+  display: grid;
+  margin-top: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.statsGrid article {
+  display: flex;
+  min-width: 0;
+  min-height: 98px;
+  padding: 15px;
+  justify-content: space-between;
+  flex-direction: column;
+  background: rgb(255 255 255 / 86%);
+  border: 1px solid rgb(60 60 67 / 9%);
+  border-radius: 18px;
+  box-shadow:
+    0 7px 20px rgb(18 18 23 / 6%),
+    inset 0 1px 0 rgb(255 255 255 / 76%);
+}
+
+.statsGrid article > span { color: #8e8e93; font-size: 0.75rem; font-weight: 590; }
+.statsGrid article > strong { overflow: hidden; font-size: clamp(1.35rem, 7vw, 1.8rem); font-weight: 750; line-height: 1; letter-spacing: -0.04em; text-overflow: ellipsis; white-space: nowrap; }
+.statsGrid article:nth-child(1) > strong { color: #7166eb; }
+.statsGrid article:nth-child(2) > strong { color: #248a3d; }
+.statsGrid article:nth-child(3) > strong { color: #5856d6; }
+.statsGrid article:nth-child(4) > strong { color: #d97706; }
+
+@media (min-width: 640px) {
+  .detailedStats { padding: 32px 0 48px; }
+  .progressCard { padding: 30px 34px; grid-template-columns: auto minmax(0, 1fr); justify-items: stretch; border-radius: 28px; }
+  .progressDetails { text-align: left; }
+  .hoursComparison { justify-content: flex-start; }
+  .statsGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .statsGrid article { min-height: 116px; padding: 17px; border-radius: 20px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .detailedStats { color: #f5f5f7; }
+  .header > div > span, .status, .periodSelector button, .progressDetails > span { color: #9a91ff; }
+  .status { background: rgb(116 104 255 / 14%); }
+  .periodSelector, .statsGrid article { background: rgb(28 28 30 / 88%); border-color: rgb(255 255 255 / 9%); box-shadow: 0 9px 26px rgb(0 0 0 / 24%), inset 0 1px 0 rgb(255 255 255 / 5%); }
+  .periodSelector button { background: rgb(116 104 255 / 15%); }
+  .periodSelector button:hover { background: rgb(116 104 255 / 22%); }
+  .progressCard { background: radial-gradient(circle at 12% 8%, rgb(90 200 250 / 10%), transparent 34%), radial-gradient(circle at 90% 95%, rgb(175 82 222 / 9%), transparent 36%), rgb(19 25 38 / 94%); border-color: rgb(154 145 255 / 12%); box-shadow: 0 14px 36px rgb(0 0 0 / 30%), inset 0 1px 0 rgb(255 255 255 / 5%); }
+  .diagram { --diagram-track: #303039; --diagram-center: #171c27; color: #f5f5f7; filter: drop-shadow(0 14px 22px rgb(0 0 0 / 24%)); }
+  .diagram > small, .hoursComparison p > span, .statsGrid article > span { color: #98989d; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .periodSelector button { transition: none; }
+}

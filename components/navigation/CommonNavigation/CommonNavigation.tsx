@@ -3,7 +3,7 @@
 import css from "./CommonNavigation.module.css";
 import { useModal } from "@/hooks/useModal";
 import Link from "next/link";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdOutlineWorkHistory } from "react-icons/md";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { PiRadioButton } from "react-icons/pi";
 
@@ -57,7 +57,7 @@ const CommonNavigation = () => {
     {
       href: "/shifts",
       label: "Shifts",
-      icon: <TiHomeOutline aria-hidden="true" />,
+      icon: <MdOutlineWorkHistory aria-hidden="true" />,
     },
     {
       href: "/",

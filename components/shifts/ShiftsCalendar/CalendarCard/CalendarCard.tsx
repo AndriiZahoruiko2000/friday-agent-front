@@ -9,15 +9,21 @@ interface CalendarCardProps {
 }
 
 const CalendarCard = ({ date, shifts, onSelect }: CalendarCardProps) => {
-  const hasShift = shifts.some(
-    (item) => new Date(item.date).getDate() === date.getDate(),
+  const items = shifts.filter(
+    (item) =>
+      new Date(item.date).getDate() === date.getDate() &&
+      new Date(item.date).getMonth() === date.getMonth(),
   );
 
   return (
     <li className={css.card}>
       <button type="button" onClick={() => onSelect(date)}>
         <span>{date.getDate()}</span>
-        {hasShift && <span className={css.indicator} />}
+        <div className={css["indicator-container"]}>
+          {items.map((item) => {
+            return <div className={css.indicator} key={item._id} />;
+          })}
+        </div>
       </button>
     </li>
   );

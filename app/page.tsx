@@ -8,6 +8,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { GrTask } from "react-icons/gr";
 import { PiRadioButton } from "react-icons/pi";
 import Greetings from "@/components/custom/Greetings/Greetings";
+import { MdOutlineWorkHistory } from "react-icons/md";
 
 const Page = () => {
   const navigationCards = [
@@ -43,7 +44,7 @@ const Page = () => {
       href: "/shifts",
       label: "Shifts",
       description: "Tune your Friday",
-      icon: <PiRadioButton />,
+      icon: <MdOutlineWorkHistory aria-hidden="true" />,
       color: "gray",
     },
     {

@@ -47,16 +47,20 @@
   line-height: 1;
 }
 
+.indicator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
 .indicator {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
   width: 7px;
   height: 7px;
   background: #50d6a1;
   border-radius: 50%;
   box-shadow: 0 0 8px rgb(80 214 161 / 55%);
-  transform: translateX(-50%);
 }
 
 .card:nth-child(3n) .indicator {

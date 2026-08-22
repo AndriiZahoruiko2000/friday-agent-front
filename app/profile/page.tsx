@@ -2,6 +2,7 @@ import Avatar from "@/components/profile/Avatar/Avatar";
 import css from "./Page.module.css";
 import ProfileInfo from "@/components/profile/ProfileInfo/ProfileInfo";
 import EditProfileModal from "@/components/profile/EditProfileModal/EditProfileModal";
+import ShiftsSettings from "@/components/profile/ShiftsSettings/ShiftsSettings";
 
 const Page = () => {
   return (
@@ -20,6 +21,7 @@ const Page = () => {
       <p className={css.caption}>
         Manage your personal information and account details.
       </p>
+      <ShiftsSettings />
     </div>
   );
 };

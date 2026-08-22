@@ -9,6 +9,7 @@ import { IoWalletSharp } from "react-icons/io5";
 import { FaEuroSign } from "react-icons/fa";
 import { useShiftsStore } from "@/stores/shiftsStore";
 import { getFirstDateOfMonth, getLastDateOfMonth } from "@/helpers/dates";
+import { useShifts } from "@/hooks/useShifts";
 
 const ShortStats = () => {
   const currentDate = useShiftsStore((state) => state.date);
@@ -18,27 +19,10 @@ const ShortStats = () => {
   firstDay.setHours(0, 0, 0, 0);
   lastDay.setHours(23, 59, 59, 999);
 
-  const startTime = firstDay.toISOString();
-  const endTime = lastDay.toISOString();
-
-  const shiftsQuery = useQuery({
-    queryKey: ["shifts", { startTime, endTime }],
-    queryFn: () => getShifts({ startTime, endTime }),
-  });
-
-  const shifts = shiftsQuery.data || [];
-
-  const totalHours = shifts.reduce((acc, el) => {
-    return acc + el.totalHours;
-  }, 0);
-
-  const nightHours = shifts.reduce((acc, el) => {
-    return acc + el.nightHours;
-  }, 0);
-
-  const dayHours = totalHours - nightHours;
-
-  const salary = (nightHours / 60) * 15 * 1.25 + (dayHours / 60) * 15;
+  const { totalHours, dayHours, salary, nightHours } = useShifts(
+    firstDay,
+    lastDay,
+  );
 
   return (
     <ul className={css.stats}>

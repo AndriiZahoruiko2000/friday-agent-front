@@ -1,0 +1,132 @@
+.shiftsListByDate {
+  width: min(100%, 520px);
+  overflow: hidden;
+  color: #17171b;
+  background: rgb(255 255 255 / 92%);
+  border: 1px solid rgb(60 60 67 / 10%);
+  border-radius: 24px;
+  box-shadow:
+    0 16px 44px rgb(18 18 23 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 80%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+.header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgb(60 60 67 / 9%);
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  color: #6f63e9;
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 6vw, 1.7rem);
+  font-weight: 760;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.emptyState {
+  display: flex;
+  min-height: 230px;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 38px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.emptyIcon {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  background: rgb(113 102 235 / 12%);
+  border-radius: 20px;
+}
+
+.emptyIcon::before,
+.emptyIcon::after {
+  position: absolute;
+  content: "";
+}
+
+.emptyIcon::before {
+  inset: 17px 15px 15px;
+  border: 2px solid #7166eb;
+  border-radius: 7px;
+}
+
+.emptyIcon::after {
+  top: 23px;
+  left: 15px;
+  width: 34px;
+  border-top: 2px solid #7166eb;
+  box-shadow: 8px 8px 0 -7px #7166eb, 17px 8px 0 -7px #7166eb;
+}
+
+.emptyState p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 720;
+  letter-spacing: -0.015em;
+}
+
+.emptyState > span:last-child {
+  max-width: 260px;
+  color: #8e8e93;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 640px) {
+  .shiftsListByDate {
+    border-radius: 28px;
+  }
+
+  .header {
+    padding: 24px 26px 19px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiftsListByDate {
+    color: #f5f5f7;
+    background:
+      linear-gradient(145deg, rgb(35 44 63 / 60%), transparent 74%),
+      rgb(19 25 38 / 96%);
+    border-color: rgb(140 150 175 / 12%);
+    box-shadow:
+      0 18px 48px rgb(0 0 0 / 36%),
+      inset 0 1px 0 rgb(255 255 255 / 5%);
+  }
+
+  .header {
+    border-bottom-color: rgb(140 150 175 / 11%);
+  }
+
+  .eyebrow {
+    color: #9a91ff;
+  }
+
+  .emptyIcon {
+    background: rgb(116 104 255 / 16%);
+  }
+}

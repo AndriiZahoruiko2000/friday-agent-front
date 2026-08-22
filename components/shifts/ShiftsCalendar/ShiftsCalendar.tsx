@@ -15,12 +15,19 @@ import { useQuery } from "@tanstack/react-query";
 import { getShifts } from "@/services/shiftsService";
 import CalendarCard from "./CalendarCard/CalendarCard";
 import { useShiftsStore } from "@/stores/shiftsStore";
+import { FaPlus } from "react-icons/fa6";
+import { MdOutlineCalendarMonth } from "react-icons/md";
+
 import { useState } from "react";
+import ShiftsListByDate from "./ShiftsListByDate/ShiftsListByDate";
+import { useShifts } from "@/hooks/useShifts";
 
 const ShiftsCalendar = () => {
   const [isOpenModal, showModal, hideModal] = useModal();
   const [selectedDate, setSelectedDate] = useState<Date>();
   const currentDate = useShiftsStore((s) => s.date);
+
+  const [isCreateModal, setIsCreateModal, setIsListModal] = useModal();
 
   const days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
 
@@ -29,27 +36,41 @@ const ShiftsCalendar = () => {
 
   const firstDayOfWeek = getFirstDateOfWeek(firstDay);
 
+  firstDayOfWeek.setUTCHours(0);
+  firstDayOfWeek.setUTCMinutes(0);
+  firstDayOfWeek.setUTCSeconds(0);
+  firstDayOfWeek.setUTCMilliseconds(0);
+
   const rangeDates = getRangeDates(firstDayOfWeek, lastDay);
-
-  const shiftsQuery = useQuery({
-    queryKey: [
-      "shifts",
-      {
-        startTime: firstDay.toISOString(),
-        endTime: lastDay.toISOString(),
-      },
-    ],
-    queryFn: () =>
-      getShifts({
-        startTime: firstDay.toISOString(),
-        endTime: lastDay.toISOString(),
-      }),
-  });
-
-  const shifts = shiftsQuery.data || [];
+  const { shifts } = useShifts(firstDay, lastDay);
 
   return (
     <div className={css["shiftsCalendar"]}>
+      <div className={css.header}>
+        <p className={css["title"]}>Календар</p>
+        <div className={css.actions}>
+          {!isCreateModal && (
+            <button
+              className={css.actionButton}
+              type="button"
+              aria-label="Додати зміну"
+              onClick={setIsCreateModal}
+            >
+              <FaPlus aria-hidden="true" />
+            </button>
+          )}
+          {isCreateModal && (
+            <button
+              className={css.actionButton}
+              type="button"
+              aria-label="Показати календар"
+              onClick={setIsListModal}
+            >
+              <MdOutlineCalendarMonth aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </div>
       <ul className={css["shifts-calendar"]}>
         {days.map((item) => {
           return <li key={item}>{item}</li>;
@@ -70,7 +91,8 @@ const ShiftsCalendar = () => {
       </ul>
       {isOpenModal && (
         <Modal onClose={hideModal}>
-          <CreateShiftsForm initialDate={selectedDate} />
+          {isCreateModal && <CreateShiftsForm initialDate={selectedDate} />}
+          {!isCreateModal && <ShiftsListByDate initialDate={selectedDate} />}
         </Modal>
       )}
     </div>

@@ -1,0 +1,236 @@
+.shiftsSettings {
+  width: 100%;
+  min-width: 0;
+  margin-top: 28px;
+  color: #1c1c1e;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding-inline: 4px;
+}
+
+.header > div {
+  min-width: 0;
+}
+
+.header > div > span {
+  display: block;
+  margin-bottom: 3px;
+  color: #7166eb;
+  font-size: 11px;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 730;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.headerIcon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  place-items: center;
+  color: #7166eb;
+  background: rgb(113 102 235 / 11%);
+  border-radius: 13px;
+  font-size: 21px;
+}
+
+.settingsList {
+  overflow: hidden;
+  background: rgb(255 255 255 / 88%);
+  border: 1px solid rgb(60 60 67 / 10%);
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px rgb(28 28 30 / 7%),
+    inset 0 1px 0 rgb(255 255 255 / 84%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+}
+
+.settingRow {
+  position: relative;
+  display: grid;
+  min-height: 64px;
+  padding: 10px 14px;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+}
+
+.settingRow + .settingRow::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 61px;
+  height: 1px;
+  background: rgb(60 60 67 / 11%);
+  content: "";
+}
+
+.icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 19px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 25%);
+}
+
+.hoursIcon {
+  background: linear-gradient(145deg, #6f8dff, #5856d6);
+}
+
+.nightIcon {
+  background: linear-gradient(145deg, #8a7df2, #5856d6);
+}
+
+.priceIcon {
+  background: linear-gradient(145deg, #43d66f, #28a745);
+}
+
+.label {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 590;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.control {
+  display: flex;
+  min-width: 78px;
+  height: 38px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 0 10px;
+  color: #8e8e93;
+  background: rgb(118 118 128 / 9%);
+  border: 1px solid transparent;
+  border-radius: 11px;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.control:focus-within {
+  background: rgb(113 102 235 / 7%);
+  border-color: rgb(113 102 235 / 32%);
+  box-shadow: 0 0 0 3px rgb(113 102 235 / 10%);
+}
+
+.control input {
+  width: 46px;
+  min-width: 0;
+  padding: 0;
+  color: #1c1c1e;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  font-weight: 680;
+  text-align: right;
+  appearance: textfield;
+}
+
+.control input::-webkit-inner-spin-button,
+.control input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.control > span {
+  font-size: 12px;
+  font-weight: 590;
+}
+
+.caption {
+  margin: 9px 14px 0;
+  color: #8e8e93;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (max-width: 390px) {
+  .settingRow {
+    padding-inline: 11px;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .control {
+    min-width: 70px;
+    padding-inline: 8px;
+  }
+
+  .control input {
+    width: 40px;
+  }
+
+  .settingRow + .settingRow::before {
+    left: 54px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiftsSettings {
+    color: #f5f5f7;
+  }
+
+  .header > div > span,
+  .headerIcon {
+    color: #9a91ff;
+  }
+
+  .headerIcon {
+    background: rgb(116 104 255 / 15%);
+  }
+
+  .settingsList {
+    background: rgb(28 28 30 / 88%);
+    border-color: rgb(255 255 255 / 9%);
+    box-shadow:
+      0 14px 36px rgb(0 0 0 / 25%),
+      inset 0 1px 0 rgb(255 255 255 / 5%);
+  }
+
+  .settingRow + .settingRow::before {
+    background: rgb(84 84 88 / 65%);
+  }
+
+  .control {
+    background: rgb(118 118 128 / 18%);
+  }
+
+  .control:focus-within {
+    background: rgb(116 104 255 / 13%);
+    border-color: rgb(154 145 255 / 34%);
+    box-shadow: 0 0 0 3px rgb(116 104 255 / 11%);
+  }
+
+  .control input {
+    color: #f5f5f7;
+  }
+}
