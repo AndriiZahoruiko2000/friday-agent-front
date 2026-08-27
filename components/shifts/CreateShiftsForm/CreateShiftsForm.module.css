@@ -131,6 +131,76 @@
   overflow: hidden;
 }
 
+.breakRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px;
+  background: rgb(113 102 235 / 5%);
+  border: 1px solid rgb(113 102 235 / 11%);
+  border-radius: 16px;
+}
+
+.breakField > span {
+  color: #68686f;
+  font-size: 0.76rem;
+  font-weight: 680;
+}
+
+.removeBreak,
+.addBreak {
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 13px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 720;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.removeBreak {
+  grid-column: 1 / -1;
+  color: #d94b45;
+  background: rgb(255 59 48 / 7%);
+  border: 1px solid rgb(255 59 48 / 11%);
+}
+
+.removeBreak:hover {
+  color: #c73530;
+  background: rgb(255 59 48 / 11%);
+  border-color: rgb(255 59 48 / 17%);
+}
+
+.addBreak {
+  width: 100%;
+  color: #6257dc;
+  background: rgb(113 102 235 / 8%);
+  border: 1px dashed rgb(113 102 235 / 26%);
+}
+
+.addBreak:hover {
+  color: #5145cb;
+  background: rgb(113 102 235 / 12%);
+  border-color: rgb(113 102 235 / 38%);
+}
+
+.removeBreak:active,
+.addBreak:active {
+  transform: scale(0.985);
+}
+
+.removeBreak:focus-visible,
+.addBreak:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid rgb(10 132 255 / 32%);
+  outline-offset: 2px;
+}
+
 .submit {
   width: 100%;
   min-height: 54px;
@@ -242,6 +312,17 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .breakRow {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: end;
+    padding: 16px;
+  }
+
+  .removeBreak {
+    grid-column: auto;
+    min-height: 56px;
+  }
+
   .notice {
     margin: 4px -20px -20px;
     border-radius: 0 0 21px 21px;
@@ -269,6 +350,39 @@
 
   .form input:focus {
     background: rgb(255 255 255 / 9%);
+  }
+
+  .breakRow {
+    background: rgb(116 104 255 / 7%);
+    border-color: rgb(154 145 255 / 12%);
+  }
+
+  .breakField > span {
+    color: #aaaab4;
+  }
+
+  .removeBreak {
+    color: #ff8b85;
+    background: rgb(255 69 58 / 10%);
+    border-color: rgb(255 105 97 / 15%);
+  }
+
+  .removeBreak:hover {
+    color: #ffa39e;
+    background: rgb(255 69 58 / 15%);
+    border-color: rgb(255 105 97 / 22%);
+  }
+
+  .addBreak {
+    color: #aaa3ff;
+    background: rgb(116 104 255 / 11%);
+    border-color: rgb(154 145 255 / 24%);
+  }
+
+  .addBreak:hover {
+    color: #c1bcff;
+    background: rgb(116 104 255 / 16%);
+    border-color: rgb(154 145 255 / 34%);
   }
 
   .calculationRow {

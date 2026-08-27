@@ -29,24 +29,24 @@ const ShortStats = () => {
       <li className={css.card}>
         <FaRegClock />
         <p>Всього годин</p>
-        <p>{totalHours / 60} год.</p>
+        <p>{(totalHours / 60).toFixed(2)} год.</p>
       </li>
       <li className={css.card}>
         <LuSun />
         <p>Денних годин</p>
-        <p>{dayHours / 60} год.</p>
+        <p>{(dayHours / 60).toFixed(2)} год.</p>
       </li>
       <li className={css.card}>
         <RiMoonClearFill />
         <p>Нічних годин</p>
-        <p>{nightHours / 60} год.</p>
+        <p>{(nightHours / 60).toFixed(2)} год.</p>
       </li>
       <li className={css.card}>
         <IoWalletSharp />
         <p>Зароблено</p>
         <p>
           <FaEuroSign />
-          {String(salary).slice(0, 6)}
+          {String(salary).slice(0, 7)}
         </p>
       </li>
     </ul>

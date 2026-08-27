@@ -52,7 +52,11 @@ export function getWeekRange() {
   return newRange;
 }
 
-export function getTotalHours(start: string, end: string) {
+export function getTotalHours(
+  start: string,
+  end: string,
+  breaks: { startTime: string; durationMinutes: number }[] = [],
+) {
   const startTime = parseInt(start);
   const endTime = parseInt(end);
 
@@ -61,16 +65,28 @@ export function getTotalHours(start: string, end: string) {
 
   const diffMinutes = endMinutes - startMinutes;
 
+  const totalBreakMinutes = breaks.reduce(
+    (sum, item) => sum + item.durationMinutes,
+    0,
+  );
+
+  let totalMinutes = 0;
+
   if (endTime > startTime) {
-    return (endTime - startTime) * 60 + diffMinutes;
+    totalMinutes = (endTime - startTime) * 60 + diffMinutes;
+  } else {
+    const diff = 24 - startTime;
+    totalMinutes = (diff + endTime) * 60 + diffMinutes;
   }
 
-  const diff = 24 - startTime;
-
-  return (diff + endTime) * 60 + diffMinutes;
+  return totalMinutes - totalBreakMinutes;
 }
 
-export function getNightHours(start: string, end: string) {
+export function getNightHours(
+  start: string,
+  end: string,
+  breaks: { startTime: string; durationMinutes: number }[] = [],
+) {
   const startTime = parseInt(start);
   const endTime = parseInt(end);
 
@@ -122,7 +138,50 @@ export function getNightHours(start: string, end: string) {
       continue;
     }
   }
-  return counter / 1000 / 60;
+
+  const nightBreakMinutes = breaks.reduce((sum, item) => {
+    const breakStartHour = parseInt(item.startTime);
+    const breakStartMinute = Number(item.startTime.slice(3));
+
+    const breakStart = new Date();
+    breakStart.setHours(breakStartHour, breakStartMinute, 0, 0);
+
+    if (breakStartHour < 5) {
+      breakStart.setDate(breakStart.getDate() + 1);
+    }
+
+    const breakEnd = new Date(breakStart);
+    breakEnd.setMinutes(breakEnd.getMinutes() + item.durationMinutes);
+
+    let nightMinutes = 0;
+
+    const nightStart = new Date(breakStart);
+    const nightEnd = new Date(breakStart);
+
+    if (breakStartHour < 5) {
+      nightStart.setDate(nightStart.getDate() - 1);
+      nightStart.setHours(23, 0, 0, 0);
+
+      nightEnd.setHours(5, 0, 0, 0);
+    } else {
+      nightStart.setHours(23, 0, 0, 0);
+
+      nightEnd.setDate(nightEnd.getDate() + 1);
+      nightEnd.setHours(5, 0, 0, 0);
+    }
+
+    const overlapStart = breakStart > nightStart ? breakStart : nightStart;
+
+    const overlapEnd = breakEnd < nightEnd ? breakEnd : nightEnd;
+
+    if (overlapStart < overlapEnd) {
+      nightMinutes += (+overlapEnd - +overlapStart) / 1000 / 60;
+    }
+
+    return sum + nightMinutes;
+  }, 0);
+
+  return counter / 1000 / 60 - nightBreakMinutes;
 }
 
 getNightHours("23:00", "23:05");

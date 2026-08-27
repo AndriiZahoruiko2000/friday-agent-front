@@ -3,7 +3,7 @@ import { getNightHours, getTotalHours } from "@/helpers/dates";
 import css from "./CreateShiftsForm.module.css";
 import { createShifts } from "@/services/shiftsService";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useShiftsStore } from "@/stores/shiftsStore";
 
 interface CreateShiftsFormProps {
@@ -19,6 +19,41 @@ const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
   const [startTime, setStartTime] = useState("08:00");
   const [endTime, setEndTime] = useState("16:00");
 
+  const [breaks, setBreaks] = useState<
+    { startTime: string; durationMinutes: number }[]
+  >([]);
+
+  const addBreak = () => {
+    setBreaks((prev) => [
+      ...prev,
+      {
+        startTime: "12:00",
+        durationMinutes: 30,
+      },
+    ]);
+  };
+
+  const updateBreak = (
+    index: number,
+    field: "startTime" | "durationMinutes",
+    value: string | number,
+  ) => {
+    setBreaks((prev) =>
+      prev.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              [field]: value,
+            }
+          : item,
+      ),
+    );
+  };
+
+  const removeBreak = (index: number) => {
+    setBreaks((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (formData: FormData) => {
     const shiftData = {
       date: new Date(formData.get("date") as string).toISOString(),
@@ -27,16 +62,20 @@ const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
       pricePerHour: Number(formData.get("pricePerHour")),
       totalHours: 0,
       nightHours: 0,
+      breaks,
     };
     shiftData.totalHours = getTotalHours(
       shiftData.startTime,
       shiftData.endTime,
+      breaks,
     );
 
     shiftData.nightHours = getNightHours(
       shiftData.startTime,
       shiftData.endTime,
+      breaks,
     );
+    console.log("SHIFT DATA:", shiftData);
 
     await createShifts(shiftData);
     onClose();
@@ -48,8 +87,8 @@ const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
 
   const rate = parseFloat(pricePerHour) || 0;
 
-  const nightHours = getNightHours(startTime, endTime);
-  const totalHours = getTotalHours(startTime, endTime);
+  const nightHours = getNightHours(startTime, endTime, breaks);
+  const totalHours = getTotalHours(startTime, endTime, breaks);
   const dateValue = initialDate
     ? `${initialDate.getFullYear()}-${String(initialDate.getMonth() + 1).padStart(2, "0")}-${String(initialDate.getDate()).padStart(2, "0")}`
     : undefined;
@@ -88,6 +127,48 @@ const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
             </label>
           </div>
 
+          {breaks.map((breakItem, index) => (
+            <div className={css.breakRow} key={index}>
+              <label className={css.breakField}>
+                <span>Початок паузи</span>
+                <input
+                  type="time"
+                  value={breakItem.startTime}
+                  onChange={(e) =>
+                    updateBreak(index, "startTime", e.target.value)
+                  }
+                />
+              </label>
+
+              <label className={css.breakField}>
+                <span>Тривалість, хв</span>
+                <input
+                  type="number"
+                  min="1"
+                  value={breakItem.durationMinutes}
+                  onChange={(e) =>
+                    updateBreak(
+                      index,
+                      "durationMinutes",
+                      Number(e.target.value),
+                    )
+                  }
+                />
+              </label>
+              <button
+                className={css.removeBreak}
+                type="button"
+                onClick={() => removeBreak(index)}
+              >
+                Видалити
+              </button>
+            </div>
+          ))}
+
+          <button className={css.addBreak} type="button" onClick={addBreak}>
+            + Додати паузу
+          </button>
+
           <label className={css.priceField}>
             <span>Ставка за годину</span>
             <input
@@ -116,14 +197,16 @@ const CreateShiftsForm = ({ initialDate, onClose }: CreateShiftsFormProps) => {
           </p>
           <p className={css.calculationRow}>
             Денних годин
-            <span>{(totalHours - nightHours) / 60}год.</span>
+            <span>{((totalHours - nightHours) / 60).toFixed(2)}год.</span>
           </p>
           <p className={`${css.calculationRow} ${css.total}`}>
             Орієнтовна оплата
             <span>
               €
-              {(nightHours / 60) * rate * 1.25 +
-                ((totalHours - nightHours) / 60) * rate}
+              {(
+                (nightHours / 60) * rate * 1.25 +
+                ((totalHours - nightHours) / 60) * rate
+              ).toFixed(2)}
             </span>
           </p>
           <div className={css.notice}>
